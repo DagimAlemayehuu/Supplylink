@@ -1,39 +1,40 @@
 import React from 'react';
 
 /**
- * Gane & Sarson Data Flow (Neon Velocity Theme)
- * Labeled arrows with high-contrast text badges and animated Neon Lime pulses.
+ * Standard DFD Data Flow (Monochrome)
+ * Strictly unidirectional with clear, single-concept noun phrase label badges.
+ * Supports active highlight and background dimming.
  */
-export default function Flow({ flow, isActive, isDimmed }) {
-  const { id, path, label, items, labelPos, bidirectional } = flow;
+export default function Flow({ flow, isActive = false, isDimmed = false }) {
+  const { id, path, label, labelPos } = flow;
 
-  const strokeColor = isActive ? '#BFFF00' : '#8892b0';
-  const strokeWidth = isActive ? 4.2 : 2.8;
-  const markerEnd = isActive ? 'url(#arrow-noir-active)' : 'url(#arrow-noir-default)';
-  const markerStart = bidirectional
-    ? isActive
-      ? 'url(#arrow-noir-active-rev)'
-      : 'url(#arrow-noir-default-rev)'
-    : 'none';
+  const strokeColor = isActive ? '#ffffff' : '#767682';
+  const strokeWidth = isActive ? 3.0 : 2.2;
+  const markerEnd = isActive ? 'url(#arrow-dfd-marker-active)' : 'url(#arrow-dfd-marker)';
+
+  // Calculate clean badge dimensions to prevent overlap
+  const textLength = label ? label.length : 12;
+  const badgeWidth = Math.max(120, textLength * 8.8 + 26);
+  const badgeHeight = 26;
 
   return (
     <g
       id={`flow-${id}`}
-      className={`transition-all duration-300 ${
+      className={`transition-opacity duration-300 ${
         isDimmed ? 'opacity-15' : 'opacity-100'
       }`}
     >
-      {/* Background shadow stroke for line contrast */}
+      {/* Background shadow path for contrast against canvas and crossings */}
       <path
         d={path}
         fill="none"
-        stroke={isActive ? 'rgba(191, 255, 0, 0.4)' : '#050505'}
-        strokeWidth={strokeWidth + 8}
+        stroke="#1c1c1f"
+        strokeWidth={strokeWidth + 5}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
 
-      {/* Main flow line */}
+      {/* Main unidirectional flow line */}
       <path
         id={`path-${id}`}
         d={path}
@@ -43,101 +44,32 @@ export default function Flow({ flow, isActive, isDimmed }) {
         strokeLinecap="round"
         strokeLinejoin="round"
         markerEnd={markerEnd}
-        markerStart={markerStart}
       />
 
-      {/* Traveling animated pulse line when active */}
-      {isActive && (
-        <path
-          d={path}
-          fill="none"
-          stroke="#d9ff66"
-          strokeWidth="4.5"
-          strokeLinecap="round"
-          className="animate-flow-dash"
-        />
-      )}
-
-      {/* Traveling pulse dot along active flow */}
-      {isActive && (
-        <circle r="7.5" fill="#BFFF00" stroke="#000000" strokeWidth="2.5" filter="drop-shadow(0 0 14px #BFFF00)">
-          <animateMotion
-            path={path}
-            dur="2s"
-            repeatCount="indefinite"
-            rotate="auto"
-          />
-        </circle>
-      )}
-
-      {/* Flow Label Badge - High Contrast, Sized to Avoid Node Overlap */}
-      {labelPos && (
+      {/* Flow Label Badge (Centered at labelPos) */}
+      {labelPos && label && (
         <g transform={`translate(${labelPos.x}, ${labelPos.y})`}>
-          {items && items.length > 1 ? (
-            // Multi-item grouped label badge (Context Diagram)
-            (() => {
-              const badgeWidth = 420;
-              const lineSpacing = 32;
-              const badgeHeight = 28 + items.length * lineSpacing;
-              return (
-                <g transform={`translate(${-badgeWidth / 2}, ${-badgeHeight / 2})`}>
-                  <rect
-                    width={badgeWidth}
-                    height={badgeHeight}
-                    rx="12"
-                    fill={isActive ? '#0f1c03' : '#080808'}
-                    stroke={isActive ? '#BFFF00' : 'rgba(255, 255, 255, 0.25)'}
-                    strokeWidth={isActive ? '2.5' : '1.8'}
-                    filter="drop-shadow(0 8px 24px rgba(0,0,0,0.95))"
-                  />
-                  {items.map((item, idx) => (
-                    <text
-                      key={idx}
-                      x="20"
-                      y={28 + idx * lineSpacing}
-                      className={`select-none font-body font-bold ${
-                        isActive ? 'fill-[#BFFF00]' : 'fill-white'
-                      }`}
-                      style={{ fontSize: '18px' }}
-                    >
-                      › {item}
-                    </text>
-                  ))}
-                </g>
-              );
-            })()
-          ) : (
-            // Single flow label badge (Level 0 Diagram)
-            (() => {
-              const textLength = (label || '').length;
-              const badgeWidth = Math.max(130, textLength * 11 + 26);
-              const badgeHeight = 38;
-              return (
-                <g transform={`translate(${-badgeWidth / 2}, ${-badgeHeight / 2})`}>
-                  <rect
-                    width={badgeWidth}
-                    height={badgeHeight}
-                    rx="8"
-                    fill={isActive ? '#111d03' : '#0a0a0a'}
-                    stroke={isActive ? '#BFFF00' : 'rgba(255, 255, 255, 0.25)'}
-                    strokeWidth={isActive ? '2.5' : '1.5'}
-                    filter="drop-shadow(0 6px 18px rgba(0,0,0,0.9))"
-                  />
-                  <text
-                    x={badgeWidth / 2}
-                    y="25"
-                    textAnchor="middle"
-                    className={`select-none font-body font-bold ${
-                      isActive ? 'fill-[#BFFF00]' : 'fill-white'
-                    }`}
-                    style={{ fontSize: '17px' }}
-                  >
-                    {label}
-                  </text>
-                </g>
-              );
-            })()
-          )}
+          <g transform={`translate(${-badgeWidth / 2}, ${-badgeHeight / 2})`}>
+            {/* Badge container */}
+            <rect
+              width={badgeWidth}
+              height={badgeHeight}
+              rx="6"
+              fill={isActive ? '#2a2a2f' : '#1e1e22'}
+              stroke={isActive ? '#ffffff' : '#52525b'}
+              strokeWidth={isActive ? '1.8' : '1.5'}
+            />
+            {/* Flow name in pure white text */}
+            <text
+              x={badgeWidth / 2}
+              y={17}
+              textAnchor="middle"
+              className="select-none font-body font-semibold tracking-wide"
+              style={{ fontSize: '12px', fill: '#ffffff' }}
+            >
+              {label}
+            </text>
+          </g>
         </g>
       )}
     </g>

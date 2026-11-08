@@ -2,9 +2,6 @@
 @import "@fontsource/plus-jakarta-sans/600.css";
 @import "@fontsource/plus-jakarta-sans/700.css";
 @import "@fontsource/plus-jakarta-sans/800.css";
-@import "@fontsource/geist-mono/400.css";
-@import "@fontsource/geist-mono/500.css";
-@import "@fontsource/geist-mono/600.css";
 @import "@fontsource/inter/300.css";
 @import "@fontsource/inter/400.css";
 @import "@fontsource/inter/500.css";
@@ -15,21 +12,18 @@
 @tailwind utilities;
 
 :root {
-  --color-bg: #050505;
-  --color-neon: #BFFF00;
-  --color-neon-glow: rgba(191, 255, 0, 0.3);
-  --ease-velocity: cubic-bezier(0.16, 1, 0.3, 1);
+  --color-bg: #161618;
 }
 
 ::selection {
-  background: #BFFF00;
-  color: #000000;
+  background: #3f3f46;
+  color: #ffffff;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: #050505;
+  background-color: #161618;
   color: #ffffff;
   font-family: "Inter", "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
   overflow: hidden;
@@ -40,131 +34,4 @@ body {
 /* Tabular numbers for non-shifting metrics */
 .tabular-nums {
   font-variant-numeric: tabular-nums;
-}
-
-/* Animations */
-@keyframes dashTravel {
-  to {
-    stroke-dashoffset: -32;
-  }
-}
-
-.animate-flow-dash {
-  stroke-dasharray: 8 6;
-  animation: dashTravel 1s linear infinite;
-}
-
-/* Laser Button (Neon Velocity Spec) */
-.laser-btn {
-  position: relative;
-  overflow: hidden;
-  border-radius: 9999px;
-  background-color: #BFFF00;
-  color: #000000;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  box-shadow: 0 0 25px rgba(191, 255, 0, 0.35);
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  isolation: isolate;
-}
-
-.laser-btn::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    45deg,
-    transparent 0%,
-    transparent 40%,
-    rgba(255, 255, 255, 0.75) 50%,
-    transparent 60%,
-    transparent 100%
-  );
-  transform: translateX(-100%) rotate(45deg);
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  pointer-events: none;
-}
-
-.laser-btn:hover {
-  box-shadow: 0 0 35px rgba(191, 255, 0, 0.55);
-  transform: translateY(-1px);
-}
-
-.laser-btn:hover::before {
-  transform: translateX(100%) rotate(45deg);
-}
-
-/* Luminosity Card (Neon Velocity Spec) */
-.luminosity-card {
-  position: relative;
-  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.04), transparent 70%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1.5rem;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  backdrop-filter: blur(12px);
-}
-
-.luminosity-card:hover {
-  border-color: rgba(191, 255, 0, 0.35);
-  background: radial-gradient(circle at top left, rgba(191, 255, 0, 0.06), transparent 70%), #0a0a0a;
-  box-shadow: 0 0 30px rgba(191, 255, 0, 0.08);
-}
-
-/* Hero 3D Tilt Card Container */
-.perspective-container {
-  perspective: 1000px;
-}
-
-.tilt-3d {
-  transform: rotateX(12deg) rotateY(-4deg);
-  transform-style: preserve-3d;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.tilt-3d:hover {
-  transform: rotateX(0deg) rotateY(0deg);
-}
-
-/* Noise overlay */
-.bg-noise {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
-}
-
-/* Print styling for PDF export (?print mode) */
-@media print {
-  @page {
-    size: 1920px 1080px;
-    margin: 0;
-  }
-  
-  html, body {
-    background: #050505 !important;
-    color: #ffffff !important;
-    overflow: visible !important;
-    height: auto !important;
-    user-select: text !important;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
-  
-  .no-print {
-    display: none !important;
-  }
-
-  .print-page {
-    page-break-after: always;
-    break-after: page;
-    width: 1920px !important;
-    height: 1080px !important;
-    overflow: hidden !important;
-    box-shadow: none !important;
-    margin: 0 !important;
-    border-radius: 0 !important;
-  }
 }

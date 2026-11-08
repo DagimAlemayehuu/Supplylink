@@ -1,55 +1,65 @@
 import React from 'react';
 
 /**
- * Gane & Sarson Process (Neon Velocity Theme)
- * Rounded rectangle divided by a horizontal line with Neon Lime accents and Plus Jakarta Sans 800.
+ * Standard DFD Process (Gane & Sarson Notation - Monochrome)
+ * Rounded rectangle with dedicated top compartment for Process ID
+ * and lower compartment for Process Name (verb phrase).
+ * Enlarged for commanding visual hierarchy over data stores.
  */
-export default function Process({ node, isActive, isDimmed }) {
-  const { x, y, w, h, procId, name, category, description } = node;
+export default function Process({ node, isActive = false, isDimmed = false }) {
+  const { x, y, w, h, procId, name } = node;
   const isSystem = procId === "0";
-  const idHeight = isSystem ? 52 : 38;
+  const idHeight = isSystem ? 56 : 38;
+  const cornerRadius = isSystem ? 24 : 18;
+
+  const strokeColor = isActive ? '#ffffff' : '#888892';
+  const strokeWidth = isActive ? '3.5' : '2.8';
+  const bodyFill = isActive ? '#2f2f35' : '#27272b';
+  const headerFill = isActive ? '#46464e' : '#38383e';
 
   return (
     <g
       id={`process-${node.id}`}
-      className={`transition-all duration-300 ${
-        isDimmed ? 'opacity-20' : 'opacity-100'
+      className={`transition-opacity duration-300 ${
+        isDimmed ? 'opacity-15' : 'opacity-100'
       }`}
     >
-      {/* Outer Neon Glow when active */}
-      {isActive && (
-        <rect
-          x={x - 8}
-          y={y - 8}
-          width={w + 16}
-          height={h + 16}
-          rx={isSystem ? 26 : 20}
-          ry={isSystem ? 26 : 20}
-          fill="none"
-          stroke="#BFFF00"
-          strokeWidth="3.5"
-          filter="drop-shadow(0 0 28px rgba(191, 255, 0, 0.9))"
-        />
-      )}
+      {/* Clip path for the top ID header matching the top rounded corners */}
+      <defs>
+        <clipPath id={`clip-process-${node.id}`}>
+          <rect
+            x={x}
+            y={y}
+            width={w}
+            height={h}
+            rx={cornerRadius}
+            ry={cornerRadius}
+          />
+        </clipPath>
+      </defs>
 
-      {/* Main Gane & Sarson rounded rectangle body */}
+      {/* Main rounded rectangle body */}
       <rect
         x={x}
         y={y}
         width={w}
         height={h}
-        rx={isSystem ? 22 : 16}
-        ry={isSystem ? 22 : 16}
-        fill={isActive ? '#101d03' : '#080808'}
-        stroke={isActive ? '#BFFF00' : '#84cc16'}
-        strokeWidth={isActive ? '3.5' : '2.5'}
+        rx={cornerRadius}
+        ry={cornerRadius}
+        fill={bodyFill}
+        stroke={strokeColor}
+        strokeWidth={strokeWidth}
         className="transition-colors duration-200"
       />
 
-      {/* Top section background for ID */}
-      <path
-        d={`M ${x} ${y + idHeight} L ${x} ${y + 16} Q ${x} ${y} ${x + 16} ${y} L ${x + w - 16} ${y} Q ${x + w} ${y} ${x + w} ${y + 16} L ${x + w} ${y + idHeight} Z`}
-        fill={isSystem ? '#BFFF00' : '#142403'}
+      {/* Top ID compartment background */}
+      <rect
+        x={x}
+        y={y}
+        width={w}
+        height={idHeight}
+        fill={headerFill}
+        clipPath={`url(#clip-process-${node.id})`}
       />
 
       {/* Dividing line separating ID section and Name section */}
@@ -58,54 +68,34 @@ export default function Process({ node, isActive, isDimmed }) {
         y1={y + idHeight}
         x2={x + w}
         y2={y + idHeight}
-        stroke={isSystem ? '#000000' : '#84cc16'}
-        strokeWidth="2.5"
+        stroke={strokeColor}
+        strokeWidth={strokeWidth}
       />
 
-      {/* Process ID - In Geist Mono */}
+      {/* Process ID */}
       <text
-        x={x + 22}
-        y={y + (isSystem ? 36 : 27)}
-        className={`font-mono font-black select-none tabular-nums ${
-          isSystem ? 'fill-black' : 'fill-[#BFFF00]'
-        }`}
-        style={{ fontSize: isSystem ? '28px' : '22px' }}
+        x={x + 18}
+        y={y + (isSystem ? 38 : 27)}
+        className="font-headline font-bold select-none tabular-nums"
+        style={{ fontSize: isSystem ? '28px' : '20px', fill: '#ffffff' }}
       >
         {procId}
       </text>
 
-      {/* System Boundary Badge on context diagram */}
-      {isSystem && (
-        <text
-          x={x + w - 22}
-          y={y + 36}
-          textAnchor="end"
-          className="fill-black font-extrabold select-none uppercase tracking-widestTechnical font-mono"
-          style={{ fontSize: '13px' }}
-        >
-          SYSTEM BOUNDARY
-        </text>
-      )}
-
-      {/* Process Name (Verb Phrase) - Plus Jakarta Sans 800 Uppercase */}
+      {/* Process Name (Verb Phrase) */}
       <foreignObject
         x={x + 10}
-        y={y + idHeight + 2}
+        y={y + idHeight}
         width={w - 20}
-        height={h - idHeight - 4}
+        height={h - idHeight}
       >
-        <div className="w-full h-full flex flex-col items-center justify-center text-center px-2">
+        <div className="w-full h-full flex items-center justify-center text-center px-2">
           <span
-            className="font-headline font-extrabold leading-tight text-white select-none uppercase tracking-tight"
-            style={{ fontSize: isSystem ? '36px' : '23px' }}
+            className="font-headline font-bold leading-tight select-none uppercase tracking-tight"
+            style={{ fontSize: isSystem ? '34px' : '21px', color: '#ffffff' }}
           >
             {name}
           </span>
-          {description && isSystem && (
-            <span className="text-zinc-300 text-sm mt-2 max-w-md font-body font-normal">
-              {description}
-            </span>
-          )}
         </div>
       </foreignObject>
     </g>
