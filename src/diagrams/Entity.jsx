@@ -1,8 +1,8 @@
 import React from 'react';
 
 /**
- * Gane & Sarson External Entity (Red Noir Theme)
- * Plain rectangle with high-contrast borders and large projector-ready typography.
+ * Gane & Sarson External Entity (Neon Velocity Theme)
+ * Plain rectangle with high-contrast borders and brutalist uppercase typography.
  */
 export default function Entity({ node, isActive, isDimmed }) {
   const { x, y, w, h, name, subtitle, description } = node;
@@ -17,15 +17,14 @@ export default function Entity({ node, isActive, isDimmed }) {
       {/* Outer Neon Glow when active */}
       {isActive && (
         <rect
-          x={x - 10}
-          y={y - 10}
-          width={w + 20}
-          height={h + 20}
+          x={x - 8}
+          y={y - 8}
+          width={w + 16}
+          height={h + 16}
           fill="none"
-          stroke="#06b6d4"
-          strokeWidth="4"
-          strokeOpacity="0.8"
-          filter="drop-shadow(0 0 20px rgba(6, 182, 212, 0.8))"
+          stroke="#BFFF00"
+          strokeWidth="3.5"
+          filter="drop-shadow(0 0 25px rgba(191, 255, 0, 0.85))"
         />
       )}
 
@@ -35,53 +34,53 @@ export default function Entity({ node, isActive, isDimmed }) {
         y={y}
         width={w}
         height={h}
-        fill={isActive ? '#042129' : '#08080d'}
-        stroke={isActive ? '#06b6d4' : '#0891b2'}
-        strokeWidth={isActive ? '4' : '2.8'}
+        fill={isActive ? '#0c1603' : '#080808'}
+        stroke={isActive ? '#BFFF00' : 'rgba(255, 255, 255, 0.4)'}
+        strokeWidth={isActive ? '3.5' : '2.5'}
         className="transition-colors duration-200"
       />
 
-      {/* Top neon indicator banner */}
+      {/* Top neon indicator stripe */}
       <rect
         x={x}
         y={y}
         width={w}
-        height="8"
-        fill="#06b6d4"
+        height="6"
+        fill={isActive ? '#BFFF00' : 'rgba(255, 255, 255, 0.7)'}
       />
 
-      {/* Entity Title - Extra Large & Punchy */}
+      {/* Entity Title - Plus Jakarta Sans 800 Uppercase */}
       <text
         x={x + w / 2}
         y={y + (h > 150 ? 64 : 52)}
         textAnchor="middle"
-        className="font-manrope font-black fill-white select-none"
-        style={{ fontSize: '38px', letterSpacing: '-0.02em' }}
+        className="font-headline font-extrabold fill-white select-none uppercase tracking-tight"
+        style={{ fontSize: '36px' }}
       >
         {name}
       </text>
 
-      {/* Subtitle / Role Tag */}
+      {/* Subtitle / Role Tag in Geist Mono */}
       {subtitle && (
         <g transform={`translate(${x + w / 2}, ${y + (h > 150 ? 104 : 88)})`}>
           <rect
-            x="-90"
-            y="-18"
-            width="180"
-            height="36"
-            rx="18"
-            fill="#083344"
-            stroke="#06b6d4"
-            strokeWidth="1.8"
+            x="-85"
+            y="-16"
+            width="170"
+            height="32"
+            rx="6"
+            fill={isActive ? '#182b03' : '#141414'}
+            stroke={isActive ? '#BFFF00' : 'rgba(255, 255, 255, 0.2)'}
+            strokeWidth="1.5"
           />
           <text
             x="0"
-            y="6"
+            y="5"
             textAnchor="middle"
-            className="fill-cyan-300 font-extrabold select-none uppercase tracking-wider font-manrope"
-            style={{ fontSize: '17px' }}
+            className="fill-[#BFFF00] font-mono font-bold select-none uppercase tracking-widestTechnical"
+            style={{ fontSize: '13px' }}
           >
-            {subtitle}
+            {subtitle.toUpperCase().replace('&', '//')}
           </text>
         </g>
       )}
@@ -89,7 +88,7 @@ export default function Entity({ node, isActive, isDimmed }) {
       {/* Description text */}
       {description && h > 200 && (
         <foreignObject x={x + 12} y={y + 135} width={w - 24} height={h - 145}>
-          <div className="text-center text-zinc-200 text-lg leading-snug px-2 flex items-center justify-center h-full font-inter font-medium">
+          <div className="text-center text-zinc-300 text-base leading-snug px-2 flex items-center justify-center h-full font-body font-normal">
             <span>{description}</span>
           </div>
         </foreignObject>

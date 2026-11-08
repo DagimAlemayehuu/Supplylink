@@ -1,8 +1,8 @@
 import React from 'react';
 
 /**
- * Gane & Sarson Data Store (Red Noir Theme)
- * Open-ended rectangle with warm amber/gold neon accents and extra-large typography.
+ * Gane & Sarson Data Store (Neon Velocity Theme)
+ * Open-ended rectangle with amber/gold accents and brutalist uppercase typography.
  */
 export default function DataStore({ node, isActive, isDimmed }) {
   const { x, y, w, h, storeId, name, desc } = node;
@@ -18,11 +18,11 @@ export default function DataStore({ node, isActive, isDimmed }) {
       {/* Outer focus glow when active */}
       {isActive && (
         <path
-          d={`M ${x + w + 10} ${y - 10} L ${x - 10} ${y - 10} L ${x - 10} ${y + h + 10} L ${x + w + 10} ${y + h + 10}`}
+          d={`M ${x + w + 8} ${y - 8} L ${x - 8} ${y - 8} L ${x - 8} ${y + h + 8} L ${x + w + 8} ${y + h + 8}`}
           fill="none"
           stroke="#f59e0b"
-          strokeWidth="4"
-          filter="drop-shadow(0 0 24px rgba(245, 158, 11, 0.8))"
+          strokeWidth="3.5"
+          filter="drop-shadow(0 0 24px rgba(245, 158, 11, 0.85))"
         />
       )}
 
@@ -32,7 +32,7 @@ export default function DataStore({ node, isActive, isDimmed }) {
         y={y}
         width={w}
         height={h}
-        fill={isActive ? '#2a1a05' : '#0a0a0e'}
+        fill={isActive ? '#241603' : '#080808'}
         className="transition-colors duration-200"
       />
 
@@ -42,7 +42,7 @@ export default function DataStore({ node, isActive, isDimmed }) {
         y={y}
         width={idWidth}
         height={h}
-        fill={isActive ? '#522e06' : '#221504'}
+        fill={isActive ? '#452604' : '#1c1203'}
       />
 
       {/* Top horizontal border (full width) */}
@@ -52,7 +52,7 @@ export default function DataStore({ node, isActive, isDimmed }) {
         x2={x + w}
         y2={y}
         stroke={isActive ? '#fbbf24' : '#f59e0b'}
-        strokeWidth={isActive ? '4' : '2.8'}
+        strokeWidth={isActive ? '3.5' : '2.5'}
       />
 
       {/* Bottom horizontal border (full width) */}
@@ -62,7 +62,7 @@ export default function DataStore({ node, isActive, isDimmed }) {
         x2={x + w}
         y2={y + h}
         stroke={isActive ? '#fbbf24' : '#f59e0b'}
-        strokeWidth={isActive ? '4' : '2.8'}
+        strokeWidth={isActive ? '3.5' : '2.5'}
       />
 
       {/* Left vertical border */}
@@ -72,7 +72,7 @@ export default function DataStore({ node, isActive, isDimmed }) {
         x2={x}
         y2={y + h}
         stroke={isActive ? '#fbbf24' : '#f59e0b'}
-        strokeWidth={isActive ? '4' : '2.8'}
+        strokeWidth={isActive ? '3.5' : '2.5'}
       />
 
       {/* Inner vertical dividing line for ID box */}
@@ -82,23 +82,23 @@ export default function DataStore({ node, isActive, isDimmed }) {
         x2={x + idWidth}
         y2={y + h}
         stroke="#f59e0b"
-        strokeWidth="2.8"
+        strokeWidth="2.5"
       />
 
-      {/* Notice: RIGHT END IS OPEN as per Gane & Sarson specification */}
+      {/* NOTICE: RIGHT END IS OPEN as per Gane & Sarson notation specification */}
 
-      {/* Store ID (e.g. D1, D2) - Extra Large */}
+      {/* Store ID (e.g. D1, D2) in Geist Mono */}
       <text
         x={x + idWidth / 2}
-        y={y + h / 2 + 9}
+        y={y + h / 2 + 8}
         textAnchor="middle"
-        className="font-manrope font-black fill-amber-300 select-none"
-        style={{ fontSize: '28px' }}
+        className="font-mono font-black fill-amber-300 select-none tabular-nums"
+        style={{ fontSize: '26px' }}
       >
         {storeId}
       </text>
 
-      {/* Store Name & description - Extra Large & High Contrast */}
+      {/* Store Name & description */}
       <foreignObject
         x={x + idWidth + 14}
         y={y}
@@ -107,13 +107,13 @@ export default function DataStore({ node, isActive, isDimmed }) {
       >
         <div className="w-full h-full flex flex-col justify-center select-none pl-1">
           <span
-            className="font-manrope font-black text-white leading-tight"
-            style={{ fontSize: '24px', letterSpacing: '-0.01em' }}
+            className="font-headline font-extrabold text-white leading-tight uppercase tracking-tight"
+            style={{ fontSize: '22px' }}
           >
             {name}
           </span>
           {desc && (
-            <span className="text-amber-200/90 text-base mt-0.5 truncate font-inter font-semibold">
+            <span className="text-amber-200/90 text-xs mt-0.5 truncate font-mono tracking-widestTechnical uppercase font-semibold">
               {desc}
             </span>
           )}

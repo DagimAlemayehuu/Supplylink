@@ -5,8 +5,9 @@ import DataStore from './DataStore';
 import Flow from './Flow';
 
 /**
- * Reusable Diagram component (Red Noir Theme).
- * Renders data-driven SVG diagrams with Gane & Sarson shapes on a deep noir canvas.
+ * Reusable Diagram component (Neon Velocity Theme).
+ * Renders data-driven SVG diagrams with Gane & Sarson shapes on a deep noir canvas
+ * with high-visibility neon lime (#BFFF00) flows and pulses.
  */
 export default function Diagram({
   data,
@@ -48,7 +49,7 @@ export default function Diagram({
             markerHeight="8"
             orient="auto-start-reverse"
           >
-            <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#71717a" />
+            <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#94a3b8" />
           </marker>
 
           {/* Reverse Default Arrowhead */}
@@ -61,10 +62,10 @@ export default function Diagram({
             markerHeight="8"
             orient="auto"
           >
-            <path d="M 9 1.5 L 0 5 L 9 8.5 z" fill="#71717a" />
+            <path d="M 9 1.5 L 0 5 L 9 8.5 z" fill="#94a3b8" />
           </marker>
 
-          {/* Active Crimson Arrowhead */}
+          {/* Active Neon Lime Arrowhead */}
           <marker
             id="arrow-noir-active"
             viewBox="0 0 10 10"
@@ -74,10 +75,10 @@ export default function Diagram({
             markerHeight="9"
             orient="auto-start-reverse"
           >
-            <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#ef233c" />
+            <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#BFFF00" />
           </marker>
 
-          {/* Reverse Active Arrowhead */}
+          {/* Reverse Active Neon Lime Arrowhead */}
           <marker
             id="arrow-noir-active-rev"
             viewBox="0 0 10 10"
@@ -87,18 +88,18 @@ export default function Diagram({
             markerHeight="9"
             orient="auto"
           >
-            <path d="M 9 1.5 L 0 5 L 9 8.5 z" fill="#ef233c" />
+            <path d="M 9 1.5 L 0 5 L 9 8.5 z" fill="#BFFF00" />
           </marker>
 
-          {/* Crimson Radial Ambient Glow */}
-          <radialGradient id="red-noir-glow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#ef233c" stopOpacity="0.12" />
-            <stop offset="100%" stopColor="#ef233c" stopOpacity="0" />
+          {/* Neon Lime Radial Ambient Refraction Glow */}
+          <radialGradient id="neon-ambient-glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#BFFF00" stopOpacity="0.12" />
+            <stop offset="100%" stopColor="#BFFF00" stopOpacity="0" />
           </radialGradient>
         </defs>
 
         {/* Ambient Center Glow */}
-        <circle cx="960" cy="540" r="600" fill="url(#red-noir-glow)" pointerEvents="none" />
+        <circle cx="960" cy="540" r="650" fill="url(#neon-ambient-glow)" pointerEvents="none" />
 
         {/* 1. Flows Layer (behind nodes) */}
         <g id="layer-flows">

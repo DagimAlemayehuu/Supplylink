@@ -1,8 +1,8 @@
 import React from 'react';
 
 /**
- * Gane & Sarson Process (Red Noir Theme)
- * Rounded rectangle divided by a horizontal line with large, projector-ready typography.
+ * Gane & Sarson Process (Neon Velocity Theme)
+ * Rounded rectangle divided by a horizontal line with Neon Lime accents and Plus Jakarta Sans 800.
  */
 export default function Process({ node, isActive, isDimmed }) {
   const { x, y, w, h, procId, name, category, description } = node;
@@ -16,19 +16,19 @@ export default function Process({ node, isActive, isDimmed }) {
         isDimmed ? 'opacity-20' : 'opacity-100'
       }`}
     >
-      {/* Outer Crimson Glow when active */}
+      {/* Outer Neon Glow when active */}
       {isActive && (
         <rect
-          x={x - 10}
-          y={y - 10}
-          width={w + 20}
-          height={h + 20}
+          x={x - 8}
+          y={y - 8}
+          width={w + 16}
+          height={h + 16}
           rx={isSystem ? 26 : 20}
           ry={isSystem ? 26 : 20}
           fill="none"
-          stroke="#ef233c"
-          strokeWidth="4"
-          filter="drop-shadow(0 0 28px rgba(239, 35, 60, 0.9))"
+          stroke="#BFFF00"
+          strokeWidth="3.5"
+          filter="drop-shadow(0 0 28px rgba(191, 255, 0, 0.9))"
         />
       )}
 
@@ -40,16 +40,16 @@ export default function Process({ node, isActive, isDimmed }) {
         height={h}
         rx={isSystem ? 22 : 16}
         ry={isSystem ? 22 : 16}
-        fill={isActive ? '#250508' : '#0a0a0e'}
-        stroke={isActive ? '#ef233c' : '#dc2626'}
-        strokeWidth={isActive ? '4' : '2.8'}
+        fill={isActive ? '#101d03' : '#080808'}
+        stroke={isActive ? '#BFFF00' : '#84cc16'}
+        strokeWidth={isActive ? '3.5' : '2.5'}
         className="transition-colors duration-200"
       />
 
       {/* Top section background for ID */}
       <path
         d={`M ${x} ${y + idHeight} L ${x} ${y + 16} Q ${x} ${y} ${x + 16} ${y} L ${x + w - 16} ${y} Q ${x + w} ${y} ${x + w} ${y + 16} L ${x + w} ${y + idHeight} Z`}
-        fill={isSystem ? '#ef233c' : '#33080c'}
+        fill={isSystem ? '#BFFF00' : '#142403'}
       />
 
       {/* Dividing line separating ID section and Name section */}
@@ -58,34 +58,36 @@ export default function Process({ node, isActive, isDimmed }) {
         y1={y + idHeight}
         x2={x + w}
         y2={y + idHeight}
-        stroke="#ef233c"
-        strokeWidth="2.8"
+        stroke={isSystem ? '#000000' : '#84cc16'}
+        strokeWidth="2.5"
       />
 
-      {/* Process ID - Large & Clear */}
+      {/* Process ID - In Geist Mono */}
       <text
         x={x + 22}
         y={y + (isSystem ? 36 : 27)}
-        className="font-manrope font-black select-none fill-white"
-        style={{ fontSize: isSystem ? '30px' : '24px' }}
+        className={`font-mono font-black select-none tabular-nums ${
+          isSystem ? 'fill-black' : 'fill-[#BFFF00]'
+        }`}
+        style={{ fontSize: isSystem ? '28px' : '22px' }}
       >
         {procId}
       </text>
 
-      {/* System Badge on context diagram */}
+      {/* System Boundary Badge on context diagram */}
       {isSystem && (
         <text
           x={x + w - 22}
           y={y + 36}
           textAnchor="end"
-          className="fill-red-100 font-black select-none uppercase tracking-widest font-manrope"
-          style={{ fontSize: '16px' }}
+          className="fill-black font-extrabold select-none uppercase tracking-widestTechnical font-mono"
+          style={{ fontSize: '13px' }}
         >
-          Central System Boundary
+          SYSTEM BOUNDARY
         </text>
       )}
 
-      {/* Process Name (Verb Phrase) - Big, Bold, Projector-Ready */}
+      {/* Process Name (Verb Phrase) - Plus Jakarta Sans 800 Uppercase */}
       <foreignObject
         x={x + 10}
         y={y + idHeight + 2}
@@ -94,13 +96,13 @@ export default function Process({ node, isActive, isDimmed }) {
       >
         <div className="w-full h-full flex flex-col items-center justify-center text-center px-2">
           <span
-            className="font-manrope font-black leading-tight text-white select-none"
-            style={{ fontSize: isSystem ? '40px' : '25px', letterSpacing: '-0.02em' }}
+            className="font-headline font-extrabold leading-tight text-white select-none uppercase tracking-tight"
+            style={{ fontSize: isSystem ? '36px' : '23px' }}
           >
             {name}
           </span>
           {description && isSystem && (
-            <span className="text-zinc-200 text-lg mt-2 max-w-lg font-inter font-normal">
+            <span className="text-zinc-300 text-sm mt-2 max-w-md font-body font-normal">
               {description}
             </span>
           )}

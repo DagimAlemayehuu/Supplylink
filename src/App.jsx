@@ -185,15 +185,15 @@ export default function App() {
   // -------------------------------------------------------------
   if (isPrintMode) {
     return (
-      <div className="bg-black min-h-screen text-white">
-        <div className="no-print bg-zinc-950 border-b border-white/10 text-white p-4 flex items-center justify-between sticky top-0 z-50 shadow-2xl">
+      <div className="bg-[#050505] min-h-screen text-white font-body">
+        <div className="no-print bg-[#0a0a0a] border-b border-white/10 text-white p-4 flex items-center justify-between sticky top-0 z-50 shadow-2xl">
           <div className="flex items-center gap-2">
-            <span className="font-extrabold text-base font-manrope">SupplyLink DFD Presentation — Printable Document</span>
-            <span className="text-zinc-400 text-xs font-inter">(All 7 slides fully expanded)</span>
+            <span className="font-extrabold text-base font-headline uppercase tracking-tight">SupplyLink DFD Presentation — Technical Specification</span>
+            <span className="text-zinc-400 text-xs font-mono uppercase tracking-widestTechnical">(All 7 slides expanded)</span>
           </div>
           <button
             onClick={() => window.print()}
-            className="flex items-center gap-2 bg-[#ef233c] hover:bg-red-700 px-5 py-2 rounded-xl font-bold text-sm transition-all shadow-[0_0_15px_rgba(239,35,60,0.5)] font-manrope"
+            className="flex items-center gap-2 laser-btn px-5 py-2 text-xs font-headline font-extrabold transition-all"
           >
             <Printer className="w-4 h-4" />
             <span>Print or Save to PDF (Ctrl+P)</span>
@@ -204,7 +204,7 @@ export default function App() {
           {[0, 1, 2, 3, 4, 5, 6].map(idx => (
             <div
               key={idx}
-              className="print-page w-[1920px] h-[1080px] bg-black my-4 shadow-2xl border border-white/10 overflow-hidden relative"
+              className="print-page w-[1920px] h-[1080px] bg-[#050505] my-4 shadow-2xl border border-white/10 overflow-hidden relative"
             >
               {renderSlideContent(idx, slideStepCounts[idx] || 0)}
             </div>
@@ -218,7 +218,7 @@ export default function App() {
   // FULL-SCREEN WEBSITE PRESENTATION MODE
   // -------------------------------------------------------------
   return (
-    <div className="w-screen h-screen bg-black text-white flex flex-col overflow-hidden relative font-inter select-none">
+    <div className="w-screen h-screen bg-[#050505] text-white flex flex-col overflow-hidden relative font-body select-none">
       {/* Floating Modern Header MinimalLineNav */}
       <MinimalLineNav
         currentSlide={currentSlide}

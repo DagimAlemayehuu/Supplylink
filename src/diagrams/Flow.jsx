@@ -1,13 +1,13 @@
 import React from 'react';
 
 /**
- * Gane & Sarson Data Flow (Red Noir Theme)
- * Labeled arrows with extra-large high-contrast text badges and animated crimson pulses.
+ * Gane & Sarson Data Flow (Neon Velocity Theme)
+ * Labeled arrows with high-contrast text badges and animated Neon Lime pulses.
  */
 export default function Flow({ flow, isActive, isDimmed }) {
   const { id, path, label, items, labelPos, bidirectional } = flow;
 
-  const strokeColor = isActive ? '#ef233c' : '#82828e';
+  const strokeColor = isActive ? '#BFFF00' : '#8892b0';
   const strokeWidth = isActive ? 4.2 : 2.8;
   const markerEnd = isActive ? 'url(#arrow-noir-active)' : 'url(#arrow-noir-default)';
   const markerStart = bidirectional
@@ -27,7 +27,7 @@ export default function Flow({ flow, isActive, isDimmed }) {
       <path
         d={path}
         fill="none"
-        stroke={isActive ? 'rgba(239, 35, 60, 0.45)' : '#000000'}
+        stroke={isActive ? 'rgba(191, 255, 0, 0.4)' : '#050505'}
         strokeWidth={strokeWidth + 8}
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -51,7 +51,7 @@ export default function Flow({ flow, isActive, isDimmed }) {
         <path
           d={path}
           fill="none"
-          stroke="#ff4d6d"
+          stroke="#d9ff66"
           strokeWidth="4.5"
           strokeLinecap="round"
           className="animate-flow-dash"
@@ -60,7 +60,7 @@ export default function Flow({ flow, isActive, isDimmed }) {
 
       {/* Traveling pulse dot along active flow */}
       {isActive && (
-        <circle r="7.5" fill="#ef233c" stroke="#ffffff" strokeWidth="2.5" filter="drop-shadow(0 0 12px #ef233c)">
+        <circle r="7.5" fill="#BFFF00" stroke="#000000" strokeWidth="2.5" filter="drop-shadow(0 0 14px #BFFF00)">
           <animateMotion
             path={path}
             dur="2s"
@@ -84,10 +84,10 @@ export default function Flow({ flow, isActive, isDimmed }) {
                   <rect
                     width={badgeWidth}
                     height={badgeHeight}
-                    rx="14"
-                    fill={isActive ? '#1c0407' : '#08080d'}
-                    stroke={isActive ? '#ef233c' : 'rgba(255, 255, 255, 0.35)'}
-                    strokeWidth={isActive ? '3' : '2'}
+                    rx="12"
+                    fill={isActive ? '#0f1c03' : '#080808'}
+                    stroke={isActive ? '#BFFF00' : 'rgba(255, 255, 255, 0.25)'}
+                    strokeWidth={isActive ? '2.5' : '1.8'}
                     filter="drop-shadow(0 8px 24px rgba(0,0,0,0.95))"
                   />
                   {items.map((item, idx) => (
@@ -95,12 +95,12 @@ export default function Flow({ flow, isActive, isDimmed }) {
                       key={idx}
                       x="20"
                       y={28 + idx * lineSpacing}
-                      className={`select-none font-inter font-black ${
-                        isActive ? 'fill-red-100' : 'fill-white'
+                      className={`select-none font-body font-bold ${
+                        isActive ? 'fill-[#BFFF00]' : 'fill-white'
                       }`}
-                      style={{ fontSize: '19px' }}
+                      style={{ fontSize: '18px' }}
                     >
-                      • {item}
+                      › {item}
                     </text>
                   ))}
                 </g>
@@ -117,20 +117,20 @@ export default function Flow({ flow, isActive, isDimmed }) {
                   <rect
                     width={badgeWidth}
                     height={badgeHeight}
-                    rx="10"
-                    fill={isActive ? '#250508' : '#09090e'}
-                    stroke={isActive ? '#ef233c' : 'rgba(255, 255, 255, 0.35)'}
-                    strokeWidth={isActive ? '3' : '2'}
+                    rx="8"
+                    fill={isActive ? '#111d03' : '#0a0a0a'}
+                    stroke={isActive ? '#BFFF00' : 'rgba(255, 255, 255, 0.25)'}
+                    strokeWidth={isActive ? '2.5' : '1.5'}
                     filter="drop-shadow(0 6px 18px rgba(0,0,0,0.9))"
                   />
                   <text
                     x={badgeWidth / 2}
                     y="25"
                     textAnchor="middle"
-                    className={`select-none font-inter font-black ${
-                      isActive ? 'fill-red-100' : 'fill-white'
+                    className={`select-none font-body font-bold ${
+                      isActive ? 'fill-[#BFFF00]' : 'fill-white'
                     }`}
-                    style={{ fontSize: '18px' }}
+                    style={{ fontSize: '17px' }}
                   >
                     {label}
                   </text>
