@@ -1,9 +1,10 @@
-// Complete Data Flow Diagram definitions for SupplyLink (Red Noir Wide-Angle Master Edition)
-// Notation: Gane & Sarson
-// Entities: plain rectangle
-// Processes: rounded rectangle with ID box at top
-// Data stores: open-ended rectangle with ID box on the left
+// Complete Data Flow Diagram definitions for SupplyLink (Industrial Noir Edition)
+// Notation: Gane & Sarson (Academic Standard)
+// Balancing Law: 100% strict 1-to-1 match of all 18 external boundary flows between Context and Level 0
 
+// ============================================================================
+// CONTEXT DIAGRAM DATA
+// ============================================================================
 export const contextDiagramData = {
   viewBox: "0 0 1920 1080",
   nodes: [
@@ -13,10 +14,10 @@ export const contextDiagramData = {
       procId: "0",
       name: "SupplyLink System",
       category: "system",
-      x: 740,
-      y: 350,
-      w: 440,
-      h: 320,
+      x: 720,
+      y: 340,
+      w: 480,
+      h: 340,
       description: "Central software platform coordinating on-demand requests, route batching, and inventory monitoring"
     },
     {
@@ -24,10 +25,10 @@ export const contextDiagramData = {
       type: "entity",
       name: "Merchant",
       subtitle: "Source & Sink",
-      x: 40,
-      y: 280,
-      w: 230,
-      h: 460,
+      x: 50,
+      y: 260,
+      w: 220,
+      h: 500,
       description: "Dispatches stock levels & requests; receives deliveries & alerts"
     },
     {
@@ -36,9 +37,9 @@ export const contextDiagramData = {
       name: "Supplier",
       subtitle: "Source & Sink",
       x: 1650,
-      y: 280,
-      w: 230,
-      h: 460,
+      y: 260,
+      w: 220,
+      h: 500,
       description: "Manages catalog & decisions; delivers organized route batches"
     },
     {
@@ -49,7 +50,7 @@ export const contextDiagramData = {
       x: 820,
       y: 60,
       w: 280,
-      h: 180,
+      h: 170,
       description: "Approves onboarding; reviews audit reports"
     }
   ],
@@ -68,8 +69,8 @@ export const contextDiagramData = {
       ],
       flowType: "inflow",
       category: "merchant",
-      path: "M 270 430 L 740 430",
-      labelPos: { x: 505, y: 310 }
+      path: "M 270 430 L 720 430",
+      labelPos: { x: 495, y: 310 }
     },
     // System -> Merchant (Outflow)
     {
@@ -85,8 +86,8 @@ export const contextDiagramData = {
       ],
       flowType: "outflow",
       category: "merchant",
-      path: "M 740 590 L 270 590",
-      labelPos: { x: 505, y: 710 }
+      path: "M 720 590 L 270 590",
+      labelPos: { x: 495, y: 710 }
     },
     // Supplier -> System (Inflow)
     {
@@ -102,8 +103,8 @@ export const contextDiagramData = {
       ],
       flowType: "inflow",
       category: "supplier",
-      path: "M 1650 430 L 1180 430",
-      labelPos: { x: 1415, y: 310 }
+      path: "M 1650 430 L 1200 430",
+      labelPos: { x: 1425, y: 310 }
     },
     // System -> Supplier (Outflow)
     {
@@ -118,8 +119,8 @@ export const contextDiagramData = {
       ],
       flowType: "outflow",
       category: "supplier",
-      path: "M 1180 590 L 1650 590",
-      labelPos: { x: 1415, y: 710 }
+      path: "M 1200 590 L 1650 590",
+      labelPos: { x: 1425, y: 710 }
     },
     // Admin -> System (Inflow)
     {
@@ -130,8 +131,8 @@ export const contextDiagramData = {
       items: ["user approvals"],
       flowType: "inflow",
       category: "admin",
-      path: "M 890 240 L 890 350",
-      labelPos: { x: 740, y: 295 }
+      path: "M 890 230 L 890 340",
+      labelPos: { x: 740, y: 285 }
     },
     // System -> Admin (Outflow)
     {
@@ -142,12 +143,15 @@ export const contextDiagramData = {
       items: ["pending registrations", "reports"],
       flowType: "outflow",
       category: "admin",
-      path: "M 1030 350 L 1030 240",
-      labelPos: { x: 1180, y: 295 }
+      path: "M 1030 340 L 1030 230",
+      labelPos: { x: 1180, y: 285 }
     }
   ]
 };
 
+// ============================================================================
+// LEVEL 0 DFD DATA (100% BALANCED & COLLISION-FREE)
+// ============================================================================
 export const level0DiagramData = {
   viewBox: "0 0 1920 1080",
   nodes: [
@@ -157,30 +161,30 @@ export const level0DiagramData = {
       type: "entity",
       name: "Merchant",
       subtitle: "Source & Sink",
-      x: 30,
+      x: 40,
       y: 220,
-      w: 180,
-      h: 640
+      w: 190,
+      h: 630
     },
     {
       id: "e_supplier",
       type: "entity",
       name: "Supplier",
       subtitle: "Source & Sink",
-      x: 1710,
-      y: 120,
-      w: 180,
-      h: 560
+      x: 1690,
+      y: 130,
+      w: 190,
+      h: 540
     },
     {
       id: "e_admin",
       type: "entity",
       name: "Admin",
       subtitle: "Source & Sink",
-      x: 1710,
-      y: 760,
-      w: 180,
-      h: 220
+      x: 1690,
+      y: 730,
+      w: 190,
+      h: 230
     },
 
     // Column 1 (Left Lane: D1, P3, D3)
@@ -190,20 +194,20 @@ export const level0DiagramData = {
       storeId: "D1",
       name: "Users and profiles",
       desc: "locations, delivery settings",
-      x: 460,
-      y: 60,
-      w: 260,
-      h: 90
+      x: 410,
+      y: 75,
+      w: 250,
+      h: 88
     },
     {
       id: "p3",
       type: "process",
       procId: "3.0",
       name: "Manage stock",
-      x: 460,
+      x: 410,
       y: 260,
-      w: 260,
-      h: 95
+      w: 250,
+      h: 92
     },
     {
       id: "d3",
@@ -211,10 +215,10 @@ export const level0DiagramData = {
       storeId: "D3",
       name: "Inventory",
       desc: "merchant inventory",
-      x: 460,
-      y: 440,
-      w: 260,
-      h: 90
+      x: 410,
+      y: 445,
+      w: 250,
+      h: 88
     },
 
     // Column 2 (Center Lane: P1, P4, D4, P5, D5)
@@ -223,20 +227,20 @@ export const level0DiagramData = {
       type: "process",
       procId: "1.0",
       name: "Manage users and profiles",
-      x: 830,
-      y: 60,
+      x: 840,
+      y: 75,
       w: 260,
-      h: 95
+      h: 92
     },
     {
       id: "p4",
       type: "process",
       procId: "4.0",
       name: "Handle requests",
-      x: 830,
+      x: 840,
       y: 260,
       w: 260,
-      h: 95
+      h: 92
     },
     {
       id: "d4",
@@ -244,20 +248,20 @@ export const level0DiagramData = {
       storeId: "D4",
       name: "Requests",
       desc: "restock & product orders",
-      x: 830,
-      y: 440,
+      x: 840,
+      y: 445,
       w: 260,
-      h: 90
+      h: 88
     },
     {
       id: "p5",
       type: "process",
       procId: "5.0",
       name: "Plan and track deliveries",
-      x: 810,
+      x: 820,
       y: 630,
       w: 300,
-      h: 105
+      h: 100
     },
     {
       id: "d5",
@@ -265,10 +269,10 @@ export const level0DiagramData = {
       storeId: "D5",
       name: "Delivery batches",
       desc: "organized delivery routes",
-      x: 810,
-      y: 830,
+      x: 820,
+      y: 825,
       w: 300,
-      h: 90
+      h: 88
     },
 
     // Column 3 (Right Lane: P2, D2, P6)
@@ -277,10 +281,10 @@ export const level0DiagramData = {
       type: "process",
       procId: "2.0",
       name: "Manage catalog",
-      x: 1200,
+      x: 1270,
       y: 260,
-      w: 260,
-      h: 95
+      w: 250,
+      h: 92
     },
     {
       id: "d2",
@@ -288,20 +292,20 @@ export const level0DiagramData = {
       storeId: "D2",
       name: "Products",
       desc: "product catalog",
-      x: 1200,
-      y: 440,
-      w: 260,
-      h: 90
+      x: 1270,
+      y: 445,
+      w: 250,
+      h: 88
     },
     {
       id: "p6",
       type: "process",
       procId: "6.0",
       name: "Generate reports",
-      x: 1200,
-      y: 830,
-      w: 260,
-      h: 95
+      x: 1270,
+      y: 825,
+      w: 250,
+      h: 92
     }
   ],
 
@@ -312,35 +316,8 @@ export const level0DiagramData = {
       source: "e_merchant",
       target: "p1",
       label: "registration details",
-      path: "M 210 250 L 260 250 L 260 30 L 880 30 L 880 60",
-      labelPos: { x: 570, y: 22 },
-      stage: "boundary"
-    },
-    {
-      id: "f_s_reg_1",
-      source: "e_supplier",
-      target: "p1",
-      label: "registration & delivery settings",
-      path: "M 1710 150 L 1520 150 L 1520 90 L 1090 90",
-      labelPos: { x: 1350, y: 75 },
-      stage: "boundary"
-    },
-    {
-      id: "f_a_app_1",
-      source: "e_admin",
-      target: "p1",
-      label: "user approvals",
-      path: "M 1710 780 L 1670 780 L 1670 45 L 960 45 L 960 60",
-      labelPos: { x: 1315, y: 35 },
-      stage: "boundary"
-    },
-    {
-      id: "f_1_pend_a",
-      source: "p1",
-      target: "e_admin",
-      label: "pending registrations",
-      path: "M 1030 60 L 1030 18 L 1690 18 L 1690 810 L 1710 810",
-      labelPos: { x: 1360, y: 12 },
+      path: "M 230 250 L 320 250 L 320 40 L 880 40 L 880 75",
+      labelPos: { x: 490, y: 40 },
       stage: "boundary"
     },
     {
@@ -348,17 +325,8 @@ export const level0DiagramData = {
       source: "p1",
       target: "e_merchant",
       label: "account status",
-      path: "M 830 130 L 760 130 L 760 195 L 250 195 L 250 280 L 210 280",
-      labelPos: { x: 480, y: 182 },
-      stage: "boundary"
-    },
-    {
-      id: "f_1_stat_s",
-      source: "p1",
-      target: "e_supplier",
-      label: "account status",
-      path: "M 1090 130 L 1560 130 L 1560 190 L 1710 190",
-      labelPos: { x: 1350, y: 145 },
+      path: "M 840 145 L 750 145 L 750 195 L 290 195 L 290 280 L 230 280",
+      labelPos: { x: 480, y: 195 },
       stage: "boundary"
     },
     {
@@ -367,9 +335,45 @@ export const level0DiagramData = {
       target: "d1",
       bidirectional: true,
       label: "user profiles / info",
-      path: "M 830 105 L 720 105",
-      labelPos: { x: 775, y: 88 },
+      path: "M 840 115 L 660 115",
+      labelPos: { x: 750, y: 45 },
       stage: "internal"
+    },
+    {
+      id: "f_s_reg_1",
+      source: "e_supplier",
+      target: "p1",
+      label: "registration & delivery settings",
+      path: "M 1690 150 L 1580 150 L 1580 100 L 1100 100",
+      labelPos: { x: 1380, y: 100 },
+      stage: "boundary"
+    },
+    {
+      id: "f_1_stat_s",
+      source: "p1",
+      target: "e_supplier",
+      label: "account status",
+      path: "M 1100 145 L 1610 145 L 1610 190 L 1690 190",
+      labelPos: { x: 1380, y: 145 },
+      stage: "boundary"
+    },
+    {
+      id: "f_a_app_1",
+      source: "e_admin",
+      target: "p1",
+      label: "user approvals",
+      path: "M 1690 760 L 1650 760 L 1650 50 L 980 50 L 980 75",
+      labelPos: { x: 1220, y: 50 },
+      stage: "boundary"
+    },
+    {
+      id: "f_1_pend_a",
+      source: "p1",
+      target: "e_admin",
+      label: "pending registrations",
+      path: "M 1030 75 L 1030 25 L 1670 25 L 1670 800 L 1690 800",
+      labelPos: { x: 1480, y: 25 },
+      stage: "boundary"
     },
 
     // ----------------- PROCESS 2.0 FLOWS -----------------
@@ -378,8 +382,8 @@ export const level0DiagramData = {
       source: "e_supplier",
       target: "p2",
       label: "product catalog",
-      path: "M 1710 240 L 1460 240",
-      labelPos: { x: 1585, y: 220 },
+      path: "M 1690 280 L 1520 280",
+      labelPos: { x: 1605, y: 260 },
       stage: "boundary"
     },
     {
@@ -388,8 +392,8 @@ export const level0DiagramData = {
       target: "d2",
       bidirectional: true,
       label: "catalog data / updates",
-      path: "M 1330 355 L 1330 440",
-      labelPos: { x: 1330, y: 398 },
+      path: "M 1395 352 L 1395 445",
+      labelPos: { x: 1395, y: 400 },
       stage: "internal"
     },
 
@@ -399,8 +403,8 @@ export const level0DiagramData = {
       source: "e_merchant",
       target: "p3",
       label: "stock levels",
-      path: "M 210 330 L 460 330",
-      labelPos: { x: 335, y: 312 },
+      path: "M 230 335 L 410 335",
+      labelPos: { x: 320, y: 335 },
       stage: "boundary"
     },
     {
@@ -408,8 +412,8 @@ export const level0DiagramData = {
       source: "p3",
       target: "e_merchant",
       label: "low-stock alerts",
-      path: "M 460 280 L 210 280",
-      labelPos: { x: 335, y: 262 },
+      path: "M 410 275 L 230 275",
+      labelPos: { x: 320, y: 275 },
       stage: "boundary"
     },
     {
@@ -418,8 +422,8 @@ export const level0DiagramData = {
       target: "d3",
       bidirectional: true,
       label: "stock data / thresholds",
-      path: "M 590 355 L 590 440",
-      labelPos: { x: 590, y: 398 },
+      path: "M 535 352 L 535 445",
+      labelPos: { x: 535, y: 400 },
       stage: "internal"
     },
 
@@ -429,8 +433,8 @@ export const level0DiagramData = {
       source: "e_merchant",
       target: "p4",
       label: "requests (restock / new product)",
-      path: "M 210 370 L 310 370 L 310 230 L 790 230 L 790 290 L 830 290",
-      labelPos: { x: 550, y: 215 },
+      path: "M 230 380 L 350 380 L 350 230 L 780 230 L 780 280 L 840 280",
+      labelPos: { x: 440, y: 230 },
       stage: "boundary"
     },
     {
@@ -438,8 +442,8 @@ export const level0DiagramData = {
       source: "e_supplier",
       target: "p4",
       label: "request decisions",
-      path: "M 1710 360 L 1580 360 L 1580 230 L 1130 230 L 1130 290 L 1090 290",
-      labelPos: { x: 1355, y: 215 },
+      path: "M 1690 350 L 1600 350 L 1600 230 L 1150 230 L 1150 280 L 1100 280",
+      labelPos: { x: 1375, y: 230 },
       stage: "boundary"
     },
     {
@@ -447,8 +451,8 @@ export const level0DiagramData = {
       source: "d2",
       target: "p4",
       label: "product details",
-      path: "M 1200 460 L 1150 460 L 1150 320 L 1090 320",
-      labelPos: { x: 1150, y: 390 },
+      path: "M 1270 470 L 1180 470 L 1180 320 L 1100 320",
+      labelPos: { x: 1180, y: 395 },
       stage: "internal"
     },
     {
@@ -456,8 +460,8 @@ export const level0DiagramData = {
       source: "p4",
       target: "e_merchant",
       label: "request status",
-      path: "M 830 330 L 770 330 L 770 560 L 290 560 L 290 450 L 210 450",
-      labelPos: { x: 530, y: 575 },
+      path: "M 840 330 L 760 330 L 760 565 L 300 565 L 300 450 L 230 450",
+      labelPos: { x: 530, y: 565 },
       stage: "boundary"
     },
     {
@@ -465,8 +469,8 @@ export const level0DiagramData = {
       source: "p4",
       target: "e_supplier",
       label: "new requests",
-      path: "M 1090 330 L 1150 330 L 1150 560 L 1600 560 L 1600 420 L 1710 420",
-      labelPos: { x: 1375, y: 575 },
+      path: "M 1100 330 L 1160 330 L 1160 565 L 1620 565 L 1620 420 L 1690 420",
+      labelPos: { x: 1390, y: 565 },
       stage: "boundary"
     },
     {
@@ -475,8 +479,8 @@ export const level0DiagramData = {
       target: "d4",
       bidirectional: true,
       label: "request records & updates",
-      path: "M 960 355 L 960 440",
-      labelPos: { x: 960, y: 398 },
+      path: "M 970 352 L 970 445",
+      labelPos: { x: 970, y: 400 },
       stage: "internal"
     },
 
@@ -486,8 +490,8 @@ export const level0DiagramData = {
       source: "d4",
       target: "p5",
       label: "accepted requests",
-      path: "M 960 530 L 960 630",
-      labelPos: { x: 960, y: 580 },
+      path: "M 970 533 L 970 630",
+      labelPos: { x: 970, y: 580 },
       stage: "internal"
     },
     {
@@ -495,8 +499,8 @@ export const level0DiagramData = {
       source: "d1",
       target: "p5",
       label: "locations & delivery settings",
-      path: "M 720 135 L 750 135 L 750 650 L 810 650",
-      labelPos: { x: 750, y: 390 },
+      path: "M 660 145 L 760 145 L 760 655 L 820 655",
+      labelPos: { x: 760, y: 210 },
       stage: "internal"
     },
     {
@@ -504,8 +508,8 @@ export const level0DiagramData = {
       source: "e_merchant",
       target: "p5",
       label: "receipt confirmation",
-      path: "M 210 680 L 810 680",
-      labelPos: { x: 510, y: 662 },
+      path: "M 230 680 L 820 680",
+      labelPos: { x: 520, y: 660 },
       stage: "boundary"
     },
     {
@@ -513,8 +517,8 @@ export const level0DiagramData = {
       source: "e_supplier",
       target: "p5",
       label: "dispatch confirmation",
-      path: "M 1710 630 L 1520 630 L 1520 660 L 1110 660",
-      labelPos: { x: 1375, y: 642 },
+      path: "M 1690 640 L 1540 640 L 1540 660 L 1120 660",
+      labelPos: { x: 1390, y: 640 },
       stage: "boundary"
     },
     {
@@ -522,8 +526,8 @@ export const level0DiagramData = {
       source: "p5",
       target: "e_supplier",
       label: "delivery batches",
-      path: "M 1110 700 L 1560 700 L 1560 500 L 1710 500",
-      labelPos: { x: 1410, y: 685 },
+      path: "M 1120 705 L 1570 705 L 1570 500 L 1690 500",
+      labelPos: { x: 1400, y: 705 },
       stage: "boundary"
     },
     {
@@ -531,8 +535,8 @@ export const level0DiagramData = {
       source: "p5",
       target: "e_merchant",
       label: "delivery status",
-      path: "M 810 715 L 210 715",
-      labelPos: { x: 510, y: 735 },
+      path: "M 820 715 L 230 715",
+      labelPos: { x: 520, y: 735 },
       stage: "boundary"
     },
     {
@@ -540,8 +544,8 @@ export const level0DiagramData = {
       source: "p5",
       target: "d5",
       label: "batches",
-      path: "M 960 735 L 960 830",
-      labelPos: { x: 960, y: 782 },
+      path: "M 970 730 L 970 825",
+      labelPos: { x: 970, y: 780 },
       stage: "internal"
     },
     {
@@ -549,8 +553,8 @@ export const level0DiagramData = {
       source: "p5",
       target: "d3",
       label: "stock update",
-      path: "M 810 640 L 735 640 L 735 490 L 720 490",
-      labelPos: { x: 735, y: 575 },
+      path: "M 820 645 L 685 645 L 685 490 L 660 490",
+      labelPos: { x: 745, y: 645 },
       stage: "internal"
     },
 
@@ -560,8 +564,8 @@ export const level0DiagramData = {
       source: "d4",
       target: "p6",
       label: "request data",
-      path: "M 1090 490 L 1160 490 L 1160 850 L 1200 850",
-      labelPos: { x: 1160, y: 675 },
+      path: "M 1100 490 L 1200 490 L 1200 850 L 1270 850",
+      labelPos: { x: 1200, y: 670 },
       stage: "internal"
     },
     {
@@ -569,8 +573,8 @@ export const level0DiagramData = {
       source: "d5",
       target: "p6",
       label: "batch data",
-      path: "M 1110 890 L 1200 890",
-      labelPos: { x: 1155, y: 872 },
+      path: "M 1120 870 L 1270 870",
+      labelPos: { x: 1195, y: 890 },
       stage: "internal"
     },
     {
@@ -578,14 +582,16 @@ export const level0DiagramData = {
       source: "p6",
       target: "e_admin",
       label: "reports",
-      path: "M 1460 875 L 1710 875",
-      labelPos: { x: 1585, y: 855 },
+      path: "M 1520 875 L 1690 875",
+      labelPos: { x: 1605, y: 855 },
       stage: "boundary"
     }
   ]
 };
 
-// Scenario steps for Walkthrough Slide (Slide 6)
+// ============================================================================
+// SCENARIO WALKTHROUGH STEPS (SLIDE 6)
+// ============================================================================
 export const walkthroughSteps = [
   {
     stepId: "a",

@@ -7,7 +7,10 @@ import Flow from './Flow';
 /**
  * Diagram Component (Industrial Noir Theme).
  * Renders SVG diagrams strictly adhering to Gane & Sarson specifications.
- * Zero ambient blur blobs, razor-sharp vector paths.
+ * Uses a strict 3-tier depth system:
+ * 1. Flow lines (behind nodes)
+ * 2. Nodes (Entities, Processes, Data Stores)
+ * 3. Flow label badges (on top of lines, guaranteed unobscured)
  */
 export default function Diagram({
   data,
@@ -92,7 +95,7 @@ export default function Diagram({
           </marker>
         </defs>
 
-        {/* 1. Flows Layer (behind nodes) */}
+        {/* 1. Flows Lines Layer (behind nodes) */}
         <g id="layer-flows">
           {renderedFlows.map(flow => {
             const isActive = activeFlows.includes(flow.id);
@@ -104,6 +107,7 @@ export default function Diagram({
                 flow={flow}
                 isActive={isActive}
                 isDimmed={isDimmed}
+                renderPathOnly={true}
               />
             );
           })}
@@ -137,7 +141,7 @@ export default function Diagram({
               );
             }
 
-            if (node.type === "datastore") {
+            if (node.type === "store" || node.type === "datastore") {
               return (
                 <DataStore
                   key={node.id}
@@ -149,6 +153,24 @@ export default function Diagram({
             }
 
             return null;
+          })}
+        </g>
+
+        {/* 3. Flow Badges Layer (Rendered on top of lines and nodes for 100% legibility) */}
+        <g id="layer-flow-badges">
+          {renderedFlows.map(flow => {
+            const isActive = activeFlows.includes(flow.id);
+            const isDimmed = dimOthers && activeFlows.length > 0 && !isActive;
+
+            return (
+              <Flow
+                key={`badge-${flow.id}`}
+                flow={flow}
+                isActive={isActive}
+                isDimmed={isDimmed}
+                renderBadgeOnly={true}
+              />
+            );
           })}
         </g>
       </svg>

@@ -1,11 +1,11 @@
 import React from 'react';
 import Slide from '../components/Slide';
 import { presentationConfig } from '../config';
-import { GraduationCap, BookOpen, Layers } from 'lucide-react';
+import { GraduationCap, BookOpen } from 'lucide-react';
 
 /**
- * Slide 1: Title Slide (Industrial Noir Edition)
- * Pure, authoritative engineering title with solid typography and zero AI slop.
+ * Slide 1: Title Slide (Restored Previous Red Noir Edition)
+ * Pure, high-impact title with huge typography, shiny CTA highlight, and zero team members.
  */
 export default function Slide1Title() {
   const {
@@ -19,57 +19,55 @@ export default function Slide1Title() {
   return (
     <Slide className="justify-between items-center text-center">
       {/* Top Academic Institution Bar */}
-      <div className="w-full flex items-center justify-between border-b border-white/10 pb-5 z-10">
-        <div className="flex items-center gap-3.5">
-          <div className="w-10 h-10 rounded-lg bg-[#dc2626] flex items-center justify-center text-white shadow-industrial-sm">
-            <GraduationCap className="w-5 h-5" />
+      <div className="w-full flex items-center justify-between border-b border-white/10 pb-6 z-10">
+        <div className="flex items-center gap-3">
+          <div className="w-11 h-11 rounded-xl bg-[#ef233c] flex items-center justify-center text-white shadow-[0_0_20px_rgba(239,35,60,0.5)]">
+            <GraduationCap className="w-6 h-6" />
           </div>
           <div className="text-left">
-            <p className="font-extrabold text-white text-base tracking-tight font-headline">
+            <p className="font-extrabold text-white text-lg tracking-tight font-manrope">
               {school}
             </p>
-            <p className="text-xs text-zinc-400 font-medium font-inter">
+            <p className="text-xs text-zinc-400 font-medium">
               Department of Computer Science
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-[#12141a] border border-white/10 shadow-industrial-sm">
-          <BookOpen className="w-4 h-4 text-[#ef4444]" />
-          <span className="text-xs font-bold text-white font-headline tracking-wide">{courseCode}: {course}</span>
+        <div className="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md">
+          <BookOpen className="w-4 h-4 text-[#ef233c]" />
+          <span className="text-sm font-bold text-white font-manrope">{courseCode}: {course}</span>
         </div>
       </div>
 
-      {/* Hero Section with Massive High-Craft Typography */}
-      <div className="my-auto py-10 max-w-5xl mx-auto space-y-7 z-10">
-        <div className="space-y-3">
-          <h1 className="text-7xl md:text-8xl font-extrabold tracking-tight font-headline text-white leading-none">
-            {title}
-          </h1>
-          <p className="text-2xl md:text-3xl font-medium text-zinc-300 font-headline">
-            Supplier-Merchant Ordering & Delivery Platform
-          </p>
-        </div>
+      {/* Hero Section with Massive Cinematic Typography */}
+      <div className="my-auto py-8 max-w-5xl mx-auto space-y-8 z-10">
+        {/* Main Title Heading - Massive & Cinematic */}
+        <h1 className="text-7xl md:text-8xl font-extrabold tracking-tighter font-manrope leading-[1.05]">
+          <span className="block text-white">{title}</span>
+          <span className="block text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/40">
+            Supplier-Merchant Platform
+          </span>
+        </h1>
 
-        {/* Industrial Highlight Container (Zero spinning gradient, real architectural framing) */}
-        <div className="pt-4 max-w-3xl mx-auto">
-          <div className="bg-[#12141a] border border-white/15 rounded-xl px-8 py-4 shadow-industrial-md flex items-center justify-center gap-3">
-            <span className="w-2 h-2 rounded-full bg-[#dc2626]" />
-            <span className="text-xl md:text-2xl text-white font-bold font-headline">
-              "{highlightLine}"
+        {/* Highlight Banner with Shiny Border Effect */}
+        <div className="pt-2">
+          <div className="shiny-cta inline-block">
+            <span className="relative z-10 flex items-center gap-3 text-xl md:text-2xl text-white font-extrabold font-manrope px-8 py-3.5">
+              <span>"{highlightLine}"</span>
             </span>
           </div>
         </div>
       </div>
 
-      {/* Bottom Architectural Specification Bar */}
-      <div className="w-full border-t border-white/10 pt-4 flex items-center justify-between text-xs text-zinc-400 font-inter z-10">
+      {/* Bottom Architectural Notation Tag */}
+      <div className="w-full border-t border-white/10 pt-5 flex items-center justify-between text-sm text-zinc-400 font-inter z-10">
         <span className="flex items-center gap-2">
-          <Layers className="w-4 h-4 text-[#ef4444]" />
-          <span className="font-medium text-zinc-300">Context Diagram & Level 0 DFD Functional Decomposition</span>
+          <span className="w-2 h-2 rounded-full bg-[#ef233c]" />
+          <span>Context Diagram & Level 0 DFD Functional Decomposition</span>
         </span>
         <span className="font-mono text-zinc-500">
-          Gane & Sarson Academic Standard
+          HiLCoE School of Computer Science & Technology
         </span>
       </div>
     </Slide>

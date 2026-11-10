@@ -64,6 +64,41 @@ body {
   animation: dashTravel 1.1s linear infinite;
 }
 
+/* Shiny CTA Button from Slide 1 */
+@keyframes border-spin {
+  from { --gradient-angle: 0deg; }
+  to { --gradient-angle: 360deg; }
+}
+
+@property --gradient-angle { 
+  syntax: "<angle>"; 
+  initial-value: 0deg; 
+  inherits: false; 
+}
+
+.shiny-cta {
+  --gradient-angle: 0deg;
+  position: relative;
+  overflow: hidden;
+  border-radius: 9999px;
+  background: linear-gradient(#0c0d12, #0c0d12) padding-box,
+  conic-gradient(from var(--gradient-angle), transparent 0%, #ef233c 5%, #ef233c 20%, #ef233c 35%, transparent 50%, transparent 100%) border-box;
+  border: 2px solid transparent;
+  cursor: pointer;
+  isolation: isolate;
+  animation: border-spin 2.5s linear infinite;
+}
+
+.shiny-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, white 0.5px, transparent 0);
+  background-size: 4px 4px;
+  opacity: 0.12;
+  z-index: 0;
+}
+
 /* High-craft Industrial Noir Card Container */
 .industrial-panel {
   background-color: #101216;
