@@ -20,15 +20,16 @@ export default function MinimalLineNav({
 }) {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
-  const sections = [
+  const allSections = [
     { title: "Overview", desc: "Title & Project Context" },
     { title: "Problem & Idea", desc: "Pain Points & Architecture" },
     { title: "External Entities", desc: "Sources & Sinks" },
     { title: "Context Diagram", desc: "System Scope & Boundary" },
     { title: "Level 0 DFD", desc: "Functional Decomposition" },
     { title: "Scenario Walkthrough", desc: "Step-by-Step Execution" },
-    { title: "Executive Summary", desc: "Architectural Synthesis" },
+    { title: "Conclusion", desc: "Architectural Synthesis" },
   ];
+  const sections = allSections.slice(0, totalSlides);
 
   return (
     <nav aria-label="Slide Navigation" className="fixed top-0 left-0 right-0 z-50 pointer-events-none no-print">

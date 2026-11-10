@@ -6,6 +6,7 @@ import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
 /**
  * Slide 3: External Entities (Industrial Noir Edition)
  * Rigorous Gane & Sarson breakdown of Merchant, Supplier, and Admin external entities.
+ * Features high-contrast, large-format typography for clear auditorium legibility.
  */
 export default function Slide3Entities({ currentStep = 0 }) {
   const entityData = [
@@ -72,54 +73,54 @@ export default function Slide3Entities({ currentStep = 0 }) {
                 {/* Header with Gane & Sarson symbol */}
                 <div className="flex items-center justify-between mb-4 border-b border-white/10 pb-3.5">
                   <div className="flex items-center gap-3">
-                    <div className="w-5 h-5 border-2 border-sky-400 bg-sky-950/40 rounded-sm" />
-                    <h3 className="text-2xl font-bold text-white font-headline">{entity.name}</h3>
+                    <div className="w-5 h-5 border-2 border-sky-400 bg-sky-950/40 rounded-sm flex-shrink-0" />
+                    <h3 className="text-2xl lg:text-3xl font-bold text-white font-headline">{entity.name}</h3>
                   </div>
-                  <span className="text-[10px] font-mono font-semibold tracking-wider bg-sky-950/60 text-sky-300 border border-sky-400/30 px-2.5 py-1 rounded">
+                  <span className="text-xs font-mono font-bold tracking-wider bg-sky-950/60 text-sky-300 border border-sky-400/30 px-2.5 py-1 rounded">
                     {entity.badge}
                   </span>
                 </div>
 
-                <p className="text-sm text-zinc-300 mb-4 leading-relaxed font-inter">
+                <p className="text-base lg:text-lg text-zinc-100 mb-4 leading-relaxed font-inter font-normal">
                   {entity.description}
                 </p>
 
                 {/* Source Role */}
-                <div className="bg-[#121620] rounded-lg p-3.5 mb-3 border border-sky-500/20">
-                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-sky-400 mb-2 font-headline">
-                    <ArrowUpRight className="w-3.5 h-3.5 text-sky-400" />
+                <div className="bg-[#121620] rounded-lg p-4 mb-3 border border-sky-500/20">
+                  <div className="flex items-center gap-2 text-xs md:text-sm font-bold uppercase tracking-wider text-sky-300 mb-2.5 font-headline">
+                    <ArrowUpRight className="w-4 h-4 text-sky-400 flex-shrink-0" />
                     <span>Source Role (Sends to Boundary):</span>
                   </div>
-                  <ul className="space-y-1.5 text-xs font-medium text-zinc-200 font-inter">
+                  <ul className="space-y-2 text-sm md:text-base font-normal text-zinc-100 font-inter">
                     {entity.sourceFlows.map((flow, fIdx) => (
-                      <li key={fIdx} className="flex items-start gap-2">
-                        <span className="text-sky-400 font-mono">•</span>
-                        <span>{flow}</span>
+                      <li key={fIdx} className="flex items-start gap-2.5">
+                        <span className="text-sky-400 font-mono text-base font-bold leading-none mt-0.5">•</span>
+                        <span className="capitalize">{flow}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
                 {/* Sink Role */}
-                <div className="bg-[#121620] rounded-lg p-3.5 border border-sky-500/20">
-                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-sky-400 mb-2 font-headline">
-                    <ArrowDownRight className="w-3.5 h-3.5 text-sky-400" />
+                <div className="bg-[#121620] rounded-lg p-4 border border-sky-500/20">
+                  <div className="flex items-center gap-2 text-xs md:text-sm font-bold uppercase tracking-wider text-sky-300 mb-2.5 font-headline">
+                    <ArrowDownRight className="w-4 h-4 text-sky-400 flex-shrink-0" />
                     <span>Sink Role (Receives from Boundary):</span>
                   </div>
-                  <ul className="space-y-1.5 text-xs font-medium text-zinc-200 font-inter">
+                  <ul className="space-y-2 text-sm md:text-base font-normal text-zinc-100 font-inter">
                     {entity.sinkFlows.map((flow, fIdx) => (
-                      <li key={fIdx} className="flex items-start gap-2">
-                        <span className="text-sky-400 font-mono">•</span>
-                        <span>{flow}</span>
+                      <li key={fIdx} className="flex items-start gap-2.5">
+                        <span className="text-sky-400 font-mono text-base font-bold leading-none mt-0.5">•</span>
+                        <span className="capitalize">{flow}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
               </div>
 
-              <div className="mt-3 pt-2.5 border-t border-white/10 flex items-center justify-between text-[11px] text-zinc-400 font-mono">
+              <div className="mt-3 pt-2.5 border-t border-white/10 flex items-center justify-between text-xs md:text-sm text-zinc-300 font-mono">
                 <span>Dual Role Participant</span>
-                <span className="text-sky-400">Strictly External</span>
+                <span className="text-sky-400 font-semibold">Strictly External</span>
               </div>
             </div>
           </Step>

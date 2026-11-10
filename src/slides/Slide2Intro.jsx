@@ -18,8 +18,7 @@ import {
 
 /**
  * Slide 2: Problem Domain & SupplyLink Solution (Industrial Noir Edition)
- * Clean, highly readable, substantive presentation without over-engineering.
- * Rich bullet points articulate domain problems, platform architecture, and operational boundaries.
+ * High-visibility typography, crisp bullet points, and authoritative domain articulation.
  */
 export default function Slide2Intro({ currentStep = 0 }) {
   const { highlightLine } = presentationConfig;
@@ -56,25 +55,25 @@ export default function Slide2Intro({ currentStep = 0 }) {
                     ? 'bg-[#161822] border-[#dc2626] shadow-industrial-sm'
                     : isCompleted
                     ? 'bg-[#101216] border-white/20 text-zinc-300 hover:border-white/40'
-                    : 'bg-[#0d0e12] border-white/5 text-zinc-500 hover:border-white/20 opacity-70'
+                    : 'bg-[#0d0e12] border-white/5 text-zinc-400 hover:border-white/20 opacity-70'
                 }`}
               >
                 <div
-                  className={`w-6 h-6 rounded flex items-center justify-center font-bold text-xs font-mono ${
+                  className={`w-7 h-7 rounded flex items-center justify-center font-bold text-xs md:text-sm font-mono ${
                     isActive
                       ? 'bg-[#dc2626] text-white'
                       : isCompleted
                       ? 'bg-white/10 text-white'
-                      : 'bg-zinc-800 text-zinc-500'
+                      : 'bg-zinc-800 text-zinc-400'
                   }`}
                 >
                   0{idx + 1}
                 </div>
                 <div>
-                  <h4 className={`text-xs md:text-sm font-bold font-headline ${isActive ? 'text-white' : 'text-zinc-300'}`}>
+                  <h4 className={`text-sm md:text-base font-bold font-headline ${isActive ? 'text-white' : 'text-zinc-200'}`}>
                     {phase.title}
                   </h4>
-                  <p className="text-[11px] text-zinc-400 font-inter">{phase.desc}</p>
+                  <p className="text-xs text-zinc-400 font-inter">{phase.desc}</p>
                 </div>
               </button>
             );
@@ -88,110 +87,110 @@ export default function Slide2Intro({ currentStep = 0 }) {
           {/* ======================================================== */}
           {activeTab === 0 && (
             <div className="h-full flex flex-col justify-between space-y-3">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 flex-1">
                 {/* 1. Supplier Friction Card */}
                 <div className="industrial-panel p-6 flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center gap-3 mb-3 border-b border-white/10 pb-3">
-                      <div className="w-10 h-10 rounded-lg bg-red-950/70 border border-red-500/30 flex items-center justify-center text-[#ef4444] shadow-industrial-sm flex-shrink-0">
-                        <Truck className="w-5 h-5" />
+                    <div className="flex items-center gap-3.5 mb-3 border-b border-white/10 pb-3">
+                      <div className="w-11 h-11 rounded-lg bg-red-950/70 border border-red-500/30 flex items-center justify-center text-[#ef4444] shadow-industrial-sm flex-shrink-0">
+                        <Truck className="w-6 h-6" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-white font-headline">
+                        <h3 className="text-xl md:text-2xl font-bold text-white font-headline">
                           Supplier Logistics Friction
                         </h3>
-                        <span className="text-xs text-red-400 font-mono uppercase tracking-wider">
+                        <span className="text-xs md:text-sm text-red-400 font-mono uppercase tracking-wider font-semibold">
                           Speculative Driving & Waste
                         </span>
                       </div>
                     </div>
 
-                    <p className="text-zinc-200 text-sm md:text-base leading-relaxed font-inter mb-4">
+                    <p className="text-zinc-100 text-sm md:text-base leading-relaxed font-inter mb-4">
                       Suppliers operate on blind intuition—rolling trucks randomly through retail corridors to inquire if merchants need goods:
                     </p>
 
-                    <ul className="space-y-2.5 font-inter text-xs md:text-sm text-zinc-300">
-                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded-lg border border-white/5">
-                        <XCircle className="w-4 h-4 text-[#ef4444] flex-shrink-0 mt-0.5" />
-                        <span><strong>Heavy Fuel Burn & Low Payload:</strong> Trucks travel long distances with partial loads or return completely empty.</span>
+                    <ul className="space-y-3 font-inter text-sm md:text-base text-zinc-100">
+                      <li className="flex items-start gap-3 bg-[#141720] p-3 rounded-lg border border-white/5">
+                        <XCircle className="w-5 h-5 text-[#ef4444] flex-shrink-0 mt-0.5" />
+                        <span><strong className="text-white font-semibold">Heavy Fuel Burn & Low Payload:</strong> Trucks travel long distances with partial loads or return completely empty.</span>
                       </li>
-                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded-lg border border-white/5">
-                        <XCircle className="w-4 h-4 text-[#ef4444] flex-shrink-0 mt-0.5" />
-                        <span><strong>Frequent Rejected Drops:</strong> Arriving unannounced often results in merchants declining orders due to lack of cash or space.</span>
+                      <li className="flex items-start gap-3 bg-[#141720] p-3 rounded-lg border border-white/5">
+                        <XCircle className="w-5 h-5 text-[#ef4444] flex-shrink-0 mt-0.5" />
+                        <span><strong className="text-white font-semibold">Frequent Rejected Drops:</strong> Arriving unannounced often results in merchants declining orders due to lack of cash or space.</span>
                       </li>
-                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded-lg border border-white/5">
-                        <XCircle className="w-4 h-4 text-[#ef4444] flex-shrink-0 mt-0.5" />
-                        <span><strong>Unpredictable Fleet Schedules:</strong> Dispatchers have no forward visibility into daily delivery requirements or route density.</span>
+                      <li className="flex items-start gap-3 bg-[#141720] p-3 rounded-lg border border-white/5">
+                        <XCircle className="w-5 h-5 text-[#ef4444] flex-shrink-0 mt-0.5" />
+                        <span><strong className="text-white font-semibold">Unpredictable Fleet Schedules:</strong> Dispatchers have no forward visibility into daily delivery requirements or route density.</span>
                       </li>
-                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded-lg border border-white/5">
-                        <XCircle className="w-4 h-4 text-[#ef4444] flex-shrink-0 mt-0.5" />
-                        <span><strong>Inefficient Urban Routing:</strong> Driver itineraries zig-zag chaotically instead of following consolidated geographic corridors.</span>
+                      <li className="flex items-start gap-3 bg-[#141720] p-3 rounded-lg border border-white/5">
+                        <XCircle className="w-5 h-5 text-[#ef4444] flex-shrink-0 mt-0.5" />
+                        <span><strong className="text-white font-semibold">Inefficient Urban Routing:</strong> Driver itineraries zig-zag chaotically instead of following consolidated geographic corridors.</span>
                       </li>
                     </ul>
                   </div>
 
-                  <div className="mt-3 pt-2.5 border-t border-white/10 text-xs font-semibold text-[#ef4444] font-headline flex items-center justify-between">
+                  <div className="mt-3 pt-2.5 border-t border-white/10 text-xs md:text-sm font-semibold text-[#ef4444] font-headline flex items-center justify-between">
                     <span>Operational Consequence:</span>
-                    <span className="font-mono text-zinc-300">Excess overhead & diminished wholesale margins</span>
+                    <span className="font-mono text-zinc-200">Excess overhead & diminished wholesale margins</span>
                   </div>
                 </div>
 
                 {/* 2. Merchant Friction Card */}
                 <div className="industrial-panel p-6 flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center gap-3 mb-3 border-b border-white/10 pb-3">
-                      <div className="w-10 h-10 rounded-lg bg-red-950/70 border border-red-500/30 flex items-center justify-center text-[#ef4444] shadow-industrial-sm flex-shrink-0">
-                        <Store className="w-5 h-5" />
+                    <div className="flex items-center gap-3.5 mb-3 border-b border-white/10 pb-3">
+                      <div className="w-11 h-11 rounded-lg bg-red-950/70 border border-red-500/30 flex items-center justify-center text-[#ef4444] shadow-industrial-sm flex-shrink-0">
+                        <Store className="w-6 h-6" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-white font-headline">
+                        <h3 className="text-xl md:text-2xl font-bold text-white font-headline">
                           Merchant Inventory Friction
                         </h3>
-                        <span className="text-xs text-red-400 font-mono uppercase tracking-wider">
+                        <span className="text-xs md:text-sm text-red-400 font-mono uppercase tracking-wider font-semibold">
                           Stockouts & Revenue Leakage
                         </span>
                       </div>
                     </div>
 
-                    <p className="text-zinc-200 text-sm md:text-base leading-relaxed font-inter mb-4">
+                    <p className="text-zinc-100 text-sm md:text-base leading-relaxed font-inter mb-4">
                       Retail store owners face chronic replenishment uncertainty, forced to wait passively for unscheduled vendor walk-ins:
                     </p>
 
-                    <ul className="space-y-2.5 font-inter text-xs md:text-sm text-zinc-300">
-                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded-lg border border-white/5">
-                        <AlertCircle className="w-4 h-4 text-[#ef4444] flex-shrink-0 mt-0.5" />
-                        <span><strong>Critical Out-of-Stock Hours:</strong> Fast-moving products run out during peak customer demand, causing lost retail sales.</span>
+                    <ul className="space-y-3 font-inter text-sm md:text-base text-zinc-100">
+                      <li className="flex items-start gap-3 bg-[#141720] p-3 rounded-lg border border-white/5">
+                        <AlertCircle className="w-5 h-5 text-[#ef4444] flex-shrink-0 mt-0.5" />
+                        <span><strong className="text-white font-semibold">Critical Out-of-Stock Hours:</strong> Fast-moving products run out during peak customer demand, causing lost retail sales.</span>
                       </li>
-                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded-lg border border-white/5">
-                        <AlertCircle className="w-4 h-4 text-[#ef4444] flex-shrink-0 mt-0.5" />
-                        <span><strong>Zero Catalog Visibility:</strong> Merchants cannot browse supplier wholesale catalog updates, prices, or restock lead times.</span>
+                      <li className="flex items-start gap-3 bg-[#141720] p-3 rounded-lg border border-white/5">
+                        <AlertCircle className="w-5 h-5 text-[#ef4444] flex-shrink-0 mt-0.5" />
+                        <span><strong className="text-white font-semibold">Zero Catalog Visibility:</strong> Merchants cannot browse supplier wholesale catalog updates, prices, or restock lead times.</span>
                       </li>
-                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded-lg border border-white/5">
-                        <AlertCircle className="w-4 h-4 text-[#ef4444] flex-shrink-0 mt-0.5" />
-                        <span><strong>Consumer Churn:</strong> Shoppers who encounter empty shelves turn to competitor stores, eroding long-term customer loyalty.</span>
+                      <li className="flex items-start gap-3 bg-[#141720] p-3 rounded-lg border border-white/5">
+                        <AlertCircle className="w-5 h-5 text-[#ef4444] flex-shrink-0 mt-0.5" />
+                        <span><strong className="text-white font-semibold">Consumer Churn:</strong> Shoppers who encounter empty shelves turn to competitor stores, eroding long-term customer loyalty.</span>
                       </li>
-                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded-lg border border-white/5">
-                        <AlertCircle className="w-4 h-4 text-[#ef4444] flex-shrink-0 mt-0.5" />
-                        <span><strong>No Direct Replenishment Channel:</strong> Merchants lack a formal method to trigger reorder requests when inventory hits safety thresholds.</span>
+                      <li className="flex items-start gap-3 bg-[#141720] p-3 rounded-lg border border-white/5">
+                        <AlertCircle className="w-5 h-5 text-[#ef4444] flex-shrink-0 mt-0.5" />
+                        <span><strong className="text-white font-semibold">No Direct Replenishment Channel:</strong> Merchants lack a formal method to trigger reorder requests when inventory hits safety thresholds.</span>
                       </li>
                     </ul>
                   </div>
 
-                  <div className="mt-3 pt-2.5 border-t border-white/10 text-xs font-semibold text-[#ef4444] font-headline flex items-center justify-between">
+                  <div className="mt-3 pt-2.5 border-t border-white/10 text-xs md:text-sm font-semibold text-[#ef4444] font-headline flex items-center justify-between">
                     <span>Retail Consequence:</span>
-                    <span className="font-mono text-zinc-300">Preventable revenue loss & inventory blindspots</span>
+                    <span className="font-mono text-zinc-200">Preventable revenue loss & inventory blindspots</span>
                   </div>
                 </div>
               </div>
 
               {/* Bottom Problem Synthesis Bar */}
-              <div className="bg-[#101216] border border-white/10 rounded-lg p-3 flex items-center justify-between text-xs md:text-sm text-zinc-300 font-inter">
+              <div className="bg-[#101216] border border-white/10 rounded-lg p-3 flex items-center justify-between text-xs md:text-sm text-zinc-200 font-inter">
                 <div className="flex items-center gap-2.5">
                   <span className="w-2.5 h-2.5 rounded-full bg-[#dc2626]" />
                   <span className="font-bold text-white font-headline">Root Problem:</span>
                   <span>Absence of a shared digital channel linking on-demand retail requests directly to wholesale route consolidation.</span>
                 </div>
-                <span className="text-zinc-500 font-mono text-xs">Press Space or Click Next →</span>
+                <span className="text-zinc-400 font-mono text-xs">Press Space or Click Next →</span>
               </div>
             </div>
           )}
@@ -206,46 +205,46 @@ export default function Slide2Intro({ currentStep = 0 }) {
                 <div className="industrial-panel p-5 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between mb-3 border-b border-white/10 pb-2.5">
-                      <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded bg-red-950/70 border border-red-500/30 flex items-center justify-center text-[#ef4444]">
-                          <PackageCheck className="w-4 h-4" />
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded bg-red-950/70 border border-red-500/30 flex items-center justify-center text-[#ef4444]">
+                          <PackageCheck className="w-4.5 h-4.5" />
                         </div>
-                        <h3 className="text-base font-bold text-white font-headline">
+                        <h3 className="text-lg font-bold text-white font-headline">
                           1. On-Demand Request
                         </h3>
                       </div>
-                      <span className="text-[10px] font-mono font-bold text-[#ef4444] bg-red-950/60 px-2 py-0.5 rounded border border-red-500/20">
+                      <span className="text-xs font-mono font-bold text-[#ef4444] bg-red-950/60 px-2.5 py-0.5 rounded border border-red-500/20">
                         PHASE 01
                       </span>
                     </div>
 
-                    <p className="text-zinc-200 text-xs md:text-sm leading-relaxed font-inter mb-3">
+                    <p className="text-zinc-100 text-sm md:text-base leading-relaxed font-inter mb-3">
                       Merchants proactively trigger replenishment orders the moment stock depletes below safety margins:
                     </p>
 
-                    <ul className="space-y-2 font-inter text-xs text-zinc-300">
-                      <li className="flex items-start gap-2 bg-[#141720] p-2 rounded border border-white/5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
-                        <span><strong>Direct Self-Service:</strong> Merchants browse active supplier product catalogs and select specific SKUs.</span>
+                    <ul className="space-y-2.5 font-inter text-sm md:text-[15px] text-zinc-100">
+                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded border border-white/5">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                        <span><strong className="text-white font-semibold">Direct Self-Service:</strong> Browse active supplier product catalogs and select specific SKUs.</span>
                       </li>
-                      <li className="flex items-start gap-2 bg-[#141720] p-2 rounded border border-white/5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
-                        <span><strong>Flexible Order Types:</strong> Supports both standard inventory restock and new catalog introduction requests.</span>
+                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded border border-white/5">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                        <span><strong className="text-white font-semibold">Flexible Order Types:</strong> Supports standard inventory restock and new catalog introduction requests.</span>
                       </li>
-                      <li className="flex items-start gap-2 bg-[#141720] p-2 rounded border border-white/5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
-                        <span><strong>Lifecycle Tracking:</strong> Transparent status propagation from pending review to accepted, batched, and in-transit.</span>
+                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded border border-white/5">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                        <span><strong className="text-white font-semibold">Lifecycle Tracking:</strong> Transparent status propagation from pending review to accepted and batched.</span>
                       </li>
-                      <li className="flex items-start gap-2 bg-[#141720] p-2 rounded border border-white/5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
-                        <span><strong>Threshold Alerts:</strong> Process 3.0 automatically warns merchants when safety stock levels are breached.</span>
+                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded border border-white/5">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                        <span><strong className="text-white font-semibold">Threshold Alerts:</strong> Process 3.0 automatically warns merchants when safety stock levels are breached.</span>
                       </li>
                     </ul>
                   </div>
 
-                  <div className="mt-3 pt-2 border-t border-white/10 text-[11px] text-zinc-400 font-mono flex items-center justify-between">
+                  <div className="mt-3 pt-2 border-t border-white/10 text-xs text-zinc-300 font-mono flex items-center justify-between">
                     <span>DFD Interface:</span>
-                    <span className="text-sky-400">Process 4.0 & D4 Requests</span>
+                    <span className="text-sky-400 font-semibold">Process 4.0 & D4 Requests</span>
                   </div>
                 </div>
 
@@ -253,46 +252,46 @@ export default function Slide2Intro({ currentStep = 0 }) {
                 <div className="industrial-panel p-5 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between mb-3 border-b border-white/10 pb-2.5">
-                      <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded bg-red-950/70 border border-red-500/30 flex items-center justify-center text-[#ef4444]">
-                          <MapPin className="w-4 h-4" />
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded bg-red-950/70 border border-red-500/30 flex items-center justify-center text-[#ef4444]">
+                          <MapPin className="w-4.5 h-4.5" />
                         </div>
-                        <h3 className="text-base font-bold text-white font-headline">
+                        <h3 className="text-lg font-bold text-white font-headline">
                           2. Route Batching
                         </h3>
                       </div>
-                      <span className="text-[10px] font-mono font-bold text-[#ef4444] bg-red-950/60 px-2 py-0.5 rounded border border-red-500/20">
+                      <span className="text-xs font-mono font-bold text-[#ef4444] bg-red-950/60 px-2.5 py-0.5 rounded border border-red-500/20">
                         PHASE 02
                       </span>
                     </div>
 
-                    <p className="text-zinc-200 text-xs md:text-sm leading-relaxed font-inter mb-3">
+                    <p className="text-zinc-100 text-sm md:text-base leading-relaxed font-inter mb-3">
                       Process 5.0 algorithmically clusters accepted orders by geographic proximity into organized delivery batches:
                     </p>
 
-                    <ul className="space-y-2 font-inter text-xs text-zinc-300">
-                      <li className="flex items-start gap-2 bg-[#141720] p-2 rounded border border-white/5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
-                        <span><strong>Corridor Clustering:</strong> Merchants located along common streets or neighborhoods are combined into one trip.</span>
+                    <ul className="space-y-2.5 font-inter text-sm md:text-[15px] text-zinc-100">
+                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded border border-white/5">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                        <span><strong className="text-white font-semibold">Corridor Clustering:</strong> Merchants along common streets or districts are grouped into one trip.</span>
                       </li>
-                      <li className="flex items-start gap-2 bg-[#141720] p-2 rounded border border-white/5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
-                        <span><strong>Vehicle Capacity Optimization:</strong> Orders are consolidated until target truck volume is satisfied, maximizing fuel ROI.</span>
+                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded border border-white/5">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                        <span><strong className="text-white font-semibold">Capacity Packing:</strong> Orders consolidate until target truck volume is satisfied, maximizing fuel ROI.</span>
                       </li>
-                      <li className="flex items-start gap-2 bg-[#141720] p-2 rounded border border-white/5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
-                        <span><strong>No Multi-Vendor Detours:</strong> Drivers follow a sequential drop path, avoiding erratic zig-zag traversal.</span>
+                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded border border-white/5">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                        <span><strong className="text-white font-semibold">Linear Drop Paths:</strong> Drivers follow a sequential corridor drop path, avoiding erratic zig-zag traversal.</span>
                       </li>
-                      <li className="flex items-start gap-2 bg-[#141720] p-2 rounded border border-white/5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
-                        <span><strong>Supplier Control:</strong> Wholesalers review and approve grouped batches before committing warehouse pick-and-pack.</span>
+                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded border border-white/5">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                        <span><strong className="text-white font-semibold">Supplier Approval:</strong> Wholesalers review and approve grouped batches before committing warehouse packing.</span>
                       </li>
                     </ul>
                   </div>
 
-                  <div className="mt-3 pt-2 border-t border-white/10 text-[11px] text-zinc-400 font-mono flex items-center justify-between">
+                  <div className="mt-3 pt-2 border-t border-white/10 text-xs text-zinc-300 font-mono flex items-center justify-between">
                     <span>DFD Interface:</span>
-                    <span className="text-sky-400">Process 5.0 & D5 Batches</span>
+                    <span className="text-sky-400 font-semibold">Process 5.0 & D5 Batches</span>
                   </div>
                 </div>
 
@@ -300,58 +299,58 @@ export default function Slide2Intro({ currentStep = 0 }) {
                 <div className="industrial-panel p-5 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between mb-3 border-b border-white/10 pb-2.5">
-                      <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded bg-red-950/70 border border-red-500/30 flex items-center justify-center text-[#ef4444]">
-                          <Clock className="w-4 h-4" />
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded bg-red-950/70 border border-red-500/30 flex items-center justify-center text-[#ef4444]">
+                          <Clock className="w-4.5 h-4.5" />
                         </div>
-                        <h3 className="text-base font-bold text-white font-headline">
+                        <h3 className="text-lg font-bold text-white font-headline">
                           3. ASAP Dispatch
                         </h3>
                       </div>
-                      <span className="text-[10px] font-mono font-bold text-[#ef4444] bg-red-950/60 px-2 py-0.5 rounded border border-red-500/20">
+                      <span className="text-xs font-mono font-bold text-[#ef4444] bg-red-950/60 px-2.5 py-0.5 rounded border border-red-500/20">
                         PHASE 03
                       </span>
                     </div>
 
-                    <p className="text-zinc-200 text-xs md:text-sm leading-relaxed font-inter mb-3">
+                    <p className="text-zinc-100 text-sm md:text-base leading-relaxed font-inter mb-3">
                       Trips depart immediately as delivery clusters form, replacing rigid calendar-based delivery days:
                     </p>
 
-                    <ul className="space-y-2 font-inter text-xs text-zinc-300">
-                      <li className="flex items-start gap-2 bg-[#141720] p-2 rounded border border-white/5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
-                        <span><strong>Dynamic Turnaround:</strong> Trucks roll when ready, drastically reducing merchant reorder wait times.</span>
+                    <ul className="space-y-2.5 font-inter text-sm md:text-[15px] text-zinc-100">
+                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded border border-white/5">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                        <span><strong className="text-white font-semibold">Dynamic Turnaround:</strong> Trucks roll when ready, drastically reducing merchant reorder wait times.</span>
                       </li>
-                      <li className="flex items-start gap-2 bg-[#141720] p-2 rounded border border-white/5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
-                        <span><strong>Fleet Agility:</strong> Wholesale fleets respond to actual market demand rather than artificial day-of-week quotas.</span>
+                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded border border-white/5">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                        <span><strong className="text-white font-semibold">Fleet Agility:</strong> Wholesale fleets respond to actual market demand rather than artificial fixed schedules.</span>
                       </li>
-                      <li className="flex items-start gap-2 bg-[#141720] p-2 rounded border border-white/5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
-                        <span><strong>Receipt Confirmation Loop:</strong> Upon arrival, merchant confirmation triggers an automatic inventory stock increment in D3.</span>
+                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded border border-white/5">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                        <span><strong className="text-white font-semibold">Receipt Confirmation:</strong> Upon arrival, merchant confirmation triggers an automatic inventory stock update in D3.</span>
                       </li>
-                      <li className="flex items-start gap-2 bg-[#141720] p-2 rounded border border-white/5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
-                        <span><strong>Continuous Feedback:</strong> Both merchant and supplier dashboards stay perfectly synchronized at every drop milestone.</span>
+                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded border border-white/5">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                        <span><strong className="text-white font-semibold">Synchronized State:</strong> Both merchant and supplier dashboards stay perfectly synchronized at every drop milestone.</span>
                       </li>
                     </ul>
                   </div>
 
-                  <div className="mt-3 pt-2 border-t border-white/10 text-[11px] text-zinc-400 font-mono flex items-center justify-between">
+                  <div className="mt-3 pt-2 border-t border-white/10 text-xs text-zinc-300 font-mono flex items-center justify-between">
                     <span>DFD Interface:</span>
-                    <span className="text-sky-400">Process 5.0 & D3 Inventory</span>
+                    <span className="text-sky-400 font-semibold">Process 5.0 & D3 Inventory</span>
                   </div>
                 </div>
               </div>
 
               {/* Bottom Summary Bar */}
-              <div className="bg-[#101216] border border-white/10 rounded-lg p-3 flex items-center justify-between text-xs md:text-sm text-zinc-300 font-inter">
-                <div className="flex items-center gap-2">
+              <div className="bg-[#101216] border border-white/10 rounded-lg p-3 flex items-center justify-between text-xs md:text-sm text-zinc-200 font-inter">
+                <div className="flex items-center gap-2.5">
                   <Layers className="w-4 h-4 text-[#ef4444]" />
                   <span className="font-bold text-white font-headline">Core Platform Architecture:</span>
                   <span>Connects retail inventory depletion directly to wholesale warehouse batching with zero intermediary delays.</span>
                 </div>
-                <span className="text-zinc-500 font-mono text-xs">Press Space or Click Next →</span>
+                <span className="text-zinc-400 font-mono text-xs">Press Space or Click Next →</span>
               </div>
             </div>
           )}
@@ -367,7 +366,7 @@ export default function Slide2Intro({ currentStep = 0 }) {
                   <h2 className="text-2xl lg:text-3xl font-extrabold text-white leading-tight font-headline">
                     "{highlightLine}"
                   </h2>
-                  <p className="mt-2 text-zinc-300 text-xs md:text-sm leading-relaxed font-inter max-w-4xl">
+                  <p className="mt-2 text-zinc-200 text-sm md:text-base leading-relaxed font-inter max-w-4xl">
                     Every delivery trip corresponds to confirmed, clustered merchant requests. Vehicles never roll speculatively, optimizing wholesale fuel expenditure and preventing retail stockouts.
                   </p>
                 </div>
@@ -383,35 +382,35 @@ export default function Slide2Intro({ currentStep = 0 }) {
                 <div className="industrial-panel p-5 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center gap-2.5 mb-2.5 border-b border-white/10 pb-2">
-                      <div className="w-7 h-7 rounded bg-sky-950/60 border border-sky-400/30 flex items-center justify-center text-sky-400">
-                        <Users className="w-4 h-4" />
+                      <div className="w-8 h-8 rounded bg-sky-950/60 border border-sky-400/30 flex items-center justify-center text-sky-400">
+                        <Users className="w-4.5 h-4.5" />
                       </div>
-                      <h4 className="text-sm font-bold text-white font-headline">
+                      <h4 className="text-base font-bold text-white font-headline">
                         Three External Entities
                       </h4>
                     </div>
 
-                    <p className="text-xs text-zinc-300 font-inter mb-3 leading-relaxed">
+                    <p className="text-sm text-zinc-200 font-inter mb-3 leading-relaxed">
                       System interactions are strictly partitioned among three distinct actors in dual Source & Sink capacities:
                     </p>
 
-                    <ul className="space-y-2 text-xs font-inter text-zinc-300">
-                      <li className="flex items-start gap-2 bg-[#141720] p-2 rounded border border-white/5">
+                    <ul className="space-y-2.5 text-sm md:text-[15px] font-inter text-zinc-100">
+                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded border border-white/5">
                         <span className="font-mono text-sky-400 font-bold">•</span>
-                        <span><strong>Merchant:</strong> Dispatches inventory levels and requests; receives alerts, order updates, and physical stock.</span>
+                        <span><strong className="text-white font-semibold">Merchant:</strong> Dispatches inventory levels and requests; receives alerts, order updates, and physical stock.</span>
                       </li>
-                      <li className="flex items-start gap-2 bg-[#141720] p-2 rounded border border-white/5">
+                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded border border-white/5">
                         <span className="font-mono text-sky-400 font-bold">•</span>
-                        <span><strong>Supplier:</strong> Manages product catalogs, reviews pending requests, and confirms route dispatches.</span>
+                        <span><strong className="text-white font-semibold">Supplier:</strong> Manages product catalogs, reviews pending requests, and confirms route dispatches.</span>
                       </li>
-                      <li className="flex items-start gap-2 bg-[#141720] p-2 rounded border border-white/5">
+                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded border border-white/5">
                         <span className="font-mono text-sky-400 font-bold">•</span>
-                        <span><strong>Admin:</strong> Supervises platform integrity by approving new registrations and auditing consolidated reports.</span>
+                        <span><strong className="text-white font-semibold">Admin:</strong> Supervises platform integrity by approving new registrations and auditing consolidated reports.</span>
                       </li>
                     </ul>
                   </div>
 
-                  <div className="mt-3 pt-2 border-t border-white/10 text-[11px] font-mono text-zinc-400">
+                  <div className="mt-3 pt-2 border-t border-white/10 text-xs font-mono text-zinc-300">
                     Dual Source & Sink participants
                   </div>
                 </div>
@@ -420,35 +419,35 @@ export default function Slide2Intro({ currentStep = 0 }) {
                 <div className="industrial-panel p-5 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center gap-2.5 mb-2.5 border-b border-white/10 pb-2">
-                      <div className="w-7 h-7 rounded bg-red-950/70 border border-red-500/30 flex items-center justify-center text-[#ef4444]">
-                        <Truck className="w-4 h-4" />
+                      <div className="w-8 h-8 rounded bg-red-950/70 border border-red-500/30 flex items-center justify-center text-[#ef4444]">
+                        <Truck className="w-4.5 h-4.5" />
                       </div>
-                      <h4 className="text-sm font-bold text-white font-headline">
+                      <h4 className="text-base font-bold text-white font-headline">
                         Fleet & Driver Ownership
                       </h4>
                     </div>
 
-                    <p className="text-xs text-zinc-300 font-inter mb-3 leading-relaxed">
+                    <p className="text-sm text-zinc-200 font-inter mb-3 leading-relaxed">
                       Delivery vehicles and drivers are owned and scheduled directly by wholesale suppliers:
                     </p>
 
-                    <ul className="space-y-2 text-xs font-inter text-zinc-300">
-                      <li className="flex items-start gap-2 bg-[#141720] p-2 rounded border border-white/5">
+                    <ul className="space-y-2.5 text-sm md:text-[15px] font-inter text-zinc-100">
+                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded border border-white/5">
                         <span className="font-mono text-red-400 font-bold">•</span>
-                        <span><strong>Internal Operations:</strong> Driver personnel are direct employees of the Supplier organization, not independent gig workers.</span>
+                        <span><strong className="text-white font-semibold">Internal Operations:</strong> Driver personnel are direct employees of the Supplier, not independent gig workers.</span>
                       </li>
-                      <li className="flex items-start gap-2 bg-[#141720] p-2 rounded border border-white/5">
+                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded border border-white/5">
                         <span className="font-mono text-red-400 font-bold">•</span>
-                        <span><strong>No Separate Driver Entity:</strong> Driver assignments, vehicle maintenance, and shift routing remain internal to the Supplier.</span>
+                        <span><strong className="text-white font-semibold">No Separate Driver Entity:</strong> Driver assignments and shift routing remain internal to the wholesale supplier.</span>
                       </li>
-                      <li className="flex items-start gap-2 bg-[#141720] p-2 rounded border border-white/5">
+                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded border border-white/5">
                         <span className="font-mono text-red-400 font-bold">•</span>
-                        <span><strong>B2B Simplicity:</strong> The software platform coordinates business-to-business order orchestration without micromanaging in-cab drivers.</span>
+                        <span><strong className="text-white font-semibold">B2B Simplicity:</strong> The software platform coordinates business-to-business ordering without micromanaging in-cab drivers.</span>
                       </li>
                     </ul>
                   </div>
 
-                  <div className="mt-3 pt-2 border-t border-white/10 text-[11px] font-mono text-zinc-400">
+                  <div className="mt-3 pt-2 border-t border-white/10 text-xs font-mono text-zinc-300">
                     Internal to wholesale supplier entity
                   </div>
                 </div>
@@ -457,35 +456,35 @@ export default function Slide2Intro({ currentStep = 0 }) {
                 <div className="industrial-panel p-5 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center gap-2.5 mb-2.5 border-b border-white/10 pb-2">
-                      <div className="w-7 h-7 rounded bg-amber-950/70 border border-amber-500/30 flex items-center justify-center text-amber-400">
-                        <ShieldAlert className="w-4 h-4" />
+                      <div className="w-8 h-8 rounded bg-amber-950/70 border border-amber-500/30 flex items-center justify-center text-amber-400">
+                        <ShieldAlert className="w-4.5 h-4.5" />
                       </div>
-                      <h4 className="text-sm font-bold text-[#ef4444] font-headline">
+                      <h4 className="text-base font-bold text-[#ef4444] font-headline">
                         Explicit Scope Boundaries
                       </h4>
                     </div>
 
-                    <p className="text-xs text-zinc-300 font-inter mb-3 leading-relaxed">
+                    <p className="text-sm text-zinc-200 font-inter mb-3 leading-relaxed">
                       To preserve architectural clarity, the project enforces strict academic modeling boundaries:
                     </p>
 
-                    <ul className="space-y-2 text-xs font-inter text-zinc-300">
-                      <li className="flex items-start gap-2 bg-[#141720] p-2 rounded border border-white/5">
+                    <ul className="space-y-2.5 text-sm md:text-[15px] font-inter text-zinc-100">
+                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded border border-white/5">
                         <span className="font-mono text-red-400 font-bold">✕</span>
-                        <span><strong>No In-App Payments:</strong> Financial invoicing, cash handling, and bank settlement occur outside the software perimeter.</span>
+                        <span><strong className="text-white font-semibold">No In-App Payments:</strong> Financial invoicing, cash handling, and bank settlement occur outside the software boundary.</span>
                       </li>
-                      <li className="flex items-start gap-2 bg-[#141720] p-2 rounded border border-white/5">
+                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded border border-white/5">
                         <span className="font-mono text-red-400 font-bold">✕</span>
-                        <span><strong>No Live GPS Tracking:</strong> No continuous satellite tracking or live moving-map telemetry feeds over cellular networks.</span>
+                        <span><strong className="text-white font-semibold">No Live GPS Tracking:</strong> No continuous satellite tracking or live moving-map telemetry feeds over cellular networks.</span>
                       </li>
-                      <li className="flex items-start gap-2 bg-[#141720] p-2 rounded border border-white/5">
+                      <li className="flex items-start gap-2.5 bg-[#141720] p-2.5 rounded border border-white/5">
                         <span className="font-mono text-red-400 font-bold">✕</span>
-                        <span><strong>No Ratings or Social Feeds:</strong> No merchant reviews, star ratings, or public consumer marketplace features.</span>
+                        <span><strong className="text-white font-semibold">No Ratings or Social Feeds:</strong> No merchant reviews, star ratings, or public consumer marketplace features.</span>
                       </li>
                     </ul>
                   </div>
 
-                  <div className="mt-3 pt-2 border-t border-white/10 text-[11px] font-mono text-zinc-400">
+                  <div className="mt-3 pt-2 border-t border-white/10 text-xs font-mono text-zinc-300">
                     Strict academic modeling perimeter
                   </div>
                 </div>

@@ -5,12 +5,11 @@ import Slide3Entities from './slides/Slide3Entities';
 import Slide4Context from './slides/Slide4Context';
 import Slide5Level0 from './slides/Slide5Level0';
 import Slide6Walkthrough from './slides/Slide6Walkthrough';
-import Slide7Summary from './slides/Slide7Summary';
 import MinimalLineNav from './components/MinimalLineNav';
 import PresenterNotes from './components/PresenterNotes';
 import { Printer } from 'lucide-react';
 
-// Speaking points for each of the 7 sections
+// Speaking points for each section (Slide 1 to 6)
 const speakerNotes = [
   // Slide 1: Title
   [
@@ -47,17 +46,11 @@ const speakerNotes = [
     "Walk through operational steps A to F: from low-stock detection (3.0) to request creation (4.0) and supplier review.",
     "Explain how 5.0 combines accepted orders with location data to group delivery batches dispatched ASAP.",
     "Conclude the cycle with receipt confirmation triggering an automatic stock update in D3 Inventory."
-  ],
-  // Slide 7: Executive Summary
-  [
-    "Summarize how SupplyLink solves the real-world operational problem through direct requests and route batching.",
-    "Reiterate the academic modeling rigor: 100% balanced DFD decomposition with zero black holes or miracles.",
-    "Conclude with the core takeaway: eliminating speculative trips while guaranteeing stock availability."
   ]
 ];
 
 // Max internal steps per slide
-const slideStepCounts = [0, 2, 2, 4, 4, 5, 0];
+const slideStepCounts = [0, 2, 2, 4, 4, 5];
 
 export default function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -70,7 +63,7 @@ export default function App() {
     return typeof window !== 'undefined' && window.location.search.includes('print');
   }, []);
 
-  const totalSlides = 7;
+  const totalSlides = 6;
   const maxStepsForCurrentSlide = slideStepCounts[currentSlide] || 0;
 
   // Navigate forward (next step inside slide first, then next section)
@@ -173,15 +166,13 @@ export default function App() {
         return <Slide5Level0 currentStep={step} />;
       case 5:
         return <Slide6Walkthrough currentStep={step} onSetStep={(s) => setCurrentStep(s)} />;
-      case 6:
-        return <Slide7Summary />;
       default:
         return null;
     }
   };
 
   // -------------------------------------------------------------
-  // PRINT MODE: Renders all 7 slides for PDF export if ?print is set
+  // PRINT MODE: Renders all slides for PDF export if ?print is set
   // -------------------------------------------------------------
   if (isPrintMode) {
     return (
@@ -189,7 +180,7 @@ export default function App() {
         <div className="no-print bg-[#101216] border-b border-white/10 text-white p-4 flex items-center justify-between sticky top-0 z-50 shadow-industrial-md">
           <div className="flex items-center gap-2">
             <span className="font-bold text-base font-headline">SupplyLink DFD Specification — Printable Document</span>
-            <span className="text-zinc-400 text-xs font-inter">(All 7 slides fully expanded)</span>
+            <span className="text-zinc-400 text-xs font-inter">(All {totalSlides} slides fully expanded)</span>
           </div>
           <button
             onClick={() => window.print()}
@@ -201,7 +192,7 @@ export default function App() {
         </div>
 
         <div className="flex flex-col items-center">
-          {[0, 1, 2, 3, 4, 5, 6].map(idx => (
+          {Array.from({ length: totalSlides }, (_, idx) => (
             <div
               key={idx}
               className="print-page w-[1920px] h-[1080px] bg-[#0a0b0d] my-4 shadow-industrial-lg border border-white/10 overflow-hidden relative"
