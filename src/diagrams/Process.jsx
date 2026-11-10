@@ -1,34 +1,36 @@
 import React from 'react';
 
 /**
- * Gane & Sarson Process (Red Noir Theme)
- * Rounded rectangle divided by a horizontal line with large, projector-ready typography.
+ * Gane & Sarson Process (Industrial Noir Edition)
+ * Rounded rectangle divided by a horizontal line separating the top ID from the process name.
+ * Zero ungrounded glowing halos, crisp academic geometry.
  */
 export default function Process({ node, isActive, isDimmed }) {
   const { x, y, w, h, procId, name, category, description } = node;
   const isSystem = procId === "0";
-  const idHeight = isSystem ? 52 : 38;
+  const idHeight = isSystem ? 48 : 36;
+  const cornerRadius = isSystem ? 18 : 12;
 
   return (
     <g
       id={`process-${node.id}`}
-      className={`transition-all duration-300 ${
+      className={`transition-opacity duration-200 ${
         isDimmed ? 'opacity-20' : 'opacity-100'
       }`}
     >
-      {/* Outer Crimson Glow when active */}
+      {/* Active Focus Frame */}
       {isActive && (
         <rect
-          x={x - 10}
-          y={y - 10}
-          width={w + 20}
-          height={h + 20}
-          rx={isSystem ? 26 : 20}
-          ry={isSystem ? 26 : 20}
+          x={x - 6}
+          y={y - 6}
+          width={w + 12}
+          height={h + 12}
+          rx={cornerRadius + 4}
+          ry={cornerRadius + 4}
           fill="none"
-          stroke="#ef233c"
-          strokeWidth="4"
-          filter="drop-shadow(0 0 28px rgba(239, 35, 60, 0.9))"
+          stroke="#dc2626"
+          strokeWidth="2.5"
+          strokeDasharray="6 4"
         />
       )}
 
@@ -38,18 +40,17 @@ export default function Process({ node, isActive, isDimmed }) {
         y={y}
         width={w}
         height={h}
-        rx={isSystem ? 22 : 16}
-        ry={isSystem ? 22 : 16}
-        fill={isActive ? '#250508' : '#0a0a0e'}
-        stroke={isActive ? '#ef233c' : '#dc2626'}
-        strokeWidth={isActive ? '4' : '2.8'}
-        className="transition-colors duration-200"
+        rx={cornerRadius}
+        ry={cornerRadius}
+        fill={isActive ? '#18080a' : '#101216'}
+        stroke={isActive ? '#dc2626' : '#7f1d1d'}
+        strokeWidth={isActive ? '3' : '2'}
       />
 
       {/* Top section background for ID */}
       <path
-        d={`M ${x} ${y + idHeight} L ${x} ${y + 16} Q ${x} ${y} ${x + 16} ${y} L ${x + w - 16} ${y} Q ${x + w} ${y} ${x + w} ${y + 16} L ${x + w} ${y + idHeight} Z`}
-        fill={isSystem ? '#ef233c' : '#33080c'}
+        d={`M ${x} ${y + idHeight} L ${x} ${y + cornerRadius} Q ${x} ${y} ${x + cornerRadius} ${y} L ${x + w - cornerRadius} ${y} Q ${x + w} ${y} ${x + w} ${y + cornerRadius} L ${x + w} ${y + idHeight} Z`}
+        fill={isSystem ? '#dc2626' : '#22080a'}
       />
 
       {/* Dividing line separating ID section and Name section */}
@@ -58,54 +59,50 @@ export default function Process({ node, isActive, isDimmed }) {
         y1={y + idHeight}
         x2={x + w}
         y2={y + idHeight}
-        stroke="#ef233c"
-        strokeWidth="2.8"
+        stroke={isSystem ? '#ef4444' : '#7f1d1d'}
+        strokeWidth="1.5"
       />
 
-      {/* Process ID - Large & Clear */}
+      {/* Process ID in top header */}
       <text
-        x={x + 22}
-        y={y + (isSystem ? 36 : 27)}
-        className="font-manrope font-black select-none fill-white"
-        style={{ fontSize: isSystem ? '30px' : '24px' }}
+        x={x + w / 2}
+        y={y + (idHeight / 2) + 5}
+        textAnchor="middle"
+        className="font-mono font-bold select-none fill-white"
+        style={{ fontSize: isSystem ? '20px' : '15px', letterSpacing: '0.08em' }}
       >
-        {procId}
+        {isSystem ? "PROCESS 0 // MAIN SYSTEM" : `PROCESS ${procId}`}
       </text>
 
-      {/* System Badge on context diagram */}
-      {isSystem && (
-        <text
-          x={x + w - 22}
-          y={y + 36}
-          textAnchor="end"
-          className="fill-red-100 font-black select-none uppercase tracking-widest font-manrope"
-          style={{ fontSize: '16px' }}
-        >
-          Central System Boundary
-        </text>
-      )}
-
-      {/* Process Name (Verb Phrase) - Big, Bold, Projector-Ready */}
-      <foreignObject
-        x={x + 10}
-        y={y + idHeight + 2}
-        width={w - 20}
-        height={h - idHeight - 4}
+      {/* Process Name (Verb Phrase) */}
+      <text
+        x={x + w / 2}
+        y={y + idHeight + (isSystem ? 70 : 54)}
+        textAnchor="middle"
+        className="font-headline font-bold fill-white select-none"
+        style={{
+          fontSize: isSystem ? '40px' : '24px',
+          letterSpacing: '-0.02em',
+        }}
       >
-        <div className="w-full h-full flex flex-col items-center justify-center text-center px-2">
-          <span
-            className="font-manrope font-black leading-tight text-white select-none"
-            style={{ fontSize: isSystem ? '40px' : '25px', letterSpacing: '-0.02em' }}
-          >
-            {name}
-          </span>
-          {description && isSystem && (
-            <span className="text-zinc-200 text-lg mt-2 max-w-lg font-inter font-normal">
+        {name}
+      </text>
+
+      {/* Process description or category */}
+      {description && (
+        <foreignObject
+          x={x + 16}
+          y={y + idHeight + (isSystem ? 100 : 70)}
+          width={w - 32}
+          height={h - idHeight - (isSystem ? 110 : 80)}
+        >
+          <div className="text-zinc-300 text-center font-inter leading-relaxed flex flex-col justify-center h-full px-2">
+            <span style={{ fontSize: isSystem ? '18px' : '13px' }}>
               {description}
             </span>
-          )}
-        </div>
-      </foreignObject>
+          </div>
+        </foreignObject>
+      )}
     </g>
   );
 }

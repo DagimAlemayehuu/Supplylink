@@ -1,14 +1,14 @@
 import React from 'react';
 
 /**
- * Gane & Sarson Data Flow (Red Noir Theme)
- * Labeled arrows with extra-large high-contrast text badges and animated crimson pulses.
+ * Gane & Sarson Data Flow (Industrial Noir Edition)
+ * Labeled directional vectors with clean high-contrast badges and disciplined trace indicators.
  */
 export default function Flow({ flow, isActive, isDimmed }) {
   const { id, path, label, items, labelPos, bidirectional } = flow;
 
-  const strokeColor = isActive ? '#ef233c' : '#82828e';
-  const strokeWidth = isActive ? 4.2 : 2.8;
+  const strokeColor = isActive ? '#dc2626' : '#94a3b8';
+  const strokeWidth = isActive ? 3.5 : 2.2;
   const markerEnd = isActive ? 'url(#arrow-noir-active)' : 'url(#arrow-noir-default)';
   const markerStart = bidirectional
     ? isActive
@@ -19,16 +19,16 @@ export default function Flow({ flow, isActive, isDimmed }) {
   return (
     <g
       id={`flow-${id}`}
-      className={`transition-all duration-300 ${
+      className={`transition-opacity duration-200 ${
         isDimmed ? 'opacity-15' : 'opacity-100'
       }`}
     >
-      {/* Background shadow stroke for line contrast */}
+      {/* Background shadow stroke for line contrast against nodes */}
       <path
         d={path}
         fill="none"
-        stroke={isActive ? 'rgba(239, 35, 60, 0.45)' : '#000000'}
-        strokeWidth={strokeWidth + 8}
+        stroke="#0a0b0d"
+        strokeWidth={strokeWidth + 6}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -51,54 +51,53 @@ export default function Flow({ flow, isActive, isDimmed }) {
         <path
           d={path}
           fill="none"
-          stroke="#ff4d6d"
-          strokeWidth="4.5"
+          stroke="#ef4444"
+          strokeWidth="3.5"
           strokeLinecap="round"
           className="animate-flow-dash"
         />
       )}
 
-      {/* Traveling pulse dot along active flow */}
+      {/* Traveling pulse indicator along active flow */}
       {isActive && (
-        <circle r="7.5" fill="#ef233c" stroke="#ffffff" strokeWidth="2.5" filter="drop-shadow(0 0 12px #ef233c)">
+        <circle r="6" fill="#dc2626" stroke="#ffffff" strokeWidth="2">
           <animateMotion
             path={path}
-            dur="2s"
+            dur="2.2s"
             repeatCount="indefinite"
             rotate="auto"
           />
         </circle>
       )}
 
-      {/* Flow Label Badge - High Contrast, Sized to Avoid Node Overlap */}
+      {/* Flow Label Badge */}
       {labelPos && (
         <g transform={`translate(${labelPos.x}, ${labelPos.y})`}>
           {items && items.length > 1 ? (
             // Multi-item grouped label badge (Context Diagram)
             (() => {
-              const badgeWidth = 420;
-              const lineSpacing = 32;
-              const badgeHeight = 28 + items.length * lineSpacing;
+              const badgeWidth = 400;
+              const lineSpacing = 30;
+              const badgeHeight = 24 + items.length * lineSpacing;
               return (
                 <g transform={`translate(${-badgeWidth / 2}, ${-badgeHeight / 2})`}>
                   <rect
                     width={badgeWidth}
                     height={badgeHeight}
-                    rx="14"
-                    fill={isActive ? '#1c0407' : '#08080d'}
-                    stroke={isActive ? '#ef233c' : 'rgba(255, 255, 255, 0.35)'}
-                    strokeWidth={isActive ? '3' : '2'}
-                    filter="drop-shadow(0 8px 24px rgba(0,0,0,0.95))"
+                    rx="10"
+                    fill={isActive ? '#18080a' : '#101216'}
+                    stroke={isActive ? '#dc2626' : 'rgba(255, 255, 255, 0.2)'}
+                    strokeWidth={isActive ? '2.5' : '1.5'}
                   />
                   {items.map((item, idx) => (
                     <text
                       key={idx}
-                      x="20"
-                      y={28 + idx * lineSpacing}
-                      className={`select-none font-inter font-black ${
-                        isActive ? 'fill-red-100' : 'fill-white'
+                      x="18"
+                      y={26 + idx * lineSpacing}
+                      className={`select-none font-inter font-bold ${
+                        isActive ? 'fill-red-200' : 'fill-zinc-100'
                       }`}
-                      style={{ fontSize: '19px' }}
+                      style={{ fontSize: '18px' }}
                     >
                       • {item}
                     </text>
@@ -110,27 +109,26 @@ export default function Flow({ flow, isActive, isDimmed }) {
             // Single flow label badge (Level 0 Diagram)
             (() => {
               const textLength = (label || '').length;
-              const badgeWidth = Math.max(130, textLength * 11 + 26);
-              const badgeHeight = 38;
+              const badgeWidth = Math.max(120, textLength * 10 + 24);
+              const badgeHeight = 34;
               return (
                 <g transform={`translate(${-badgeWidth / 2}, ${-badgeHeight / 2})`}>
                   <rect
                     width={badgeWidth}
                     height={badgeHeight}
-                    rx="10"
-                    fill={isActive ? '#250508' : '#09090e'}
-                    stroke={isActive ? '#ef233c' : 'rgba(255, 255, 255, 0.35)'}
-                    strokeWidth={isActive ? '3' : '2'}
-                    filter="drop-shadow(0 6px 18px rgba(0,0,0,0.9))"
+                    rx="8"
+                    fill={isActive ? '#18080a' : '#101216'}
+                    stroke={isActive ? '#dc2626' : 'rgba(255, 255, 255, 0.2)'}
+                    strokeWidth={isActive ? '2.5' : '1.5'}
                   />
                   <text
                     x={badgeWidth / 2}
-                    y="25"
+                    y="23"
                     textAnchor="middle"
-                    className={`select-none font-inter font-black ${
-                      isActive ? 'fill-red-100' : 'fill-white'
+                    className={`select-none font-inter font-bold ${
+                      isActive ? 'fill-red-200' : 'fill-zinc-100'
                     }`}
-                    style={{ fontSize: '18px' }}
+                    style={{ fontSize: '16px' }}
                   >
                     {label}
                   </text>

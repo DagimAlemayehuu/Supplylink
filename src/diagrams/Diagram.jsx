@@ -5,8 +5,9 @@ import DataStore from './DataStore';
 import Flow from './Flow';
 
 /**
- * Reusable Diagram component (Red Noir Theme).
- * Renders data-driven SVG diagrams with Gane & Sarson shapes on a deep noir canvas.
+ * Diagram Component (Industrial Noir Theme).
+ * Renders SVG diagrams strictly adhering to Gane & Sarson specifications.
+ * Zero ambient blur blobs, razor-sharp vector paths.
  */
 export default function Diagram({
   data,
@@ -38,7 +39,7 @@ export default function Diagram({
         preserveAspectRatio="xMidYMid meet"
       >
         <defs>
-          {/* Default Silver/Zinc Arrowhead */}
+          {/* Default Slate Arrowhead */}
           <marker
             id="arrow-noir-default"
             viewBox="0 0 10 10"
@@ -48,7 +49,7 @@ export default function Diagram({
             markerHeight="8"
             orient="auto-start-reverse"
           >
-            <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#71717a" />
+            <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#94a3b8" />
           </marker>
 
           {/* Reverse Default Arrowhead */}
@@ -61,7 +62,7 @@ export default function Diagram({
             markerHeight="8"
             orient="auto"
           >
-            <path d="M 9 1.5 L 0 5 L 9 8.5 z" fill="#71717a" />
+            <path d="M 9 1.5 L 0 5 L 9 8.5 z" fill="#94a3b8" />
           </marker>
 
           {/* Active Crimson Arrowhead */}
@@ -74,7 +75,7 @@ export default function Diagram({
             markerHeight="9"
             orient="auto-start-reverse"
           >
-            <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#ef233c" />
+            <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#dc2626" />
           </marker>
 
           {/* Reverse Active Arrowhead */}
@@ -87,18 +88,9 @@ export default function Diagram({
             markerHeight="9"
             orient="auto"
           >
-            <path d="M 9 1.5 L 0 5 L 9 8.5 z" fill="#ef233c" />
+            <path d="M 9 1.5 L 0 5 L 9 8.5 z" fill="#dc2626" />
           </marker>
-
-          {/* Crimson Radial Ambient Glow */}
-          <radialGradient id="red-noir-glow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#ef233c" stopOpacity="0.12" />
-            <stop offset="100%" stopColor="#ef233c" stopOpacity="0" />
-          </radialGradient>
         </defs>
-
-        {/* Ambient Center Glow */}
-        <circle cx="960" cy="540" r="600" fill="url(#red-noir-glow)" pointerEvents="none" />
 
         {/* 1. Flows Layer (behind nodes) */}
         <g id="layer-flows">
@@ -117,13 +109,13 @@ export default function Diagram({
           })}
         </g>
 
-        {/* 2. Nodes Layer */}
+        {/* 2. Nodes Layer (Entities, Processes, Data Stores) */}
         <g id="layer-nodes">
           {renderedNodes.map(node => {
             const isActive = activeNodes.includes(node.id);
             const isDimmed = dimOthers && activeNodes.length > 0 && !isActive;
 
-            if (node.type === 'entity') {
+            if (node.type === "entity") {
               return (
                 <Entity
                   key={node.id}
@@ -134,7 +126,7 @@ export default function Diagram({
               );
             }
 
-            if (node.type === 'process') {
+            if (node.type === "process") {
               return (
                 <Process
                   key={node.id}
@@ -145,7 +137,7 @@ export default function Diagram({
               );
             }
 
-            if (node.type === 'store') {
+            if (node.type === "datastore") {
               return (
                 <DataStore
                   key={node.id}

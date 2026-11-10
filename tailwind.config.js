@@ -7,49 +7,51 @@ export default {
   theme: {
     extend: {
       colors: {
-        canvas: '#000000',
-        panel: '#09090b',
-        card: '#121217',
-        accent: {
-          red: '#ef233c',
-          redDark: '#d90429',
-          glow: 'rgba(239, 35, 60, 0.5)',
+        obsidian: {
+          950: '#060708',
+          900: '#0a0b0d',
+          850: '#101216',
+          800: '#16181f',
+          700: '#212530',
+          600: '#2d3342',
         },
-        noir: {
-          950: '#030304',
-          900: '#09090b',
-          850: '#111116',
-          800: '#18181f',
-          700: '#272730',
+        crimson: {
+          DEFAULT: '#dc2626',
+          bright: '#ef4444',
+          dark: '#991b1b',
+          muted: '#7f1d1d',
+          faint: 'rgba(220, 38, 38, 0.12)',
         },
-        entity: {
-          glow: '#06b6d4',
-          border: '#0891b2',
-          bg: '#041d24',
+        steel: {
+          DEFAULT: '#38bdf8',
+          dark: '#0369a1',
+          faint: 'rgba(56, 189, 248, 0.10)',
         },
-        process: {
-          glow: '#ef233c',
-          border: '#dc2626',
-          bg: '#220709',
-        },
-        store: {
-          glow: '#f59e0b',
-          border: '#d97706',
-          bg: '#231604',
+        amber: {
+          DEFAULT: '#f59e0b',
+          dark: '#b45309',
+          faint: 'rgba(245, 158, 11, 0.10)',
         },
       },
       fontFamily: {
+        headline: ['"IBM Plex Sans"', '"Manrope"', 'sans-serif'],
         manrope: ['"Manrope"', 'sans-serif'],
-        inter: ['"Inter"', 'sans-serif'],
-        sans: ['"Manrope"', '"Inter"', 'system-ui', 'sans-serif'],
+        body: ['"IBM Plex Sans"', 'sans-serif'],
+        inter: ['"IBM Plex Sans"', 'sans-serif'],
+        mono: ['"IBM Plex Mono"', 'monospace'],
+        sans: ['"IBM Plex Sans"', 'sans-serif'],
+      },
+      letterSpacing: {
+        tightest: '-0.035em',
+        widestTechnical: '0.22em',
+        ultraTechnical: '0.35em',
       },
       boxShadow: {
-        'glow-red': '0 0 35px -5px rgba(239, 35, 60, 0.45)',
-        'glow-red-lg': '0 0 60px -10px rgba(239, 35, 60, 0.6)',
-        'glow-entity': '0 0 30px -5px rgba(6, 182, 212, 0.4)',
-        'glow-store': '0 0 30px -5px rgba(245, 158, 11, 0.4)',
-        'card-noir': '0 8px 32px 0 rgba(0, 0, 0, 0.6)',
-      }
+        'industrial-sm': '0 2px 8px -1px rgba(0, 0, 0, 0.5)',
+        'industrial-md': '0 4px 16px -2px rgba(0, 0, 0, 0.6), 0 1px 3px rgba(0, 0, 0, 0.4)',
+        'industrial-lg': '0 12px 32px -4px rgba(0, 0, 0, 0.7), 0 4px 12px -2px rgba(0, 0, 0, 0.5)',
+        'crimson-subtle': '0 4px 16px -2px rgba(220, 38, 38, 0.3)',
+      },
     },
   },
   plugins: [],

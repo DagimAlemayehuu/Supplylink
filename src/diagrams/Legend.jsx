@@ -1,55 +1,53 @@
 import React from 'react';
 
 /**
- * Reusable Legend for Gane & Sarson DFD slides (Red Noir Theme).
+ * Reusable Legend for Gane & Sarson DFD slides (Industrial Noir Edition).
  */
 export default function Legend({ className = "" }) {
   return (
     <div
-      className={`bg-zinc-950/90 backdrop-blur-xl border border-white/10 rounded-2xl px-6 py-3.5 shadow-2xl flex items-center gap-8 text-base select-none ${className}`}
+      className={`bg-[#101216]/95 border border-white/10 rounded-lg px-4 py-2 shadow-industrial-md flex items-center gap-6 text-xs select-none ${className}`}
     >
-      <div className="flex items-center gap-2">
-        <span className="font-extrabold text-[#ef233c] text-xs uppercase tracking-widest font-manrope">
-          Gane & Sarson Legend:
-        </span>
-      </div>
+      <span className="font-mono font-bold text-zinc-400 uppercase tracking-wider text-[11px]">
+        GANE & SARSON:
+      </span>
 
       {/* External Entity */}
-      <div className="flex items-center gap-2.5">
-        <div className="w-5 h-4 border-2 border-cyan-400 bg-cyan-950/60" />
-        <span className="font-bold text-white text-sm">
-          External Entity <span className="text-zinc-400 font-normal">(Source/Sink)</span>
+      <div className="flex items-center gap-2">
+        <div className="w-4 h-3.5 border border-sky-400 bg-sky-950/50 rounded-none" />
+        <span className="font-medium text-zinc-200">
+          Entity <span className="text-zinc-500">(Source / Sink)</span>
         </span>
       </div>
 
       {/* Process */}
-      <div className="flex items-center gap-2.5">
-        <div className="w-5 h-4 rounded border-2 border-[#ef233c] bg-red-950/60 relative overflow-hidden">
-          <div className="h-1 bg-[#ef233c]" />
+      <div className="flex items-center gap-2">
+        <div className="w-4 h-3.5 rounded-sm border border-[#dc2626] bg-red-950/60 relative overflow-hidden">
+          <div className="h-1 bg-[#dc2626]" />
         </div>
-        <span className="font-bold text-white text-sm">
-          Process <span className="text-zinc-400 font-normal">(Verb Phrase)</span>
+        <span className="font-medium text-zinc-200">
+          Process <span className="text-zinc-500">(Verb Phrase)</span>
         </span>
       </div>
 
       {/* Data Store */}
-      <div className="flex items-center gap-2.5">
-        <div className="w-6 h-4 border-y-2 border-l-2 border-amber-400 bg-amber-950/60 relative">
-          <div className="w-1.5 h-full bg-amber-400/40 border-r border-amber-400" />
+      <div className="flex items-center gap-2">
+        <div className="w-4 h-3.5 border-y border-l border-amber-400 bg-amber-950/60 relative">
+          <div className="w-1 h-full bg-amber-400/40 border-r border-amber-400" />
         </div>
-        <span className="font-bold text-white text-sm">
-          Data Store <span className="text-zinc-400 font-normal">(Open Rectangle)</span>
+        <span className="font-medium text-zinc-200">
+          Data Store <span className="text-zinc-500">(Open Rect)</span>
         </span>
       </div>
 
       {/* Data Flow */}
-      <div className="flex items-center gap-2.5">
-        <div className="w-6 flex items-center">
-          <div className="h-[2px] bg-zinc-400 flex-1" />
-          <div className="w-0 h-0 border-t-[3.5px] border-t-transparent border-b-[3.5px] border-b-transparent border-l-[6px] border-l-zinc-400" />
+      <div className="flex items-center gap-2">
+        <div className="w-5 flex items-center">
+          <div className="h-[1.5px] bg-slate-300 flex-1" />
+          <div className="w-0 h-0 border-t-[3px] border-t-transparent border-b-[3px] border-b-transparent border-l-[5px] border-l-slate-300" />
         </div>
-        <span className="font-bold text-white text-sm">
-          Data Flow <span className="text-zinc-400 font-normal">(Noun)</span>
+        <span className="font-medium text-zinc-200">
+          Data Flow <span className="text-zinc-500">(Noun Phrase)</span>
         </span>
       </div>
     </div>

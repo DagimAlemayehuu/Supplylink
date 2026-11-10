@@ -3,70 +3,66 @@ import Slide from '../components/Slide';
 import { presentationConfig } from '../config';
 import {
   AlertCircle,
-  Lightbulb,
-  Truck,
   PackageCheck,
   MapPin,
-  ShieldAlert,
-  ArrowRight,
   Clock,
-  Store
+  ShieldAlert,
+  Truck,
+  Store,
+  Layers
 } from 'lucide-react';
 
 /**
- * Slide 2: Problem & Solution Idea (Red Noir Theme)
- * Completely redesigned into a structured, highly organized 3-phase narrative:
- * Step 0: The Core Problem (Supplier & Merchant Friction)
- * Step 1: The Solution Idea (Direct Ordering, Route Batching, ASAP Dispatch)
- * Step 2: Guiding Principle & Architectural Scope
+ * Slide 2: Problem Domain & SupplyLink Solution (Industrial Noir Edition)
+ * Structured 3-step progression: Problem Analysis -> Platform Solution -> Principle & Boundaries.
  */
 export default function Slide2Intro({ currentStep = 0 }) {
   const { highlightLine } = presentationConfig;
 
   const phases = [
-    { title: "1. The Operational Problem", desc: "Traditional Friction" },
-    { title: "2. The SupplyLink Idea", desc: "Structured Workflow" },
-    { title: "3. Principle & Scope", desc: "Core Bounds" },
+    { title: "Operational Friction", desc: "Traditional Waste" },
+    { title: "The SupplyLink Architecture", desc: "Structured Solution" },
+    { title: "Principle & Scope Bounds", desc: "System Perimeter" },
   ];
 
   return (
     <Slide
-      title="Problem Domain & The SupplyLink Solution"
-      subtitle="Transforming speculative vendor visits into organized, demand-driven route logistics"
+      title="Problem Domain & Platform Architecture"
+      subtitle="Replacing blind speculative vendor trips with demand-driven batch logistics"
     >
-      <div className="flex flex-col h-full justify-between pb-2">
-        {/* Top Organized Phase Navigation Bar */}
-        <div className="grid grid-cols-3 gap-4 mb-5">
+      <div className="flex flex-col h-full justify-between pb-1">
+        {/* Top Structured Phase Tabs */}
+        <div className="grid grid-cols-3 gap-3 mb-4">
           {phases.map((phase, idx) => {
             const isActive = currentStep === idx;
             const isCompleted = currentStep > idx;
             return (
               <div
                 key={idx}
-                className={`flex items-center gap-3 px-5 py-3 rounded-2xl border transition-all ${
+                className={`flex items-center gap-3 px-4 py-2.5 rounded-lg border transition-all ${
                   isActive
-                    ? 'bg-[#1a0407] border-[#ef233c] shadow-[0_0_20px_rgba(239,35,60,0.35)]'
+                    ? 'bg-[#161822] border-[#dc2626] shadow-industrial-sm'
                     : isCompleted
-                    ? 'bg-zinc-950/60 border-white/20 text-zinc-300'
-                    : 'bg-zinc-950/30 border-white/5 text-zinc-500 opacity-60'
+                    ? 'bg-[#101216] border-white/20 text-zinc-300'
+                    : 'bg-[#0d0e12] border-white/5 text-zinc-500 opacity-60'
                 }`}
               >
                 <div
-                  className={`w-8 h-8 rounded-xl flex items-center justify-center font-black text-sm font-manrope ${
+                  className={`w-6 h-6 rounded flex items-center justify-center font-bold text-xs font-mono ${
                     isActive
-                      ? 'bg-[#ef233c] text-white shadow-[0_0_10px_#ef233c]'
+                      ? 'bg-[#dc2626] text-white'
                       : isCompleted
                       ? 'bg-white/10 text-white'
-                      : 'bg-zinc-900 text-zinc-500'
+                      : 'bg-zinc-800 text-zinc-500'
                   }`}
                 >
-                  {idx + 1}
+                  0{idx + 1}
                 </div>
                 <div>
-                  <h4 className={`text-base font-extrabold font-manrope ${isActive ? 'text-white' : 'text-zinc-300'}`}>
+                  <h4 className={`text-xs md:text-sm font-bold font-headline ${isActive ? 'text-white' : 'text-zinc-300'}`}>
                     {phase.title}
                   </h4>
-                  <p className="text-xs text-zinc-400 font-inter">{phase.desc}</p>
+                  <p className="text-[11px] text-zinc-400 font-inter">{phase.desc}</p>
                 </div>
               </div>
             );
@@ -75,234 +71,221 @@ export default function Slide2Intro({ currentStep = 0 }) {
 
         {/* Dynamic Phase Content Container */}
         <div className="flex-1 min-h-0 relative">
-          {/* ======================================================== */}
-          {/* STEP 0: THE PROBLEM (Supplier Pain vs Merchant Pain)     */}
-          {/* ======================================================== */}
+          {/* STEP 0: THE PROBLEM */}
           {currentStep === 0 && (
-            <div className="h-full flex flex-col justify-between space-y-4 animate-fadeIn">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1">
+            <div className="h-full flex flex-col justify-between space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 flex-1">
                 {/* Supplier Friction Card */}
-                <div className="bg-gradient-to-b from-[#1a0507] to-zinc-950 border border-red-500/40 rounded-3xl p-8 shadow-[0_0_30px_rgba(239,35,60,0.15)] flex flex-col justify-between backdrop-blur-xl">
+                <div className="industrial-panel p-6 flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center gap-3.5 mb-5">
-                      <div className="w-12 h-12 rounded-2xl bg-[#ef233c]/20 border border-[#ef233c]/40 flex items-center justify-center text-[#ef233c]">
-                        <Truck className="w-7 h-7" />
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 rounded-lg bg-red-950/60 border border-red-500/30 flex items-center justify-center text-[#ef4444]">
+                        <Truck className="w-5 h-5" />
                       </div>
                       <div>
-                        <span className="text-xs font-black uppercase tracking-wider text-red-400 font-manrope">
-                          Supplier Friction
-                        </span>
-                        <h3 className="text-2xl font-black text-white font-manrope">
-                          Blind Speculative Trips
+                        <h3 className="text-xl font-bold text-white font-headline">
+                          Supplier Logistics Friction
                         </h3>
+                        <span className="text-xs text-zinc-400 font-inter">
+                          Blind Speculative Trips & Route Inefficiency
+                        </span>
                       </div>
                     </div>
 
-                    <p className="text-zinc-200 text-xl leading-relaxed font-inter mb-6">
-                      Suppliers waste fuel and driver hours driving aimlessly to merchants just to inquire if they need goods.
+                    <p className="text-zinc-200 text-base leading-relaxed font-inter mb-5">
+                      Suppliers waste fuel, driver hours, and vehicle capacity driving aimlessly to merchants just to inquire if restock is needed.
                     </p>
 
-                    <div className="space-y-3 font-inter text-base text-zinc-300">
-                      <div className="flex items-center gap-3 bg-red-950/40 p-3 rounded-xl border border-red-500/20">
-                        <AlertCircle className="w-5 h-5 text-[#ef233c] flex-shrink-0" />
-                        <span>High fuel consumption and low vehicle capacity utilization</span>
+                    <div className="space-y-2.5 font-inter text-sm text-zinc-300">
+                      <div className="flex items-center gap-3 bg-[#161822] p-3 rounded-lg border border-white/5">
+                        <AlertCircle className="w-4 h-4 text-[#ef4444] flex-shrink-0" />
+                        <span>High fuel overhead with sub-optimal vehicle capacity utilization</span>
                       </div>
-                      <div className="flex items-center gap-3 bg-red-950/40 p-3 rounded-xl border border-red-500/20">
-                        <AlertCircle className="w-5 h-5 text-[#ef233c] flex-shrink-0" />
-                        <span>Unpredictable sales visits with frequent rejected visits</span>
+                      <div className="flex items-center gap-3 bg-[#161822] p-3 rounded-lg border border-white/5">
+                        <AlertCircle className="w-4 h-4 text-[#ef4444] flex-shrink-0" />
+                        <span>Unpredictable sales visits resulting in frequent rejected drops</span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-white/10 text-xs font-bold uppercase tracking-wider text-red-400 font-manrope">
-                    Outcome: Severe Logistics Inefficiency
+                  <div className="mt-4 pt-3 border-t border-white/10 text-xs font-semibold text-[#ef4444] font-headline">
+                    Result: Severe operational cost and wasted fleet capacity
                   </div>
                 </div>
 
                 {/* Merchant Friction Card */}
-                <div className="bg-gradient-to-b from-[#1a0507] to-zinc-950 border border-red-500/40 rounded-3xl p-8 shadow-[0_0_30px_rgba(239,35,60,0.15)] flex flex-col justify-between backdrop-blur-xl">
+                <div className="industrial-panel p-6 flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center gap-3.5 mb-5">
-                      <div className="w-12 h-12 rounded-2xl bg-[#ef233c]/20 border border-[#ef233c]/40 flex items-center justify-center text-[#ef233c]">
-                        <Store className="w-7 h-7" />
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 rounded-lg bg-red-950/60 border border-red-500/30 flex items-center justify-center text-[#ef4444]">
+                        <Store className="w-5 h-5" />
                       </div>
                       <div>
-                        <span className="text-xs font-black uppercase tracking-wider text-red-400 font-manrope">
-                          Merchant Friction
-                        </span>
-                        <h3 className="text-2xl font-black text-white font-manrope">
-                          Stockouts & Lost Revenue
+                        <h3 className="text-xl font-bold text-white font-headline">
+                          Merchant Inventory Friction
                         </h3>
+                        <span className="text-xs text-zinc-400 font-inter">
+                          Stockouts & Revenue Leakage
+                        </span>
                       </div>
                     </div>
 
-                    <p className="text-zinc-200 text-xl leading-relaxed font-inter mb-6">
-                      Merchants frequently run out of popular products because they have no reliable, proactive way to request stock.
+                    <p className="text-zinc-200 text-base leading-relaxed font-inter mb-5">
+                      Merchants frequently run out of popular SKUs because they lack a direct, structured mechanism to request replenishment on demand.
                     </p>
 
-                    <div className="space-y-3 font-inter text-base text-zinc-300">
-                      <div className="flex items-center gap-3 bg-red-950/40 p-3 rounded-xl border border-red-500/20">
-                        <AlertCircle className="w-5 h-5 text-[#ef233c] flex-shrink-0" />
-                        <span>Empty shelves during peak customer demand hours</span>
+                    <div className="space-y-2.5 font-inter text-sm text-zinc-300">
+                      <div className="flex items-center gap-3 bg-[#161822] p-3 rounded-lg border border-white/5">
+                        <AlertCircle className="w-4 h-4 text-[#ef4444] flex-shrink-0" />
+                        <span>Empty shelves during peak retail demand hours</span>
                       </div>
-                      <div className="flex items-center gap-3 bg-red-950/40 p-3 rounded-xl border border-red-500/20">
-                        <AlertCircle className="w-5 h-5 text-[#ef233c] flex-shrink-0" />
-                        <span>Zero visibility into supplier availability or delivery ETA</span>
+                      <div className="flex items-center gap-3 bg-[#161822] p-3 rounded-lg border border-white/5">
+                        <AlertCircle className="w-4 h-4 text-[#ef4444] flex-shrink-0" />
+                        <span>Zero visibility into supplier product catalog or delivery ETA</span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-white/10 text-xs font-bold uppercase tracking-wider text-red-400 font-manrope">
-                    Outcome: Lost Customer Loyalty & Sales
+                  <div className="mt-4 pt-3 border-t border-white/10 text-xs font-semibold text-[#ef4444] font-headline">
+                    Result: Lost consumer loyalty and preventable retail revenue decline
                   </div>
                 </div>
               </div>
 
               {/* Bottom Problem Synthesis Bar */}
-              <div className="bg-zinc-950/80 border border-white/10 rounded-2xl p-4 flex items-center justify-between text-base text-zinc-300 font-inter">
-                <div className="flex items-center gap-3">
-                  <span className="w-3 h-3 rounded-full bg-[#ef233c] animate-pulse" />
-                  <span className="font-bold text-white">Root Cause:</span>
+              <div className="bg-[#101216] border border-white/10 rounded-lg p-3.5 flex items-center justify-between text-sm text-zinc-300 font-inter">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-2 h-2 rounded-full bg-[#dc2626]" />
+                  <span className="font-bold text-white font-headline">Core Failure:</span>
                   <span>Absence of a shared, structured channel for direct ordering and route consolidation.</span>
                 </div>
-                <span className="text-xs text-zinc-500 font-mono">Press Space or Next →</span>
+                <span className="text-xs text-zinc-400 font-mono">Press Space or Right Arrow →</span>
               </div>
             </div>
           )}
 
-          {/* ======================================================== */}
-          {/* STEP 1: THE IDEA (Structured 3-Stage Platform Solution)  */}
-          {/* ======================================================== */}
+          {/* STEP 1: THE IDEA */}
           {currentStep === 1 && (
-            <div className="h-full flex flex-col justify-between space-y-4 animate-fadeIn">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 flex-1">
-                {/* Step 1: Demand-Driven Ordering */}
-                <div className="bg-zinc-950/90 border border-white/15 hover:border-[#ef233c]/60 rounded-3xl p-7 shadow-2xl flex flex-col justify-between backdrop-blur-xl relative group">
+            <div className="h-full flex flex-col justify-between space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5 flex-1">
+                {/* Stage 1 */}
+                <div className="industrial-panel p-6 flex flex-col justify-between">
                   <div>
-                    <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-white mb-5 font-black text-lg font-manrope">
-                      01
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-xs font-mono font-bold text-[#ef4444] bg-red-950/60 px-2 py-0.5 rounded border border-red-500/20">
+                        PHASE 01
+                      </span>
+                      <PackageCheck className="w-5 h-5 text-zinc-400" />
                     </div>
-                    <span className="text-xs font-black uppercase tracking-wider text-[#ef233c] font-manrope">
-                      Direct Ordering
-                    </span>
-                    <h3 className="text-2xl font-black text-white font-manrope mb-3 mt-1">
-                      Merchant Request
+                    <h3 className="text-lg font-bold text-white font-headline mb-2">
+                      On-Demand Merchant Request
                     </h3>
-                    <p className="text-zinc-200 text-lg leading-relaxed font-inter font-normal">
-                      When low on inventory, the merchant selects their chosen supplier and dispatches a restock or new-product request.
+                    <p className="text-zinc-300 text-sm leading-relaxed font-inter">
+                      Merchants proactively dispatch restock or new-product requests through the system rather than waiting for unscheduled supplier visits.
                     </p>
                   </div>
-                  <div className="mt-4 pt-3 border-t border-white/10 text-sm font-semibold text-zinc-400 flex items-center gap-2">
-                    <PackageCheck className="w-4 h-4 text-[#ef233c]" />
-                    <span>Demand-driven, not speculative</span>
+                  <div className="mt-4 pt-3 border-t border-white/10 text-xs text-zinc-400 font-mono">
+                    Trigger: Threshold stock depletion
                   </div>
                 </div>
 
-                {/* Step 2: Supplier Decision & Clustering */}
-                <div className="bg-zinc-950/90 border border-white/15 hover:border-[#ef233c]/60 rounded-3xl p-7 shadow-2xl flex flex-col justify-between backdrop-blur-xl relative group">
+                {/* Stage 2 */}
+                <div className="industrial-panel p-6 flex flex-col justify-between">
                   <div>
-                    <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-white mb-5 font-black text-lg font-manrope">
-                      02
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-xs font-mono font-bold text-[#ef4444] bg-red-950/60 px-2 py-0.5 rounded border border-red-500/20">
+                        PHASE 02
+                      </span>
+                      <MapPin className="w-5 h-5 text-zinc-400" />
                     </div>
-                    <span className="text-xs font-black uppercase tracking-wider text-[#ef233c] font-manrope">
-                      Intelligent Grouping
-                    </span>
-                    <h3 className="text-2xl font-black text-white font-manrope mb-3 mt-1">
-                      Route Batching
+                    <h3 className="text-lg font-bold text-white font-headline mb-2">
+                      Geographic Route Batching
                     </h3>
-                    <p className="text-zinc-200 text-lg leading-relaxed font-inter font-normal">
-                      The supplier accepts or rejects requests. Accepted requests from nearby merchants on common routes are grouped into delivery batches.
+                    <p className="text-zinc-300 text-sm leading-relaxed font-inter">
+                      Suppliers accept requests. Accepted orders from nearby merchants along common geographical routes are consolidated into delivery batches.
                     </p>
                   </div>
-                  <div className="mt-4 pt-3 border-t border-white/10 text-sm font-semibold text-zinc-400 flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-[#ef233c]" />
-                    <span>Clustered by merchant proximity</span>
+                  <div className="mt-4 pt-3 border-t border-white/10 text-xs text-zinc-400 font-mono">
+                    Grouping: Proximity & truck capacity
                   </div>
                 </div>
 
-                {/* Step 3: ASAP Dispatch */}
-                <div className="bg-zinc-950/90 border border-white/15 hover:border-[#ef233c]/60 rounded-3xl p-7 shadow-2xl flex flex-col justify-between backdrop-blur-xl relative group">
+                {/* Stage 3 */}
+                <div className="industrial-panel p-6 flex flex-col justify-between">
                   <div>
-                    <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-white mb-5 font-black text-lg font-manrope">
-                      03
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-xs font-mono font-bold text-[#ef4444] bg-red-950/60 px-2 py-0.5 rounded border border-red-500/20">
+                        PHASE 03
+                      </span>
+                      <Clock className="w-5 h-5 text-zinc-400" />
                     </div>
-                    <span className="text-xs font-black uppercase tracking-wider text-[#ef233c] font-manrope">
-                      Dynamic Dispatch
-                    </span>
-                    <h3 className="text-2xl font-black text-white font-manrope mb-3 mt-1">
-                      ASAP Delivery Trips
+                    <h3 className="text-lg font-bold text-white font-headline mb-2">
+                      Dynamic ASAP Dispatch
                     </h3>
-                    <p className="text-zinc-200 text-lg leading-relaxed font-inter font-normal">
-                      Vehicles depart as soon as batches form rather than on rigid, arbitrary delivery days, saving fuel and cutting wait times.
+                    <p className="text-zinc-300 text-sm leading-relaxed font-inter">
+                      Delivery vehicles depart as soon as batches form rather than on rigid calendar schedules, reducing turnaround times and fuel burn.
                     </p>
                   </div>
-                  <div className="mt-4 pt-3 border-t border-white/10 text-sm font-semibold text-zinc-400 flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-[#ef233c]" />
-                    <span>Dispatched ASAP, not on fixed days</span>
+                  <div className="mt-4 pt-3 border-t border-white/10 text-xs text-zinc-400 font-mono">
+                    Execution: Immediate batch dispatch
                   </div>
                 </div>
               </div>
 
               {/* Bottom Summary Bar */}
-              <div className="bg-zinc-950/80 border border-white/10 rounded-2xl p-4 flex items-center justify-between text-base text-zinc-300 font-inter">
-                <div className="flex items-center gap-3">
-                  <Lightbulb className="w-5 h-5 text-yellow-400" />
-                  <span className="font-bold text-white">Platform Core:</span>
-                  <span>Connects demand directly to organized logistics without middle-tier dispatch delays.</span>
+              <div className="bg-[#101216] border border-white/10 rounded-lg p-3.5 flex items-center justify-between text-sm text-zinc-300 font-inter">
+                <div className="flex items-center gap-2.5">
+                  <Layers className="w-4 h-4 text-[#ef4444]" />
+                  <span className="font-bold text-white font-headline">Platform Value:</span>
+                  <span>Directly synchronizes retail replenishment with wholesale delivery corridors.</span>
                 </div>
-                <span className="text-xs text-zinc-500 font-mono">Press Space or Next →</span>
+                <span className="text-xs text-zinc-400 font-mono">Press Space or Right Arrow →</span>
               </div>
             </div>
           )}
 
-          {/* ======================================================== */}
-          {/* STEP 2: GUIDING PRINCIPLE & ARCHITECTURAL SCOPE          */}
-          {/* ======================================================== */}
+          {/* STEP 2: PRINCIPLE & SCOPE */}
           {currentStep === 2 && (
-            <div className="h-full flex flex-col justify-between space-y-4 animate-fadeIn">
-              {/* Massive Hero Highlight Banner */}
-              <div className="bg-gradient-to-r from-[#200508] via-zinc-950 to-zinc-950 border-2 border-[#ef233c]/60 rounded-3xl p-8 shadow-[0_0_40px_rgba(239,35,60,0.3)] backdrop-blur-xl">
-                <div className="flex items-center gap-2.5 text-red-400 text-xs font-black uppercase tracking-widest mb-3 font-manrope">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#ef233c] shadow-[0_0_8px_#ef233c]" />
-                  <span>The Architectural Highlight Line</span>
-                </div>
-                <h2 className="text-4xl lg:text-6xl font-black text-white leading-tight font-manrope">
+            <div className="h-full flex flex-col justify-between space-y-4">
+              {/* Highlight Container */}
+              <div className="bg-[#12141a] border border-[#dc2626]/40 rounded-xl p-6 shadow-industrial-md">
+                <h2 className="text-3xl lg:text-4xl font-extrabold text-white leading-tight font-headline">
                   "{highlightLine}"
                 </h2>
-                <p className="mt-4 text-zinc-300 text-xl leading-relaxed font-inter font-normal max-w-4xl">
-                  Eliminates speculative driving. Trips are organized and dispatched dynamically whenever delivery batches form, maximizing vehicle capacity.
+                <p className="mt-3 text-zinc-300 text-base leading-relaxed font-inter max-w-4xl">
+                  Trips are never speculative. Deliveries are batched and dispatched dynamically as soon as merchant thresholds are met, optimizing fleet capacity.
                 </p>
               </div>
 
-              {/* Scope Boundaries 3-Box Row */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                <div className="bg-zinc-950/80 border border-white/10 rounded-2xl p-5 backdrop-blur-xl">
-                  <h4 className="text-base font-extrabold text-white font-manrope mb-1.5 flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#ef233c]" />
-                    <span>Three Core Users</span>
+              {/* Scope Boundaries */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="industrial-panel p-5">
+                  <h4 className="text-sm font-bold text-white font-headline mb-1.5 flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#dc2626]" />
+                    <span>Three System Roles</span>
                   </h4>
-                  <p className="text-sm text-zinc-300 font-inter">
-                    Merchant, Supplier, and Admin (who approves accounts and reviews system reports).
+                  <p className="text-xs text-zinc-300 font-inter leading-relaxed">
+                    Merchant, Supplier, and Admin (responsible for onboarding approvals and viewing operational reports).
                   </p>
                 </div>
 
-                <div className="bg-zinc-950/80 border border-white/10 rounded-2xl p-5 backdrop-blur-xl">
-                  <h4 className="text-base font-extrabold text-white font-manrope mb-1.5 flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#ef233c]" />
-                    <span>Fleet & Driver Ownership</span>
+                <div className="industrial-panel p-5">
+                  <h4 className="text-sm font-bold text-white font-headline mb-1.5 flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#dc2626]" />
+                    <span>Fleet & Driver Model</span>
                   </h4>
-                  <p className="text-sm text-zinc-300 font-inter">
-                    Suppliers own vehicles and drivers; drivers are internal to the Supplier (no separate driver user).
+                  <p className="text-xs text-zinc-300 font-inter leading-relaxed">
+                    Suppliers own vehicles and assign drivers internally. Driver activity remains fully internal to the Supplier entity.
                   </p>
                 </div>
 
-                <div className="bg-zinc-950/80 border border-white/10 rounded-2xl p-5 backdrop-blur-xl">
-                  <h4 className="text-base font-extrabold text-red-400 font-manrope mb-1.5 flex items-center gap-2">
-                    <ShieldAlert className="w-4 h-4 text-[#ef233c]" />
-                    <span>Explicit Scope Boundaries</span>
+                <div className="industrial-panel p-5">
+                  <h4 className="text-sm font-bold text-[#ef4444] font-headline mb-1.5 flex items-center gap-2">
+                    <ShieldAlert className="w-4 h-4 text-[#ef4444]" />
+                    <span>Strict Academic Boundaries</span>
                   </h4>
-                  <p className="text-sm text-zinc-300 font-inter">
-                    No payment gateways, ratings, map/traffic APIs, or live GPS telemetry.
+                  <p className="text-xs text-zinc-300 font-inter leading-relaxed">
+                    Excluded: in-app payment gateways, driver ratings, traffic map APIs, or continuous GPS telemetry.
                   </p>
                 </div>
               </div>

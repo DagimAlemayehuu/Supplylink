@@ -5,8 +5,8 @@ import { level0DiagramData, walkthroughSteps } from '../diagrams/diagramData';
 import { ArrowRight } from 'lucide-react';
 
 /**
- * Slide 6: Scenario Walkthrough (Red Noir Wide-Angle Master Edition)
- * Traces operational data flow step-by-step with glowing active flows and maximum diagram space.
+ * Slide 6: Scenario Walkthrough (Industrial Noir Edition)
+ * Traces operational data flow step-by-step through the Level 0 architecture.
  */
 export default function Slide6Walkthrough({ currentStep = 0, onSetStep }) {
   const stepIndex = Math.min(Math.max(currentStep, 0), walkthroughSteps.length - 1);
@@ -15,21 +15,21 @@ export default function Slide6Walkthrough({ currentStep = 0, onSetStep }) {
   return (
     <Slide
       title="Scenario Walkthrough: Request & Delivery Lifecycle"
-      subtitle="Traces operational data flow step-by-step through the Level 0 architecture"
+      subtitle="Traces operational data flow step-by-step through the decomposed Level 0 architecture"
       headerExtra={
-        <div className="flex items-center gap-2 bg-zinc-950/90 border border-white/15 p-1.5 rounded-2xl backdrop-blur-xl shadow-xl">
+        <div className="flex items-center gap-1.5 bg-[#101216] border border-white/10 p-1 rounded-lg shadow-industrial-sm">
           {walkthroughSteps.map((s, idx) => (
             <button
               key={s.stepId}
               onClick={() => onSetStep && onSetStep(idx)}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold transition-all font-manrope ${
+              className={`flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-bold transition-all font-headline ${
                 idx === stepIndex
-                  ? 'bg-[#ef233c] text-white shadow-[0_0_15px_rgba(239,35,60,0.6)]'
+                  ? 'bg-[#dc2626] text-white shadow-industrial-sm'
                   : 'text-zinc-400 hover:bg-white/10 hover:text-white'
               }`}
             >
-              <span className={`w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-black ${
-                idx === stepIndex ? 'bg-white/20 text-white' : 'bg-zinc-800 text-zinc-300'
+              <span className={`w-4 h-4 rounded-sm flex items-center justify-center text-[10px] font-mono font-bold ${
+                idx === stepIndex ? 'bg-black/30 text-white' : 'bg-zinc-800 text-zinc-300'
               }`}>
                 {s.letter}
               </span>
@@ -39,39 +39,37 @@ export default function Slide6Walkthrough({ currentStep = 0, onSetStep }) {
         </div>
       }
     >
-      <div className="flex flex-col h-full justify-between pb-2">
-        {/* Active Scenario Step Caption Bar - Compact & High-Impact */}
-        <div className="bg-gradient-to-r from-[#200508] via-zinc-950 to-zinc-950 border border-[#ef233c]/40 rounded-2xl px-5 py-3 shadow-2xl mb-2 backdrop-blur-xl flex items-center justify-between gap-6">
-          <div className="flex items-center gap-3.5 flex-1 min-w-0">
-            <span className="w-8 h-8 rounded-lg bg-[#ef233c] text-white flex items-center justify-center font-black text-sm shadow-[0_0_12px_#ef233c] flex-shrink-0">
+      <div className="flex flex-col h-full justify-between pb-1">
+        {/* Active Scenario Step Caption Bar */}
+        <div className="bg-[#101216] border border-white/10 rounded-lg px-4 py-2 mb-2 shadow-industrial-sm flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3 flex-1 min-w-0">
+            <span className="w-7 h-7 rounded bg-[#dc2626] text-white flex items-center justify-center font-mono font-bold text-xs flex-shrink-0 shadow-industrial-sm">
               {activeScenario.letter}
             </span>
-            <div className="min-w-0">
-              <div className="flex items-center gap-2">
-                <h3 className="font-black text-white text-base font-manrope whitespace-nowrap">
-                  {activeScenario.title}
-                </h3>
-                <span className="text-zinc-500">•</span>
-                <p className="text-zinc-300 text-sm font-inter truncate font-normal">
-                  {activeScenario.caption}
-                </p>
-              </div>
+            <div className="min-w-0 flex items-center gap-2">
+              <h3 className="font-bold text-white text-sm font-headline whitespace-nowrap">
+                {activeScenario.title}
+              </h3>
+              <span className="text-zinc-600 font-mono">/</span>
+              <p className="text-zinc-300 text-xs font-inter truncate">
+                {activeScenario.caption}
+              </p>
             </div>
           </div>
 
-          <div className="hidden lg:flex items-center gap-3 text-xs text-zinc-300 bg-black/60 px-3.5 py-1.5 rounded-xl border border-white/10 flex-shrink-0">
-            <span className="font-bold text-[#ef233c] uppercase font-manrope">Active:</span>
+          <div className="hidden lg:flex items-center gap-2 text-xs text-zinc-300 bg-[#161822] px-3 py-1 rounded border border-white/5 flex-shrink-0">
+            <span className="font-mono text-[11px] font-bold text-[#ef4444] uppercase">FLOWS:</span>
             {activeScenario.details.slice(0, 2).map((detail, dIdx) => (
-              <span key={dIdx} className="flex items-center gap-1 font-medium">
-                <ArrowRight className="w-3 h-3 text-[#ef233c]" />
-                <span className="truncate max-w-[200px]">{detail}</span>
+              <span key={dIdx} className="flex items-center gap-1 font-medium text-xs">
+                <ArrowRight className="w-3 h-3 text-[#ef4444]" />
+                <span className="truncate max-w-[220px]">{detail}</span>
               </span>
             ))}
           </div>
         </div>
 
-        {/* Level 0 Diagram with Glowing Red Active Highlighting */}
-        <div className="flex-1 w-full bg-[#030305]/90 rounded-3xl border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.8)] relative overflow-hidden flex items-center justify-center p-2">
+        {/* Level 0 Diagram with Active Highlighting */}
+        <div className="flex-1 w-full bg-[#0c0d12] rounded-xl border border-white/10 shadow-industrial-lg relative overflow-hidden flex items-center justify-center p-2">
           <Diagram
             data={level0DiagramData}
             activeNodes={activeScenario.activeNodes}
@@ -81,13 +79,13 @@ export default function Slide6Walkthrough({ currentStep = 0, onSetStep }) {
         </div>
 
         {/* Bottom Status Hint */}
-        <div className="mt-2 flex items-center justify-between text-xs text-zinc-400 px-2">
+        <div className="mt-1.5 flex items-center justify-between text-xs text-zinc-400 px-1">
           <span className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#ef233c] shadow-[0_0_6px_#ef233c]" />
-            <span className="text-zinc-300">Active flows pulse in crimson along the direction of data movement</span>
+            <span className="w-2 h-2 rounded-full bg-[#dc2626]" />
+            <span className="text-zinc-300 text-[11px]">Active flows trace in crimson along the direction of data movement</span>
           </span>
-          <span className="font-mono text-zinc-400">
-            Scenario Step {stepIndex + 1} of 6 (Press Space / Right Arrow to advance)
+          <span className="font-mono text-zinc-400 text-[11px]">
+            STEP {stepIndex + 1} OF 6 (Press Space or Right Arrow to advance)
           </span>
         </div>
       </div>

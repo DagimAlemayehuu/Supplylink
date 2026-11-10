@@ -5,8 +5,9 @@ import Legend from '../diagrams/Legend';
 import { level0DiagramData } from '../diagrams/diagramData';
 
 /**
- * Slide 5: Level 0 DFD (Red Noir Wide-Angle Master Edition)
- * Maximized SVG canvas: 6 processes, 5 persistent stores, 3 entities, 29 flows, 100% balanced.
+ * Slide 5: Level 0 DFD (Industrial Noir Edition)
+ * Complete functional decomposition into 6 processes, 5 data stores, and 3 external entities.
+ * 100% strictly balanced with the Context Diagram.
  */
 export default function Slide5Level0({ currentStep = 0 }) {
   const allProcessIds = ["p1", "p2", "p3", "p4", "p5", "p6"];
@@ -40,7 +41,7 @@ export default function Slide5Level0({ currentStep = 0 }) {
   const stepCaptions = [
     {
       title: "Stage 1: Functional Process Decomposition",
-      desc: "Process '0' expands into 6 single-purpose processes (1.0 to 6.0), each an active verb phrase."
+      desc: "Process '0' decomposes into 6 single-purpose processes (1.0 to 6.0), each named as an active verb phrase."
     },
     {
       title: "Stage 2: Persistent Data Stores (D1–D5)",
@@ -64,22 +65,22 @@ export default function Slide5Level0({ currentStep = 0 }) {
 
   return (
     <Slide
-      title="Level 0 Data Flow Diagram"
-      subtitle="Complete decomposition into 6 processes, 5 data stores, and 3 external entities"
+      title="Level 0 Data Flow Diagram: Functional Decomposition"
+      subtitle="Complete decomposition into 6 processes, 5 data stores, and 3 external entities (100% balanced)"
       headerExtra={
-        <div className="flex items-center gap-3 bg-zinc-950/90 border border-white/15 px-4 py-2 rounded-2xl backdrop-blur-xl shadow-xl">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#ef233c] shadow-[0_0_8px_#ef233c]" />
-          <span className="text-sm font-black text-white font-manrope">{currentCaption.title}</span>
+        <div className="flex items-center gap-2.5 bg-[#101216] border border-white/10 px-3.5 py-1.5 rounded-lg shadow-industrial-sm">
+          <span className="w-2 h-2 rounded-full bg-[#dc2626]" />
+          <span className="text-xs font-bold text-white font-headline">{currentCaption.title}</span>
           <span className="text-zinc-400 text-xs font-inter hidden xl:inline">({currentCaption.desc})</span>
-          <span className="text-xs font-bold text-[#ef233c] font-mono ml-2 bg-red-950/60 px-2 py-0.5 rounded-md border border-red-500/30">
-            Stage {currentStep + 1}/5
+          <span className="text-[11px] font-semibold text-[#ef4444] font-mono ml-1.5 bg-red-950/70 px-2 py-0.5 rounded border border-red-500/20">
+            STAGE {currentStep + 1}/5
           </span>
         </div>
       }
     >
-      <div className="flex-1 w-full h-full relative flex items-center justify-center pb-2">
+      <div className="flex-1 w-full h-full relative flex items-center justify-center pb-1">
         {/* Full-bleed Level 0 Diagram Canvas */}
-        <div className="w-full h-full bg-[#030305]/90 rounded-3xl border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.8)] relative overflow-hidden flex items-center justify-center p-2">
+        <div className="w-full h-full bg-[#0c0d12] rounded-xl border border-white/10 shadow-industrial-lg relative overflow-hidden flex items-center justify-center p-2">
           <Diagram
             data={level0DiagramData}
             visibleNodes={stepVisibleNodes[Math.min(currentStep, 4)]}
@@ -88,14 +89,8 @@ export default function Slide5Level0({ currentStep = 0 }) {
         </div>
 
         {/* Floating Level 0 Legend */}
-        <div className="absolute bottom-5 right-6 z-20 pointer-events-auto">
+        <div className="absolute bottom-4 right-5 z-20 pointer-events-auto">
           <Legend />
-        </div>
-
-        {/* Floating Structural Balancing Indicator */}
-        <div className="absolute bottom-6 left-7 z-20 pointer-events-none hidden md:flex items-center gap-2 text-xs font-mono text-zinc-400 bg-black/80 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/10 shadow-lg">
-          <span className="w-2 h-2 rounded-full bg-[#ef233c]" />
-          <span>6 Processes (Verb Phrases) • 5 Stores (Open Rectangles) • 18 Balanced Boundary Flows</span>
         </div>
       </div>
     </Slide>

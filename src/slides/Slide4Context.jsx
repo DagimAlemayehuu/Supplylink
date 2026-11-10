@@ -5,8 +5,8 @@ import Legend from '../diagrams/Legend';
 import { contextDiagramData } from '../diagrams/diagramData';
 
 /**
- * Slide 4: Context Diagram (Red Noir Wide-Angle Master Edition)
- * Maximized SVG canvas with floating glassmorphic controls and zero obstructions.
+ * Slide 4: Context Diagram (Industrial Noir Edition)
+ * Unobstructed wide-angle SVG canvas showing Process 0 and external boundaries.
  */
 export default function Slide4Context({ currentStep = 0 }) {
   const stepVisibleNodes = {
@@ -28,7 +28,7 @@ export default function Slide4Context({ currentStep = 0 }) {
   const stepCaptions = [
     {
       title: "Stage 1: Central System Process",
-      desc: "Process '0 SupplyLink System' encapsulates all internal algorithms and transactions."
+      desc: "Process '0 SupplyLink System' encapsulates all internal platform logic."
     },
     {
       title: "Stage 2: External Boundary Entities",
@@ -40,7 +40,7 @@ export default function Slide4Context({ currentStep = 0 }) {
     },
     {
       title: "Stage 4: Sink Outflow Deliverables",
-      desc: "Account status, real-time alerts, delivery batches, and administrative reports are delivered."
+      desc: "Account status, alerts, delivery batches, and administrative reports are delivered."
     },
     {
       title: "Stage 5: Complete Context Boundary Contract",
@@ -52,22 +52,22 @@ export default function Slide4Context({ currentStep = 0 }) {
 
   return (
     <Slide
-      title="Context Diagram (System Scope)"
-      subtitle="Highest-level view: establishes system boundaries and external source/sink interactions"
+      title="Context Diagram: System Scope & Boundary"
+      subtitle="Highest-level view: establishes system boundaries and external source/sink data interactions"
       headerExtra={
-        <div className="flex items-center gap-3 bg-zinc-950/90 border border-white/15 px-4 py-2 rounded-2xl backdrop-blur-xl shadow-xl">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#ef233c] shadow-[0_0_8px_#ef233c]" />
-          <span className="text-sm font-black text-white font-manrope">{currentCaption.title}</span>
+        <div className="flex items-center gap-2.5 bg-[#101216] border border-white/10 px-3.5 py-1.5 rounded-lg shadow-industrial-sm">
+          <span className="w-2 h-2 rounded-full bg-[#dc2626]" />
+          <span className="text-xs font-bold text-white font-headline">{currentCaption.title}</span>
           <span className="text-zinc-400 text-xs font-inter hidden xl:inline">({currentCaption.desc})</span>
-          <span className="text-xs font-bold text-[#ef233c] font-mono ml-2 bg-red-950/60 px-2 py-0.5 rounded-md border border-red-500/30">
-            Stage {currentStep + 1}/5
+          <span className="text-[11px] font-semibold text-[#ef4444] font-mono ml-1.5 bg-red-950/70 px-2 py-0.5 rounded border border-red-500/20">
+            STAGE {currentStep + 1}/5
           </span>
         </div>
       }
     >
-      <div className="flex-1 w-full h-full relative flex items-center justify-center pb-2">
+      <div className="flex-1 w-full h-full relative flex items-center justify-center pb-1">
         {/* Full-bleed Diagram Canvas */}
-        <div className="w-full h-full bg-[#030305]/90 rounded-3xl border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.8)] relative overflow-hidden flex items-center justify-center p-3">
+        <div className="w-full h-full bg-[#0c0d12] rounded-xl border border-white/10 shadow-industrial-lg relative overflow-hidden flex items-center justify-center p-2">
           <Diagram
             data={contextDiagramData}
             visibleNodes={stepVisibleNodes[Math.min(currentStep, 4)]}
@@ -83,14 +83,8 @@ export default function Slide4Context({ currentStep = 0 }) {
         </div>
 
         {/* Floating Context Legend */}
-        <div className="absolute bottom-5 right-6 z-20 pointer-events-auto">
+        <div className="absolute bottom-4 right-5 z-20 pointer-events-auto">
           <Legend />
-        </div>
-
-        {/* Floating Context Label */}
-        <div className="absolute bottom-6 left-7 z-20 pointer-events-none hidden md:flex items-center gap-2 text-xs font-mono text-zinc-400 bg-black/80 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/10 shadow-lg">
-          <span className="w-2 h-2 rounded-full bg-[#ef233c]" />
-          <span>Gane & Sarson DFD Level 0 Context Boundary Contract (18 Balanced Flows)</span>
         </div>
       </div>
     </Slide>

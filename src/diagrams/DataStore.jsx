@@ -1,124 +1,122 @@
 import React from 'react';
 
 /**
- * Gane & Sarson Data Store (Red Noir Theme)
- * Open-ended rectangle with warm amber/gold neon accents and extra-large typography.
+ * Gane & Sarson Data Store (Industrial Noir Edition)
+ * Open-ended rectangle: top & bottom parallel borders, closed on the left with an ID compartment,
+ * and open on the right to signify persistent storage.
  */
 export default function DataStore({ node, isActive, isDimmed }) {
   const { x, y, w, h, storeId, name, desc } = node;
-  const idWidth = 68;
+  const idWidth = 56;
 
   return (
     <g
       id={`store-${node.id}`}
-      className={`transition-all duration-300 ${
+      className={`transition-opacity duration-200 ${
         isDimmed ? 'opacity-20' : 'opacity-100'
       }`}
     >
-      {/* Outer focus glow when active */}
+      {/* Active Focus Frame */}
       {isActive && (
         <path
-          d={`M ${x + w + 10} ${y - 10} L ${x - 10} ${y - 10} L ${x - 10} ${y + h + 10} L ${x + w + 10} ${y + h + 10}`}
+          d={`M ${x + w + 8} ${y - 6} L ${x - 6} ${y - 6} L ${x - 6} ${y + h + 6} L ${x + w + 8} ${y + h + 6}`}
           fill="none"
           stroke="#f59e0b"
-          strokeWidth="4"
-          filter="drop-shadow(0 0 24px rgba(245, 158, 11, 0.8))"
+          strokeWidth="2.5"
+          strokeDasharray="6 4"
         />
       )}
 
-      {/* Background fill */}
+      {/* Main Store Background */}
       <rect
         x={x}
         y={y}
         width={w}
         height={h}
-        fill={isActive ? '#2a1a05' : '#0a0a0e'}
-        className="transition-colors duration-200"
+        fill={isActive ? '#1a1306' : '#101216'}
       />
 
-      {/* ID section fill on left */}
+      {/* Left ID Compartment Background */}
       <rect
         x={x}
         y={y}
         width={idWidth}
         height={h}
-        fill={isActive ? '#522e06' : '#221504'}
+        fill={isActive ? '#3d2505' : '#1c1508'}
       />
 
-      {/* Top horizontal border (full width) */}
+      {/* Top parallel border */}
       <line
         x1={x}
         y1={y}
         x2={x + w}
         y2={y}
-        stroke={isActive ? '#fbbf24' : '#f59e0b'}
-        strokeWidth={isActive ? '4' : '2.8'}
+        stroke={isActive ? '#fbbf24' : '#b45309'}
+        strokeWidth={isActive ? '3' : '2'}
       />
 
-      {/* Bottom horizontal border (full width) */}
+      {/* Bottom parallel border */}
       <line
         x1={x}
         y1={y + h}
         x2={x + w}
         y2={y + h}
-        stroke={isActive ? '#fbbf24' : '#f59e0b'}
-        strokeWidth={isActive ? '4' : '2.8'}
+        stroke={isActive ? '#fbbf24' : '#b45309'}
+        strokeWidth={isActive ? '3' : '2'}
       />
 
-      {/* Left vertical border */}
+      {/* Left closing border */}
       <line
         x1={x}
         y1={y}
         x2={x}
         y2={y + h}
-        stroke={isActive ? '#fbbf24' : '#f59e0b'}
-        strokeWidth={isActive ? '4' : '2.8'}
+        stroke={isActive ? '#fbbf24' : '#b45309'}
+        strokeWidth={isActive ? '3' : '2'}
       />
 
-      {/* Inner vertical dividing line for ID box */}
+      {/* ID Compartment vertical divider */}
       <line
         x1={x + idWidth}
         y1={y}
         x2={x + idWidth}
         y2={y + h}
-        stroke="#f59e0b"
-        strokeWidth="2.8"
+        stroke={isActive ? '#fbbf24' : '#b45309'}
+        strokeWidth="1.5"
       />
 
-      {/* Notice: RIGHT END IS OPEN as per Gane & Sarson specification */}
-
-      {/* Store ID (e.g. D1, D2) - Extra Large */}
+      {/* Store ID (D1, D2, etc.) */}
       <text
         x={x + idWidth / 2}
-        y={y + h / 2 + 9}
+        y={y + h / 2 + 6}
         textAnchor="middle"
-        className="font-manrope font-black fill-amber-300 select-none"
-        style={{ fontSize: '28px' }}
+        className="font-mono font-bold select-none fill-amber-300"
+        style={{ fontSize: '20px', letterSpacing: '0.05em' }}
       >
         {storeId}
       </text>
 
-      {/* Store Name & description - Extra Large & High Contrast */}
-      <foreignObject
-        x={x + idWidth + 14}
-        y={y}
-        width={w - idWidth - 18}
-        height={h}
+      {/* Store Name */}
+      <text
+        x={x + idWidth + 16}
+        y={y + (desc ? h / 2 - 2 : h / 2 + 7)}
+        className="font-headline font-bold fill-white select-none"
+        style={{ fontSize: '20px', letterSpacing: '-0.01em' }}
       >
-        <div className="w-full h-full flex flex-col justify-center select-none pl-1">
-          <span
-            className="font-manrope font-black text-white leading-tight"
-            style={{ fontSize: '24px', letterSpacing: '-0.01em' }}
-          >
-            {name}
-          </span>
-          {desc && (
-            <span className="text-amber-200/90 text-base mt-0.5 truncate font-inter font-semibold">
-              {desc}
-            </span>
-          )}
-        </div>
-      </foreignObject>
+        {name}
+      </text>
+
+      {/* Optional store brief description */}
+      {desc && (
+        <text
+          x={x + idWidth + 16}
+          y={y + h / 2 + 18}
+          className="font-inter fill-zinc-400 select-none"
+          style={{ fontSize: '12px' }}
+        >
+          {desc}
+        </text>
+      )}
     </g>
   );
 }

@@ -1,97 +1,113 @@
-@import "@fontsource/manrope/400.css";
-@import "@fontsource/manrope/600.css";
-@import "@fontsource/manrope/700.css";
-@import "@fontsource/manrope/800.css";
-@import "@fontsource/inter/400.css";
-@import "@fontsource/inter/500.css";
-@import "@fontsource/inter/600.css";
+@import "@fontsource/ibm-plex-sans/400.css";
+@import "@fontsource/ibm-plex-sans/500.css";
+@import "@fontsource/ibm-plex-sans/600.css";
+@import "@fontsource/ibm-plex-sans/700.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "@fontsource/ibm-plex-mono/600.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --accent-red: #ef233c;
-  --accent-red-glow: rgba(239, 35, 60, 0.5);
+  --color-obsidian: #0a0b0d;
+  --color-carbon: #101216;
+  --color-surface: #16181f;
+  --color-crimson: #dc2626;
+  --color-crimson-bright: #ef4444;
+  --color-steel: #38bdf8;
+  --color-amber: #f59e0b;
 }
 
 ::selection {
-  background: #ef233c;
+  background: #dc2626;
   color: #ffffff;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0b0d;
+}
+::-webkit-scrollbar-thumb {
+  background: #212530;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #dc2626;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: #000000;
-  color: #ffffff;
-  font-family: "Manrope", "Inter", system-ui, -apple-system, sans-serif;
+  background-color: #0a0b0d;
+  color: #f4f4f5;
+  font-family: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
   overflow: hidden;
   user-select: none;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Animations from Red Noir reference */
-@keyframes border-spin {
-  from { --gradient-angle: 0deg; }
-  to { --gradient-angle: 360deg; }
-}
-
-@keyframes animStar {
-  from { transform: translateY(0px); }
-  to { transform: translateY(-2000px); }
-}
-
+/* Functional Flow Animation (Controlled linear trace for active DFD paths) */
 @keyframes dashTravel {
   to {
-    stroke-dashoffset: -32;
+    stroke-dashoffset: -28;
   }
 }
 
-@property --gradient-angle { 
-  syntax: "<angle>"; 
-  initial-value: 0deg; 
-  inherits: false; 
-}
-
 .animate-flow-dash {
-  stroke-dasharray: 8 6;
-  animation: dashTravel 1s linear infinite;
+  stroke-dasharray: 7 5;
+  animation: dashTravel 1.1s linear infinite;
 }
 
-/* Shiny CTA Button from reference */
-.shiny-cta {
-  --gradient-angle: 0deg;
-  position: relative;
-  overflow: hidden;
-  border-radius: 9999px;
-  background: linear-gradient(#000000, #000000) padding-box,
-  conic-gradient(from var(--gradient-angle), transparent 0%, #ef233c 5%, #ef233c 20%, #ef233c 35%, transparent 50%, transparent 100%) border-box;
-  border: 2px solid transparent;
-  cursor: pointer;
-  isolation: isolate;
-  animation: border-spin 2.5s linear infinite;
+/* High-craft Industrial Noir Card Container */
+.industrial-panel {
+  background-color: #101216;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.65), 0 1px 3px rgba(0, 0, 0, 0.4);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.shiny-cta::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 50%, white 0.5px, transparent 0);
-  background-size: 4px 4px;
-  opacity: 0.15;
-  z-index: 0;
+.industrial-panel:hover {
+  border-color: rgba(220, 38, 38, 0.4);
 }
 
-/* Parallax Stars */
-.stars-1 { 
-  box-shadow: 234px 124px #fff, 654px 345px #fff, 876px 12px #fff, 1200px 800px #fff, 400px 1500px #fff, 1800px 200px #fff, 100px 1000px #fff, 900px 1900px #fff, 500px 600px #fff, 1400px 100px #fff, 300px 400px #fff, 1600px 1200px #fff; 
-}
-.stars-2 { 
-  box-shadow: 123px 456px #fff, 789px 234px #fff, 456px 890px #fff, 1100px 300px #fff, 200px 1200px #fff, 1500px 500px #fff, 600px 1700px #fff, 1300px 900px #fff; 
+.industrial-panel-active {
+  background-color: #141720;
+  border: 1px solid #dc2626;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px -4px rgba(220, 38, 38, 0.25), 0 2px 6px rgba(0, 0, 0, 0.6);
 }
 
-/* Reduced motion */
+/* Technical Accent Button */
+.btn-industrial {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #dc2626;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px -1px rgba(220, 38, 38, 0.4);
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.btn-industrial:hover {
+  background-color: #ef4444;
+}
+
+.btn-industrial:active {
+  transform: translateY(1px);
+}
+
+/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
     animation-duration: 0.01ms !important;
@@ -100,9 +116,6 @@ body {
     scroll-behavior: auto !important;
   }
   .animate-flow-dash {
-    animation: none !important;
-  }
-  .shiny-cta {
     animation: none !important;
   }
 }
@@ -115,7 +128,7 @@ body {
   }
   
   html, body {
-    background: #000000 !important;
+    background: #0a0b0d !important;
     color: #ffffff !important;
     overflow: visible !important;
     height: auto !important;
