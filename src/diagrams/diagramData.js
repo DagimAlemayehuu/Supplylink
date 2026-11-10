@@ -1,9 +1,9 @@
-// Standard Data Flow Diagram (DFD) Specifications for SupplyLink
+// Complete Data Flow Diagram definitions for SupplyLink (Industrial Noir Edition)
 // Notation: Gane & Sarson (Academic Standard)
-// Balancing Law: 100% strict 1-to-1 match of all external boundary flows between Context and Level 0
+// Balancing Law: 100% strict 1-to-1 match of all 18 external boundary flows between Context and Level 0
 
 // ============================================================================
-// SLIDE 1: CONTEXT DIAGRAM (PROCESS 0 & EXTERNAL BOUNDARY)
+// CONTEXT DIAGRAM DATA
 // ============================================================================
 export const contextDiagramData = {
   viewBox: "0 0 1920 1080",
@@ -13,671 +13,662 @@ export const contextDiagramData = {
       type: "process",
       procId: "0",
       name: "SupplyLink System",
+      category: "system",
       x: 720,
-      y: 280,
+      y: 340,
       w: 480,
-      h: 540
+      h: 340,
+      description: "Central software platform coordinating on-demand requests, route batching, and inventory monitoring"
     },
     {
       id: "e_merchant",
       type: "entity",
       name: "Merchant",
-      x: 60,
+      subtitle: "Source & Sink",
+      x: 50,
       y: 260,
       w: 220,
-      h: 560
+      h: 500,
+      description: "Dispatches stock levels & requests; receives deliveries & alerts"
     },
     {
       id: "e_supplier",
       type: "entity",
       name: "Supplier",
-      x: 1640,
+      subtitle: "Source & Sink",
+      x: 1650,
       y: 260,
       w: 220,
-      h: 560
+      h: 500,
+      description: "Manages catalog & decisions; delivers organized route batches"
     },
     {
       id: "e_admin",
       type: "entity",
       name: "Admin",
+      subtitle: "Source & Sink",
       x: 820,
-      y: 50,
+      y: 60,
       w: 280,
-      h: 120
+      h: 170,
+      description: "Approves onboarding; reviews audit reports"
     }
   ],
   flows: [
-    // --- Merchant <-> Process 0 (4 Inflows, 4 Outflows) ---
+    // Merchant -> System (Inflow)
     {
-      id: "cf_m_in_1",
+      id: "cf_m_in",
       source: "e_merchant",
       target: "p0",
-      label: "Registration Details",
-      path: "M 280 320 L 720 320",
-      labelPos: { x: 500, y: 320 }
+      label: "registration details, stock levels, requests, receipt confirmation",
+      items: [
+        "registration details",
+        "stock levels",
+        "requests (restock or new product)",
+        "receipt confirmation"
+      ],
+      flowType: "inflow",
+      category: "merchant",
+      path: "M 270 430 L 720 430",
+      labelPos: { x: 495, y: 310 }
     },
+    // System -> Merchant (Outflow)
     {
-      id: "cf_m_in_2",
-      source: "e_merchant",
-      target: "p0",
-      label: "Stock Levels",
-      path: "M 280 380 L 720 380",
-      labelPos: { x: 500, y: 380 }
-    },
-    {
-      id: "cf_m_in_3",
-      source: "e_merchant",
-      target: "p0",
-      label: "Restock Order",
-      path: "M 280 440 L 720 440",
-      labelPos: { x: 500, y: 440 }
-    },
-    {
-      id: "cf_m_in_4",
-      source: "e_merchant",
-      target: "p0",
-      label: "Delivery Receipt",
-      path: "M 280 500 L 720 500",
-      labelPos: { x: 500, y: 500 }
-    },
-    {
-      id: "cf_m_out_1",
+      id: "cf_m_out",
       source: "p0",
       target: "e_merchant",
-      label: "Account Confirmation",
-      path: "M 720 570 L 280 570",
-      labelPos: { x: 500, y: 570 }
+      label: "account status, low-stock alerts, request status, delivery status",
+      items: [
+        "account status",
+        "low-stock alerts",
+        "request status",
+        "delivery status"
+      ],
+      flowType: "outflow",
+      category: "merchant",
+      path: "M 720 590 L 270 590",
+      labelPos: { x: 495, y: 710 }
     },
+    // Supplier -> System (Inflow)
     {
-      id: "cf_m_out_2",
-      source: "p0",
-      target: "e_merchant",
-      label: "Low Stock Alert",
-      path: "M 720 630 L 280 630",
-      labelPos: { x: 500, y: 630 }
-    },
-    {
-      id: "cf_m_out_3",
-      source: "p0",
-      target: "e_merchant",
-      label: "Order Status",
-      path: "M 720 690 L 280 690",
-      labelPos: { x: 500, y: 690 }
-    },
-    {
-      id: "cf_m_out_4",
-      source: "p0",
-      target: "e_merchant",
-      label: "Delivery Schedule",
-      path: "M 720 750 L 280 750",
-      labelPos: { x: 500, y: 750 }
-    },
-
-    // --- Supplier <-> Process 0 (4 Inflows, 3 Outflows) ---
-    {
-      id: "cf_s_in_1",
+      id: "cf_s_in",
       source: "e_supplier",
       target: "p0",
-      label: "Registration Details",
-      path: "M 1640 330 L 1200 330",
-      labelPos: { x: 1420, y: 330 }
+      label: "registration & delivery settings, product catalog, decisions, dispatch confirmation",
+      items: [
+        "registration and delivery settings",
+        "product catalog",
+        "request decisions",
+        "dispatch confirmation"
+      ],
+      flowType: "inflow",
+      category: "supplier",
+      path: "M 1650 430 L 1200 430",
+      labelPos: { x: 1425, y: 310 }
     },
+    // System -> Supplier (Outflow)
     {
-      id: "cf_s_in_2",
-      source: "e_supplier",
-      target: "p0",
-      label: "Product Catalog",
-      path: "M 1640 400 L 1200 400",
-      labelPos: { x: 1420, y: 400 }
-    },
-    {
-      id: "cf_s_in_3",
-      source: "e_supplier",
-      target: "p0",
-      label: "Order Decision",
-      path: "M 1640 470 L 1200 470",
-      labelPos: { x: 1420, y: 470 }
-    },
-    {
-      id: "cf_s_in_4",
-      source: "e_supplier",
-      target: "p0",
-      label: "Dispatch Notice",
-      path: "M 1640 540 L 1200 540",
-      labelPos: { x: 1420, y: 540 }
-    },
-    {
-      id: "cf_s_out_1",
+      id: "cf_s_out",
       source: "p0",
       target: "e_supplier",
-      label: "Account Confirmation",
-      path: "M 1200 620 L 1640 620",
-      labelPos: { x: 1420, y: 620 }
+      label: "account status, new requests, delivery batches",
+      items: [
+        "account status",
+        "new requests",
+        "delivery batches"
+      ],
+      flowType: "outflow",
+      category: "supplier",
+      path: "M 1200 590 L 1650 590",
+      labelPos: { x: 1425, y: 710 }
     },
+    // Admin -> System (Inflow)
     {
-      id: "cf_s_out_2",
-      source: "p0",
-      target: "e_supplier",
-      label: "Pending Orders",
-      path: "M 1200 690 L 1640 690",
-      labelPos: { x: 1420, y: 690 }
-    },
-    {
-      id: "cf_s_out_3",
-      source: "p0",
-      target: "e_supplier",
-      label: "Route Delivery Batch",
-      path: "M 1200 760 L 1640 760",
-      labelPos: { x: 1420, y: 760 }
-    },
-
-    // --- Admin <-> Process 0 (1 Inflow, 2 Outflows) ---
-    {
-      id: "cf_a_in_1",
+      id: "cf_a_in",
       source: "e_admin",
       target: "p0",
-      label: "Account Approval",
-      path: "M 880 170 L 880 280",
-      labelPos: { x: 760, y: 225 }
+      label: "user approvals",
+      items: ["user approvals"],
+      flowType: "inflow",
+      category: "admin",
+      path: "M 890 230 L 890 340",
+      labelPos: { x: 740, y: 285 }
     },
+    // System -> Admin (Outflow)
     {
-      id: "cf_a_out_1",
+      id: "cf_a_out",
       source: "p0",
       target: "e_admin",
-      label: "Pending Accounts",
-      path: "M 960 280 L 960 170",
-      labelPos: { x: 960, y: 225 }
-    },
-    {
-      id: "cf_a_out_2",
-      source: "p0",
-      target: "e_admin",
-      label: "Operations Report",
-      path: "M 1040 280 L 1040 170",
-      labelPos: { x: 1150, y: 225 }
+      label: "pending registrations, reports",
+      items: ["pending registrations", "reports"],
+      flowType: "outflow",
+      category: "admin",
+      path: "M 1030 340 L 1030 230",
+      labelPos: { x: 1180, y: 285 }
     }
   ]
 };
 
 // ============================================================================
-// SLIDE 2: LEVEL 0 DFD (FUNCTIONAL DECOMPOSITION OF PROCESS 0)
+// LEVEL 0 DFD DATA (100% BALANCED & COLLISION-FREE)
 // ============================================================================
 export const level0DiagramData = {
-  viewBox: "0 0 2200 1200",
+  viewBox: "0 0 1920 1080",
   nodes: [
-    // External Entities (Same 3 entities as Context Diagram)
+    // External Entities (Left & Right Margins)
     {
       id: "e_merchant",
       type: "entity",
       name: "Merchant",
-      x: 50,
-      y: 180,
-      w: 200,
-      h: 860
+      subtitle: "Source & Sink",
+      x: 40,
+      y: 220,
+      w: 190,
+      h: 630
     },
     {
       id: "e_supplier",
       type: "entity",
       name: "Supplier",
-      x: 1950,
-      y: 180,
-      w: 200,
-      h: 860
+      subtitle: "Source & Sink",
+      x: 1690,
+      y: 130,
+      w: 190,
+      h: 540
     },
     {
       id: "e_admin",
       type: "entity",
       name: "Admin",
-      x: 950,
-      y: 30,
-      w: 300,
-      h: 90
+      subtitle: "Source & Sink",
+      x: 1690,
+      y: 730,
+      w: 190,
+      h: 230
     },
 
-    // Processes 1.0 - 6.0 (Decomposed from Process 0)
+    // Column 1 (Left Lane: D1, P3, D3)
     {
-      id: "p1",
-      type: "process",
-      procId: "1.0",
-      name: "Register Users",
-      x: 950,
-      y: 180,
-      w: 300,
-      h: 95
-    },
-    {
-      id: "p2",
-      type: "process",
-      procId: "2.0",
-      name: "Manage Products",
-      x: 1400,
-      y: 360,
-      w: 290,
-      h: 95
+      id: "d1",
+      type: "store",
+      storeId: "D1",
+      name: "Users and profiles",
+      desc: "locations, delivery settings",
+      x: 410,
+      y: 75,
+      w: 250,
+      h: 88
     },
     {
       id: "p3",
       type: "process",
       procId: "3.0",
-      name: "Track Inventory",
-      x: 510,
-      y: 360,
-      w: 290,
-      h: 95
-    },
-    {
-      id: "p4",
-      type: "process",
-      procId: "4.0",
-      name: "Process Orders",
-      x: 950,
-      y: 520,
-      w: 300,
-      h: 95
-    },
-    {
-      id: "p5",
-      type: "process",
-      procId: "5.0",
-      name: "Schedule Deliveries",
-      x: 950,
-      y: 830,
-      w: 300,
-      h: 100
-    },
-    {
-      id: "p6",
-      type: "process",
-      procId: "6.0",
-      name: "Generate Reports",
-      x: 1400,
-      y: 1010,
-      w: 290,
-      h: 90
-    },
-
-    // Data Stores D1 - D5 (Internal Persistent Storage)
-    {
-      id: "d1",
-      type: "store",
-      storeId: "D1",
-      name: "User Accounts",
-      x: 510,
-      y: 185,
-      w: 270,
-      h: 85
-    },
-    {
-      id: "d2",
-      type: "store",
-      storeId: "D2",
-      name: "Product Catalog",
-      x: 1400,
-      y: 525,
-      w: 270,
-      h: 85
+      name: "Manage stock",
+      x: 410,
+      y: 260,
+      w: 250,
+      h: 92
     },
     {
       id: "d3",
       type: "store",
       storeId: "D3",
-      name: "Inventory Records",
-      x: 510,
-      y: 525,
-      w: 270,
-      h: 85
+      name: "Inventory",
+      desc: "merchant inventory",
+      x: 410,
+      y: 445,
+      w: 250,
+      h: 88
+    },
+
+    // Column 2 (Center Lane: P1, P4, D4, P5, D5)
+    {
+      id: "p1",
+      type: "process",
+      procId: "1.0",
+      name: "Manage users and profiles",
+      x: 840,
+      y: 75,
+      w: 260,
+      h: 92
+    },
+    {
+      id: "p4",
+      type: "process",
+      procId: "4.0",
+      name: "Handle requests",
+      x: 840,
+      y: 260,
+      w: 260,
+      h: 92
     },
     {
       id: "d4",
       type: "store",
       storeId: "D4",
-      name: "Customer Orders",
-      x: 965,
-      y: 675,
-      w: 270,
-      h: 85
+      name: "Requests",
+      desc: "restock & product orders",
+      x: 840,
+      y: 445,
+      w: 260,
+      h: 88
+    },
+    {
+      id: "p5",
+      type: "process",
+      procId: "5.0",
+      name: "Plan and track deliveries",
+      x: 820,
+      y: 630,
+      w: 300,
+      h: 100
     },
     {
       id: "d5",
       type: "store",
       storeId: "D5",
-      name: "Delivery Routes",
-      x: 965,
-      y: 1015,
-      w: 270,
-      h: 85
+      name: "Delivery batches",
+      desc: "organized delivery routes",
+      x: 820,
+      y: 825,
+      w: 300,
+      h: 88
+    },
+
+    // Column 3 (Right Lane: P2, D2, P6)
+    {
+      id: "p2",
+      type: "process",
+      procId: "2.0",
+      name: "Manage catalog",
+      x: 1270,
+      y: 260,
+      w: 250,
+      h: 92
+    },
+    {
+      id: "d2",
+      type: "store",
+      storeId: "D2",
+      name: "Products",
+      desc: "product catalog",
+      x: 1270,
+      y: 445,
+      w: 250,
+      h: 88
+    },
+    {
+      id: "p6",
+      type: "process",
+      procId: "6.0",
+      name: "Generate reports",
+      x: 1270,
+      y: 825,
+      w: 250,
+      h: 92
     }
   ],
 
   flows: [
-    // ------------------------------------------------------------------------
-    // PROCESS 1.0 (Register Users) FLOWS
-    // ------------------------------------------------------------------------
-    // External Inflows
+    // ----------------- PROCESS 1.0 FLOWS -----------------
     {
       id: "f_m_reg_1",
       source: "e_merchant",
       target: "p1",
-      label: "Registration Details",
-      path: "M 250 205 L 950 205",
-      labelPos: { x: 380, y: 205 }
-    },
-    {
-      id: "f_s_reg_1",
-      source: "e_supplier",
-      target: "p1",
-      label: "Registration Details",
-      path: "M 1950 205 L 1250 205",
-      labelPos: { x: 1820, y: 205 }
-    },
-    {
-      id: "f_a_app_1",
-      source: "e_admin",
-      target: "p1",
-      label: "Account Approval",
-      path: "M 1030 120 L 1030 180",
-      labelPos: { x: 970, y: 150 }
-    },
-    // External Outflows
-    {
-      id: "f_1_pend_a",
-      source: "p1",
-      target: "e_admin",
-      label: "Pending Accounts",
-      path: "M 1170 180 L 1170 120",
-      labelPos: { x: 1235, y: 150 }
+      label: "registration details",
+      path: "M 230 250 L 320 250 L 320 40 L 880 40 L 880 75",
+      labelPos: { x: 490, y: 40 },
+      stage: "boundary"
     },
     {
       id: "f_1_stat_m",
       source: "p1",
       target: "e_merchant",
-      label: "Account Confirmation",
-      path: "M 950 250 L 250 250",
-      labelPos: { x: 380, y: 250 }
+      label: "account status",
+      path: "M 840 145 L 750 145 L 750 195 L 290 195 L 290 280 L 230 280",
+      labelPos: { x: 480, y: 195 },
+      stage: "boundary"
+    },
+    {
+      id: "f_1_d1",
+      source: "p1",
+      target: "d1",
+      bidirectional: true,
+      label: "user profiles / info",
+      path: "M 840 115 L 660 115",
+      labelPos: { x: 750, y: 45 },
+      stage: "internal"
+    },
+    {
+      id: "f_s_reg_1",
+      source: "e_supplier",
+      target: "p1",
+      label: "registration & delivery settings",
+      path: "M 1690 150 L 1580 150 L 1580 100 L 1100 100",
+      labelPos: { x: 1380, y: 100 },
+      stage: "boundary"
     },
     {
       id: "f_1_stat_s",
       source: "p1",
       target: "e_supplier",
-      label: "Account Confirmation",
-      path: "M 1250 250 L 1950 250",
-      labelPos: { x: 1820, y: 250 }
+      label: "account status",
+      path: "M 1100 145 L 1610 145 L 1610 190 L 1690 190",
+      labelPos: { x: 1380, y: 145 },
+      stage: "boundary"
     },
-    // Internal Store Flow
     {
-      id: "f_1_d1",
+      id: "f_a_app_1",
+      source: "e_admin",
+      target: "p1",
+      label: "user approvals",
+      path: "M 1690 760 L 1650 760 L 1650 50 L 980 50 L 980 75",
+      labelPos: { x: 1220, y: 50 },
+      stage: "boundary"
+    },
+    {
+      id: "f_1_pend_a",
       source: "p1",
-      target: "d1",
-      label: "Account Record",
-      path: "M 950 225 L 780 225",
-      labelPos: { x: 865, y: 225 }
+      target: "e_admin",
+      label: "pending registrations",
+      path: "M 1030 75 L 1030 25 L 1670 25 L 1670 800 L 1690 800",
+      labelPos: { x: 1480, y: 25 },
+      stage: "boundary"
     },
 
-    // ------------------------------------------------------------------------
-    // PROCESS 2.0 (Manage Products) & PROCESS 3.0 (Track Inventory) FLOWS
-    // ------------------------------------------------------------------------
-    // Process 2.0
+    // ----------------- PROCESS 2.0 FLOWS -----------------
     {
       id: "f_s_cat_2",
       source: "e_supplier",
       target: "p2",
-      label: "Product Catalog",
-      path: "M 1950 390 L 1690 390",
-      labelPos: { x: 1820, y: 390 }
+      label: "product catalog",
+      path: "M 1690 280 L 1520 280",
+      labelPos: { x: 1605, y: 260 },
+      stage: "boundary"
     },
     {
       id: "f_2_d2",
       source: "p2",
       target: "d2",
-      label: "Product Record",
-      path: "M 1535 455 L 1535 525",
-      labelPos: { x: 1535, y: 490 }
+      bidirectional: true,
+      label: "catalog data / updates",
+      path: "M 1395 352 L 1395 445",
+      labelPos: { x: 1395, y: 400 },
+      stage: "internal"
     },
-    // Process 3.0
+
+    // ----------------- PROCESS 3.0 FLOWS -----------------
     {
       id: "f_m_stock_3",
       source: "e_merchant",
       target: "p3",
-      label: "Stock Levels",
-      path: "M 250 380 L 510 380",
-      labelPos: { x: 380, y: 380 }
+      label: "stock levels",
+      path: "M 230 335 L 410 335",
+      labelPos: { x: 320, y: 335 },
+      stage: "boundary"
     },
     {
       id: "f_3_alert_m",
       source: "p3",
       target: "e_merchant",
-      label: "Low Stock Alert",
-      path: "M 510 425 L 250 425",
-      labelPos: { x: 380, y: 425 }
+      label: "low-stock alerts",
+      path: "M 410 275 L 230 275",
+      labelPos: { x: 320, y: 275 },
+      stage: "boundary"
     },
     {
       id: "f_3_d3",
       source: "p3",
       target: "d3",
-      label: "Stock Record",
-      path: "M 645 455 L 645 525",
-      labelPos: { x: 645, y: 490 }
+      bidirectional: true,
+      label: "stock data / thresholds",
+      path: "M 535 352 L 535 445",
+      labelPos: { x: 535, y: 400 },
+      stage: "internal"
     },
 
-    // ------------------------------------------------------------------------
-    // PROCESS 4.0 (Process Orders) FLOWS
-    // ------------------------------------------------------------------------
+    // ----------------- PROCESS 4.0 FLOWS -----------------
     {
       id: "f_m_req_4",
       source: "e_merchant",
       target: "p4",
-      label: "Restock Order",
-      path: "M 250 540 L 950 540",
-      labelPos: { x: 380, y: 540 }
+      label: "requests (restock / new product)",
+      path: "M 230 380 L 350 380 L 350 230 L 780 230 L 780 280 L 840 280",
+      labelPos: { x: 440, y: 230 },
+      stage: "boundary"
     },
     {
       id: "f_s_dec_4",
       source: "e_supplier",
       target: "p4",
-      label: "Order Decision",
-      path: "M 1950 540 L 1250 540",
-      labelPos: { x: 1820, y: 540 }
+      label: "request decisions",
+      path: "M 1690 350 L 1600 350 L 1600 230 L 1150 230 L 1150 280 L 1100 280",
+      labelPos: { x: 1375, y: 230 },
+      stage: "boundary"
     },
     {
       id: "f_d2_det_4",
       source: "d2",
       target: "p4",
-      label: "Product Price",
-      path: "M 1400 565 L 1250 565",
-      labelPos: { x: 1325, y: 565 }
+      label: "product details",
+      path: "M 1270 470 L 1180 470 L 1180 320 L 1100 320",
+      labelPos: { x: 1180, y: 395 },
+      stage: "internal"
     },
     {
       id: "f_4_stat_m",
       source: "p4",
       target: "e_merchant",
-      label: "Order Status",
-      path: "M 950 585 L 250 585",
-      labelPos: { x: 380, y: 585 }
+      label: "request status",
+      path: "M 840 330 L 760 330 L 760 565 L 300 565 L 300 450 L 230 450",
+      labelPos: { x: 530, y: 565 },
+      stage: "boundary"
     },
     {
       id: "f_4_new_s",
       source: "p4",
       target: "e_supplier",
-      label: "Pending Orders",
-      path: "M 1250 585 L 1950 585",
-      labelPos: { x: 1820, y: 585 }
+      label: "new requests",
+      path: "M 1100 330 L 1160 330 L 1160 565 L 1620 565 L 1620 420 L 1690 420",
+      labelPos: { x: 1390, y: 565 },
+      stage: "boundary"
     },
     {
       id: "f_4_d4",
       source: "p4",
       target: "d4",
-      label: "Order Record",
-      path: "M 1100 615 L 1100 675",
-      labelPos: { x: 1100, y: 645 }
+      bidirectional: true,
+      label: "request records & updates",
+      path: "M 970 352 L 970 445",
+      labelPos: { x: 970, y: 400 },
+      stage: "internal"
     },
 
-    // ------------------------------------------------------------------------
-    // PROCESS 5.0 (Schedule Deliveries) FLOWS
-    // ------------------------------------------------------------------------
+    // ----------------- PROCESS 5.0 FLOWS -----------------
     {
       id: "f_d4_acc_5",
       source: "d4",
       target: "p5",
-      label: "Approved Orders",
-      path: "M 1100 760 L 1100 830",
-      labelPos: { x: 1100, y: 795 }
+      label: "accepted requests",
+      path: "M 970 533 L 970 630",
+      labelPos: { x: 970, y: 580 },
+      stage: "internal"
     },
     {
       id: "f_d1_loc_5",
       source: "d1",
       target: "p5",
-      label: "Delivery Address",
-      path: "M 740 270 L 740 850 L 950 850",
-      labelPos: { x: 740, y: 740 }
+      label: "locations & delivery settings",
+      path: "M 660 145 L 760 145 L 760 655 L 820 655",
+      labelPos: { x: 760, y: 210 },
+      stage: "internal"
     },
     {
       id: "f_m_rec_5",
       source: "e_merchant",
       target: "p5",
-      label: "Delivery Receipt",
-      path: "M 250 870 L 950 870",
-      labelPos: { x: 380, y: 870 }
+      label: "receipt confirmation",
+      path: "M 230 680 L 820 680",
+      labelPos: { x: 520, y: 660 },
+      stage: "boundary"
     },
     {
       id: "f_s_disp_5",
       source: "e_supplier",
       target: "p5",
-      label: "Dispatch Notice",
-      path: "M 1950 870 L 1250 870",
-      labelPos: { x: 1820, y: 870 }
+      label: "dispatch confirmation",
+      path: "M 1690 640 L 1540 640 L 1540 660 L 1120 660",
+      labelPos: { x: 1390, y: 640 },
+      stage: "boundary"
+    },
+    {
+      id: "f_5_batch_s",
+      source: "p5",
+      target: "e_supplier",
+      label: "delivery batches",
+      path: "M 1120 705 L 1570 705 L 1570 500 L 1690 500",
+      labelPos: { x: 1400, y: 705 },
+      stage: "boundary"
     },
     {
       id: "f_5_stat_m",
       source: "p5",
       target: "e_merchant",
-      label: "Delivery Schedule",
-      path: "M 950 910 L 250 910",
-      labelPos: { x: 380, y: 910 }
-    },
-    {
-      id: "f_5_bat_s",
-      source: "p5",
-      target: "e_supplier",
-      label: "Route Delivery Batch",
-      path: "M 1250 910 L 1950 910",
-      labelPos: { x: 1820, y: 910 }
+      label: "delivery status",
+      path: "M 820 715 L 230 715",
+      labelPos: { x: 520, y: 735 },
+      stage: "boundary"
     },
     {
       id: "f_5_d5",
       source: "p5",
       target: "d5",
-      label: "Route Plan",
-      path: "M 1100 930 L 1100 1015",
-      labelPos: { x: 1100, y: 975 }
+      label: "batches",
+      path: "M 970 730 L 970 825",
+      labelPos: { x: 970, y: 780 },
+      stage: "internal"
     },
     {
-      id: "f_5_d3_stock",
+      id: "f_5_d3",
       source: "p5",
       target: "d3",
-      label: "Stock Deduction",
-      path: "M 950 890 L 840 890 L 840 570 L 780 570",
-      labelPos: { x: 840, y: 700 }
+      label: "stock update",
+      path: "M 820 645 L 685 645 L 685 490 L 660 490",
+      labelPos: { x: 745, y: 645 },
+      stage: "internal"
     },
 
-    // ------------------------------------------------------------------------
-    // PROCESS 6.0 (Generate Reports) FLOWS
-    // ------------------------------------------------------------------------
+    // ----------------- PROCESS 6.0 FLOWS -----------------
+    {
+      id: "f_d4_rep_6",
+      source: "d4",
+      target: "p6",
+      label: "request data",
+      path: "M 1100 490 L 1200 490 L 1200 850 L 1270 850",
+      labelPos: { x: 1200, y: 670 },
+      stage: "internal"
+    },
     {
       id: "f_d5_rep_6",
       source: "d5",
       target: "p6",
-      label: "Route History",
-      path: "M 1235 1055 L 1400 1055",
-      labelPos: { x: 1315, y: 1055 }
+      label: "batch data",
+      path: "M 1120 870 L 1270 870",
+      labelPos: { x: 1195, y: 890 },
+      stage: "internal"
     },
     {
       id: "f_6_rep_a",
       source: "p6",
       target: "e_admin",
-      label: "Operations Report",
-      path: "M 1690 1055 L 1860 1055 L 1860 75 L 1250 75",
-      labelPos: { x: 1550, y: 75 }
+      label: "reports",
+      path: "M 1520 875 L 1690 875",
+      labelPos: { x: 1605, y: 855 },
+      stage: "boundary"
     }
   ]
 };
 
 // ============================================================================
-// LEVEL 0 PRESENTATION PHASES (Clean One-Line Explanations, Zero ASCII)
+// SCENARIO WALKTHROUGH STEPS (SLIDE 6)
 // ============================================================================
-export const level0Phases = [
+export const walkthroughSteps = [
   {
-    id: 0,
-    title: "Overview",
-    summary: "Full functional decomposition of Process 0 into six processes and five data stores.",
-    activeNodes: null,
-    activeFlows: null
-  },
-  {
-    id: 1,
-    title: "1. Register Users",
-    summary: "Merchants and Suppliers submit registration details; Admin reviews pending accounts and grants approvals.",
-    activeNodes: ["e_merchant", "e_supplier", "e_admin", "p1", "d1"],
-    activeFlows: [
-      "f_m_reg_1",
-      "f_s_reg_1",
-      "f_a_app_1",
-      "f_1_pend_a",
-      "f_1_stat_m",
-      "f_1_stat_s",
-      "f_1_d1"
+    stepId: "a",
+    letter: "A",
+    title: "Stock Monitoring & Low-Stock Trigger",
+    caption: "The merchant periodically reports stock levels to 3.0 Manage stock. When inventory drops below the reorder threshold stored in D3 Inventory, process 3.0 immediately returns a low-stock alert to the merchant.",
+    activeNodes: ["e_merchant", "p3", "d3"],
+    activeFlows: ["f_m_stock_3", "f_3_d3", "f_3_alert_m"],
+    details: [
+      "Merchant sends current inventory count to process 3.0",
+      "Process 3.0 evaluates threshold limits against D3 Inventory",
+      "Automatic low-stock alert dispatched back to Merchant"
     ]
   },
   {
-    id: 2,
-    title: "2. Catalog & Stock",
-    summary: "Suppliers manage product catalog items; Merchants monitor inventory counts and receive low-stock alerts.",
-    activeNodes: ["e_supplier", "p2", "d2", "e_merchant", "p3", "d3"],
-    activeFlows: [
-      "f_s_cat_2",
-      "f_2_d2",
-      "f_m_stock_3",
-      "f_3_alert_m",
-      "f_3_d3"
-    ]
-  },
-  {
-    id: 3,
-    title: "3. Process Orders",
-    summary: "Merchants place restock orders validated against catalog pricing; Suppliers review and accept orders.",
+    stepId: "b",
+    letter: "B",
+    title: "Merchant Request Creation & Supplier Notification",
+    caption: "The merchant sends a restock or new-product request to 4.0 Handle requests. Process 4.0 validates product details against D2 Products, logs the pending order into D4 Requests, and pushes a new request notice to the supplier.",
     activeNodes: ["e_merchant", "p4", "d2", "d4", "e_supplier"],
-    activeFlows: [
-      "f_m_req_4",
-      "f_d2_det_4",
-      "f_4_new_s",
-      "f_s_dec_4",
-      "f_4_stat_m",
-      "f_4_d4"
+    activeFlows: ["f_m_req_4", "f_d2_det_4", "f_4_d4", "f_4_new_s"],
+    details: [
+      "Merchant selects supplier and items to request",
+      "Process 4.0 looks up D2 Products for verification",
+      "Order logged in D4 Requests and routed to Supplier"
     ]
   },
   {
-    id: 4,
-    title: "4. Schedule Deliveries",
-    summary: "Accepted orders are grouped by location into delivery route batches and dispatched to suppliers.",
-    activeNodes: ["d4", "d1", "p5", "d5", "e_supplier", "e_merchant"],
-    activeFlows: [
-      "f_d4_acc_5",
-      "f_d1_loc_5",
-      "f_s_disp_5",
-      "f_5_stat_m",
-      "f_5_bat_s",
-      "f_5_d5"
+    stepId: "c",
+    letter: "C",
+    title: "Supplier Decision & Status Propagation",
+    caption: "The supplier reviews the incoming request and submits an accept or reject decision back to 4.0. Process 4.0 updates the order record in D4 Requests and transmits real-time request status to the merchant.",
+    activeNodes: ["e_supplier", "p4", "d4", "e_merchant"],
+    activeFlows: ["f_s_dec_4", "f_4_d4", "f_4_stat_m"],
+    details: [
+      "Supplier reviews order capacity and decides (accept / reject)",
+      "Process 4.0 records decision in D4 Requests",
+      "Merchant receives immediate confirmation of request status"
     ]
   },
   {
-    id: 5,
-    title: "5. Generate Reports",
-    summary: "Merchant delivery receipts update inventory levels; completed delivery records generate admin reports.",
-    activeNodes: ["e_merchant", "p5", "d3", "d5", "p6", "e_admin"],
-    activeFlows: [
-      "f_m_rec_5",
-      "f_5_d3_stock",
-      "f_d5_rep_6",
-      "f_6_rep_a"
+    stepId: "d",
+    letter: "D",
+    title: "Automated Geographic Route Batching",
+    caption: "5.0 Plan and track deliveries queries D4 for accepted requests and pulls merchant locations and supplier delivery settings from D1 Users and profiles. It groups nearby merchants on common routes, writes the trip to D5 Delivery batches, and sends delivery batches to the supplier.",
+    activeNodes: ["d4", "d1", "p5", "d5", "e_supplier"],
+    activeFlows: ["f_d4_acc_5", "f_d1_loc_5", "f_5_d5", "f_5_batch_s"],
+    details: [
+      "5.0 aggregates pending accepted orders from D4",
+      "D1 provides merchant GPS/neighborhood locations & vehicle rules",
+      "Grouped batch saved to D5 and sent to Supplier for packing"
+    ]
+  },
+  {
+    stepId: "e",
+    letter: "E",
+    title: "Dispatch Confirmation & In-Transit Tracking",
+    caption: "The supplier loads the vehicle and submits dispatch confirmation to 5.0. Process 5.0 updates the delivery status, alerting all merchants along the route that their delivery is in transit (dispatched ASAP, not on fixed days).",
+    activeNodes: ["e_supplier", "p5", "e_merchant"],
+    activeFlows: ["f_s_disp_5", "f_5_stat_m"],
+    details: [
+      "Supplier confirms driver dispatch for the assigned route",
+      "Process 5.0 updates delivery state to active / out-for-delivery",
+      "Merchants receive real-time delivery status updates"
+    ]
+  },
+  {
+    stepId: "f",
+    letter: "F",
+    title: "Delivery Receipt & Stock Reconciliation",
+    caption: "Upon physical arrival and verification of goods, the merchant sends a receipt confirmation to 5.0. Process 5.0 triggers an automated stock update to D3 Inventory, completing the ordering lifecycle.",
+    activeNodes: ["e_merchant", "p5", "d3"],
+    activeFlows: ["f_m_rec_5", "f_5_d3"],
+    details: [
+      "Merchant checks delivery contents and confirms receipt",
+      "Process 5.0 initiates stock update flow",
+      "D3 Inventory levels incremented to reflect restocked goods"
     ]
   }
 ];

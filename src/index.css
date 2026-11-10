@@ -1,37 +1,189 @@
-@import "@fontsource/plus-jakarta-sans/400.css";
-@import "@fontsource/plus-jakarta-sans/600.css";
-@import "@fontsource/plus-jakarta-sans/700.css";
-@import "@fontsource/plus-jakarta-sans/800.css";
-@import "@fontsource/inter/300.css";
-@import "@fontsource/inter/400.css";
-@import "@fontsource/inter/500.css";
-@import "@fontsource/inter/600.css";
+@import "@fontsource/ibm-plex-sans/400.css";
+@import "@fontsource/ibm-plex-sans/500.css";
+@import "@fontsource/ibm-plex-sans/600.css";
+@import "@fontsource/ibm-plex-sans/700.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "@fontsource/ibm-plex-mono/600.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --color-bg: #161618;
+  --color-obsidian: #0a0b0d;
+  --color-carbon: #101216;
+  --color-surface: #16181f;
+  --color-crimson: #dc2626;
+  --color-crimson-bright: #ef4444;
+  --color-steel: #38bdf8;
+  --color-amber: #f59e0b;
 }
 
 ::selection {
-  background: #3f3f46;
+  background: #dc2626;
   color: #ffffff;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0b0d;
+}
+::-webkit-scrollbar-thumb {
+  background: #212530;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #dc2626;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: #161618;
-  color: #ffffff;
-  font-family: "Inter", "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  background-color: #0a0b0d;
+  color: #f4f4f5;
+  font-family: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
   overflow: hidden;
   user-select: none;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Tabular numbers for non-shifting metrics */
-.tabular-nums {
-  font-variant-numeric: tabular-nums;
+/* Functional Flow Animation (Controlled linear trace for active DFD paths) */
+@keyframes dashTravel {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+
+.animate-flow-dash {
+  stroke-dasharray: 7 5;
+  animation: dashTravel 1.1s linear infinite;
+}
+
+/* Shiny CTA Button from Slide 1 */
+@keyframes border-spin {
+  from { --gradient-angle: 0deg; }
+  to { --gradient-angle: 360deg; }
+}
+
+@property --gradient-angle { 
+  syntax: "<angle>"; 
+  initial-value: 0deg; 
+  inherits: false; 
+}
+
+.shiny-cta {
+  --gradient-angle: 0deg;
+  position: relative;
+  overflow: hidden;
+  border-radius: 9999px;
+  background: linear-gradient(#0c0d12, #0c0d12) padding-box,
+  conic-gradient(from var(--gradient-angle), transparent 0%, #ef233c 5%, #ef233c 20%, #ef233c 35%, transparent 50%, transparent 100%) border-box;
+  border: 2px solid transparent;
+  cursor: pointer;
+  isolation: isolate;
+  animation: border-spin 2.5s linear infinite;
+}
+
+.shiny-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, white 0.5px, transparent 0);
+  background-size: 4px 4px;
+  opacity: 0.12;
+  z-index: 0;
+}
+
+/* High-craft Industrial Noir Card Container */
+.industrial-panel {
+  background-color: #101216;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.65), 0 1px 3px rgba(0, 0, 0, 0.4);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.industrial-panel:hover {
+  border-color: rgba(220, 38, 38, 0.4);
+}
+
+.industrial-panel-active {
+  background-color: #141720;
+  border: 1px solid #dc2626;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px -4px rgba(220, 38, 38, 0.25), 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* Technical Accent Button */
+.btn-industrial {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #dc2626;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px -1px rgba(220, 38, 38, 0.4);
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.btn-industrial:hover {
+  background-color: #ef4444;
+}
+
+.btn-industrial:active {
+  transform: translateY(1px);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-flow-dash {
+    animation: none !important;
+  }
+}
+
+/* Print styling for PDF export (?print mode) */
+@media print {
+  @page {
+    size: 1920px 1080px;
+    margin: 0;
+  }
+  
+  html, body {
+    background: #0a0b0d !important;
+    color: #ffffff !important;
+    overflow: visible !important;
+    height: auto !important;
+    user-select: text !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+
+  .print-page {
+    page-break-after: always;
+    break-after: page;
+    width: 1920px !important;
+    height: 1080px !important;
+    overflow: hidden !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
 }

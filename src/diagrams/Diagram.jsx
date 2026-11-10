@@ -5,19 +5,33 @@ import DataStore from './DataStore';
 import Flow from './Flow';
 
 /**
- * Standard DFD Diagram Canvas (Monochrome with Phase Focus)
- * Supports highlighting specific active flows and nodes while dimming others.
+ * Diagram Component (Industrial Noir Theme).
+ * Renders SVG diagrams strictly adhering to Gane & Sarson specifications.
+ * Uses a strict 3-tier depth system:
+ * 1. Flow lines (behind nodes)
+ * 2. Nodes (Entities, Processes, Data Stores)
+ * 3. Flow label badges (on top of lines, guaranteed unobscured)
  */
 export default function Diagram({
   data,
-  activeNodes = null,
-  activeFlows = null,
+  activeNodes = [],
+  activeFlows = [],
+  visibleNodes = null,
+  visibleFlows = null,
+  dimOthers = false,
   className = ""
 }) {
   if (!data) return null;
 
   const { viewBox = "0 0 1920 1080", nodes = [], flows = [] } = data;
-  const hasFilter = activeNodes !== null && activeNodes !== undefined;
+
+  const renderedNodes = visibleNodes
+    ? nodes.filter(n => visibleNodes.includes(n.id))
+    : nodes;
+
+  const renderedFlows = visibleFlows
+    ? flows.filter(f => visibleFlows.includes(f.id))
+    : flows;
 
   return (
     <div className={`w-full h-full flex items-center justify-center relative ${className}`}>
@@ -28,9 +42,9 @@ export default function Diagram({
         preserveAspectRatio="xMidYMid meet"
       >
         <defs>
-          {/* Default Grey Arrowhead Marker */}
+          {/* Default Slate Arrowhead */}
           <marker
-            id="arrow-dfd-marker"
+            id="arrow-noir-default"
             viewBox="0 0 10 10"
             refX="8"
             refY="5"
@@ -38,25 +52,12 @@ export default function Diagram({
             markerHeight="8"
             orient="auto-start-reverse"
           >
-            <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#767682" />
+            <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#94a3b8" />
           </marker>
 
-          {/* Active Highlighted Arrowhead Marker (Crisp Light Grey / Silver) */}
+          {/* Reverse Default Arrowhead */}
           <marker
-            id="arrow-dfd-marker-active"
-            viewBox="0 0 10 10"
-            refX="8"
-            refY="5"
-            markerWidth="9"
-            markerHeight="9"
-            orient="auto-start-reverse"
-          >
-            <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#ffffff" />
-          </marker>
-
-          {/* Reverse Marker */}
-          <marker
-            id="arrow-dfd-marker-rev"
+            id="arrow-noir-default-rev"
             viewBox="0 0 10 10"
             refX="2"
             refY="5"
@@ -64,63 +65,112 @@ export default function Diagram({
             markerHeight="8"
             orient="auto"
           >
-            <path d="M 9 1.5 L 0 5 L 9 8.5 z" fill="#767682" />
+            <path d="M 9 1.5 L 0 5 L 9 8.5 z" fill="#94a3b8" />
+          </marker>
+
+          {/* Active Crimson Arrowhead */}
+          <marker
+            id="arrow-noir-active"
+            viewBox="0 0 10 10"
+            refX="8"
+            refY="5"
+            markerWidth="9"
+            markerHeight="9"
+            orient="auto-start-reverse"
+          >
+            <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#dc2626" />
+          </marker>
+
+          {/* Reverse Active Arrowhead */}
+          <marker
+            id="arrow-noir-active-rev"
+            viewBox="0 0 10 10"
+            refX="2"
+            refY="5"
+            markerWidth="9"
+            markerHeight="9"
+            orient="auto"
+          >
+            <path d="M 9 1.5 L 0 5 L 9 8.5 z" fill="#dc2626" />
           </marker>
         </defs>
 
-        {/* 1. Flows Layer */}
+        {/* 1. Flows Lines Layer (behind nodes) */}
         <g id="layer-flows">
-          {flows.map(flow => {
-            const isActive = hasFilter && activeFlows && activeFlows.includes(flow.id);
-            const isDimmed = hasFilter && !isActive;
+          {renderedFlows.map(flow => {
+            const isActive = activeFlows.includes(flow.id);
+            const isDimmed = dimOthers && activeFlows.length > 0 && !isActive;
+
             return (
               <Flow
                 key={flow.id}
                 flow={flow}
                 isActive={isActive}
                 isDimmed={isDimmed}
+                renderPathOnly={true}
               />
             );
           })}
         </g>
 
-        {/* 2. Nodes Layer */}
+        {/* 2. Nodes Layer (Entities, Processes, Data Stores) */}
         <g id="layer-nodes">
-          {nodes.map(node => {
-            const isActive = hasFilter && activeNodes && activeNodes.includes(node.id);
-            const isDimmed = hasFilter && !isActive;
+          {renderedNodes.map(node => {
+            const isActive = activeNodes.includes(node.id);
+            const isDimmed = dimOthers && activeNodes.length > 0 && !isActive;
 
-            switch (node.type) {
-              case 'entity':
-                return (
-                  <Entity
-                    key={node.id}
-                    node={node}
-                    isActive={isActive}
-                    isDimmed={isDimmed}
-                  />
-                );
-              case 'process':
-                return (
-                  <Process
-                    key={node.id}
-                    node={node}
-                    isActive={isActive}
-                    isDimmed={isDimmed}
-                  />
-                );
-              case 'store':
-                return (
-                  <DataStore
-                    key={node.id}
-                    node={node}
-                    isActive={isActive}
-                    isDimmed={isDimmed}
-                  />
-                );
-              default:
-                return null;
+            if (node.type === "entity") {
+              return (
+                <Entity
+                  key={node.id}
+                  node={node}
+                  isActive={isActive}
+                  isDimmed={isDimmed}
+                />
+              );
             }
+
+            if (node.type === "process") {
+              return (
+                <Process
+                  key={node.id}
+                  node={node}
+                  isActive={isActive}
+                  isDimmed={isDimmed}
+                />
+              );
+            }
+
+            if (node.type === "store" || node.type === "datastore") {
+              return (
+                <DataStore
+                  key={node.id}
+                  node={node}
+                  isActive={isActive}
+                  isDimmed={isDimmed}
+                />
+              );
+            }
+
+            return null;
+          })}
+        </g>
+
+        {/* 3. Flow Badges Layer (Rendered on top of lines and nodes for 100% legibility) */}
+        <g id="layer-flow-badges">
+          {renderedFlows.map(flow => {
+            const isActive = activeFlows.includes(flow.id);
+            const isDimmed = dimOthers && activeFlows.length > 0 && !isActive;
+
+            return (
+              <Flow
+                key={`badge-${flow.id}`}
+                flow={flow}
+                isActive={isActive}
+                isDimmed={isDimmed}
+                renderBadgeOnly={true}
+              />
+            );
           })}
         </g>
       </svg>

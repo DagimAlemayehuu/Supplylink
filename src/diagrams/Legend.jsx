@@ -1,50 +1,53 @@
 import React from 'react';
 
 /**
- * Standard DFD Legend (Monochrome)
- * Uses grey shapes/borders and pure white text.
+ * Reusable Legend for Gane & Sarson DFD slides (Industrial Noir Edition).
  */
 export default function Legend({ className = "" }) {
   return (
     <div
-      className={`bg-[#222225] border border-[#38383e] rounded-xl px-5 py-2.5 shadow-lg flex items-center gap-6 select-none ${className}`}
+      className={`bg-[#101216]/95 border border-white/10 rounded-lg px-4 py-2 shadow-industrial-md flex items-center gap-6 text-xs select-none ${className}`}
     >
+      <span className="font-mono font-bold text-zinc-400 uppercase tracking-wider text-[11px]">
+        GANE & SARSON:
+      </span>
+
       {/* External Entity */}
       <div className="flex items-center gap-2">
-        <div className="w-5 h-4 border-2 border-[#71717a] bg-[#252528]" />
-        <span className="font-headline font-semibold text-white uppercase tracking-wider text-xs">
-          External Entity
+        <div className="w-4 h-3.5 border border-sky-400 bg-sky-950/50 rounded-none" />
+        <span className="font-medium text-zinc-200">
+          Entity <span className="text-zinc-500">(Source / Sink)</span>
         </span>
       </div>
 
       {/* Process */}
       <div className="flex items-center gap-2">
-        <div className="w-5 h-4 rounded border-2 border-[#80808a] bg-[#27272b] relative overflow-hidden">
-          <div className="h-1.5 bg-[#38383e] border-b border-[#80808a]" />
+        <div className="w-4 h-3.5 rounded-sm border border-[#dc2626] bg-red-950/60 relative overflow-hidden">
+          <div className="h-1 bg-[#dc2626]" />
         </div>
-        <span className="font-headline font-semibold text-white uppercase tracking-wider text-xs">
-          Process
+        <span className="font-medium text-zinc-200">
+          Process <span className="text-zinc-500">(Verb Phrase)</span>
         </span>
       </div>
 
       {/* Data Store */}
       <div className="flex items-center gap-2">
-        <div className="w-6 h-4 border-y-2 border-l-2 border-[#80808a] bg-[#232326] relative">
-          <div className="w-2 h-full bg-[#333338] border-r-2 border-[#80808a]" />
+        <div className="w-4 h-3.5 border-y border-l border-amber-400 bg-amber-950/60 relative">
+          <div className="w-1 h-full bg-amber-400/40 border-r border-amber-400" />
         </div>
-        <span className="font-headline font-semibold text-white uppercase tracking-wider text-xs">
-          Data Store
+        <span className="font-medium text-zinc-200">
+          Data Store <span className="text-zinc-500">(Open Rect)</span>
         </span>
       </div>
 
       {/* Data Flow */}
       <div className="flex items-center gap-2">
-        <div className="w-6 flex items-center">
-          <div className="h-[2px] bg-[#767682] flex-1" />
-          <div className="w-0 h-0 border-t-[3px] border-t-transparent border-b-[3px] border-b-transparent border-l-[6px] border-l-[#767682]" />
+        <div className="w-5 flex items-center">
+          <div className="h-[1.5px] bg-slate-300 flex-1" />
+          <div className="w-0 h-0 border-t-[3px] border-t-transparent border-b-[3px] border-b-transparent border-l-[5px] border-l-slate-300" />
         </div>
-        <span className="font-headline font-semibold text-white uppercase tracking-wider text-xs">
-          Data Flow
+        <span className="font-medium text-zinc-200">
+          Data Flow <span className="text-zinc-500">(Noun Phrase)</span>
         </span>
       </div>
     </div>
