@@ -27,7 +27,7 @@ export default function MinimalLineNav({
     { title: "Context Diagram", desc: "System Scope & Boundary" },
     { title: "Level 0 DFD", desc: "Functional Decomposition" },
     { title: "Scenario Walkthrough", desc: "Step-by-Step Execution" },
-    { title: "Conclusion", desc: "Architectural Synthesis" },
+    { title: "ER Diagram", desc: "3NF Relational Model" },
   ];
   const sections = allSections.slice(0, totalSlides);
 

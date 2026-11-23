@@ -5,11 +5,12 @@ import Slide3Entities from './slides/Slide3Entities';
 import Slide4Context from './slides/Slide4Context';
 import Slide5Level0 from './slides/Slide5Level0';
 import Slide6Walkthrough from './slides/Slide6Walkthrough';
+import Slide7ERD from './slides/Slide7ERD';
 import MinimalLineNav from './components/MinimalLineNav';
 import PresenterNotes from './components/PresenterNotes';
 import { Printer } from 'lucide-react';
 
-// Speaking points for each section (Slide 1 to 6)
+// Speaking points for each section (Slide 1 to 7)
 const speakerNotes = [
   // Slide 1: Title
   [
@@ -46,15 +47,40 @@ const speakerNotes = [
     "Walk through operational steps A to F: from low-stock detection (3.0) to request creation (4.0) and supplier review.",
     "Explain how 5.0 combines accepted orders with location data to group delivery batches dispatched ASAP.",
     "Conclude the cycle with receipt confirmation triggering an automatic stock update in D3 Inventory."
+  ],
+  // Slide 7: Entity-Relationship Diagram (ERD)
+  [
+    "Present the 3NF relational data model derived directly from DFD data stores D1–D5.",
+    "Explain key normalization decisions: RequestItem resolves multi-item orders, Inventory resolves merchant-product stock.",
+    "Highlight dynamic logistics: DeliveryBatch consolidates accepted requests along geographic delivery routes dispatched ASAP."
   ]
 ];
 
 // Max internal steps per slide
-const slideStepCounts = [0, 2, 2, 4, 4, 5];
+const slideStepCounts = [0, 2, 2, 4, 4, 5, 3];
 
 export default function App() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [currentStep, setCurrentStep] = useState(0);
+  // Check URL parameters for direct slide/step access (e.g. ?slide=3&step=4)
+  const initialSlide = useMemo(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const s = params.get('slide');
+      if (s !== null) return parseInt(s, 10);
+    }
+    return 0;
+  }, []);
+
+  const initialStep = useMemo(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const st = params.get('step');
+      if (st !== null) return parseInt(st, 10);
+    }
+    return 0;
+  }, []);
+
+  const [currentSlide, setCurrentSlide] = useState(initialSlide);
+  const [currentStep, setCurrentStep] = useState(initialStep);
   const [notesOpen, setNotesOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
@@ -63,7 +89,7 @@ export default function App() {
     return typeof window !== 'undefined' && window.location.search.includes('print');
   }, []);
 
-  const totalSlides = 6;
+  const totalSlides = 7;
   const maxStepsForCurrentSlide = slideStepCounts[currentSlide] || 0;
 
   // Navigate forward (next step inside slide first, then next section)
@@ -166,6 +192,8 @@ export default function App() {
         return <Slide5Level0 currentStep={step} />;
       case 5:
         return <Slide6Walkthrough currentStep={step} onSetStep={(s) => setCurrentStep(s)} />;
+      case 6:
+        return <Slide7ERD currentStep={step} />;
       default:
         return null;
     }
