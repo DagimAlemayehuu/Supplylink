@@ -45,11 +45,10 @@ export default function Slide7ERD({ currentStep = 0 }) {
   const activeCaption = stages[Math.min(selectedStage, stages.length - 1)];
 
   return (
-    <Slide
-      title="Entity-Relationship Diagram: 3NF Relational Model"
-      subtitle="Strict relational specification derived directly from DFD data stores D1–D5 with zero redundancy"
-      headerExtra={
-        <div className="flex items-center gap-1.5 bg-[#101216] border border-white/10 p-1 rounded-lg shadow-industrial-sm">
+    <Slide>
+      <div className="flex flex-col h-full justify-between pb-1 relative">
+        {/* Floating Stage Selector (Top-Right) */}
+        <div className="absolute top-3 right-4 z-20 pointer-events-auto flex items-center gap-1.5 bg-[#101216]/90 backdrop-blur-md border border-white/10 p-1 rounded-lg shadow-industrial-sm">
           {stages.map((st) => (
             <button
               key={st.id}
@@ -69,9 +68,7 @@ export default function Slide7ERD({ currentStep = 0 }) {
             </button>
           ))}
         </div>
-      }
-    >
-      <div className="flex flex-col h-full justify-between pb-1">
+
         {/* Full-bleed SVG Canvas Container */}
         <div className="flex-1 w-full bg-[#0c0d12] rounded-xl border border-white/10 shadow-industrial-lg relative overflow-hidden flex items-center justify-center p-2">
           <svg
@@ -462,12 +459,12 @@ export default function Slide7ERD({ currentStep = 0 }) {
               />
 
               {/* 9. ERD NOTATION & SUBSYSTEM LEGEND (BOTTOM-RIGHT) */}
-              <g transform="translate(1220, 670)">
+              <g transform="translate(1220, 740)">
                 <rect
                   x="0"
                   y="0"
                   width="640"
-                  height="235"
+                  height="165"
                   rx="10"
                   fill="#101216"
                   stroke="rgba(255, 255, 255, 0.15)"
@@ -478,9 +475,6 @@ export default function Slide7ERD({ currentStep = 0 }) {
                 <path d="M 0 38 L 640 38" stroke="rgba(255, 255, 255, 0.1)" strokeWidth="1" />
                 <text x="20" y="24" className="font-headline font-bold fill-white text-[14px]">
                   ERD Cardinality & Subsystem Architecture Legend
-                </text>
-                <text x="590" y="24" textAnchor="end" className="font-mono text-[11px] fill-[#ef4444] font-bold">
-                  3NF VERIFIED
                 </text>
 
                 {/* Subsystems */}
@@ -519,39 +513,9 @@ export default function Slide7ERD({ currentStep = 0 }) {
                     <text x="54" y="14" className="font-inter text-[12px] fill-zinc-300">Subtype Specialization</text>
                   </g>
                 </g>
-
-                {/* Bottom verification badge */}
-                <g transform="translate(20, 160)">
-                  <rect x="0" y="0" width="600" height="28" rx="6" fill="#181b24" stroke="rgba(255, 255, 255, 0.08)" />
-                  <path d="M 12 14 L 16 18 L 24 10" fill="none" stroke="#ef4444" strokeWidth="2" />
-                  <text x="32" y="18" className="font-mono text-[11px] fill-zinc-300">
-                    Strict 3NF: No repeating groups (RequestItem) • Zero derived attributes • Planar routing
-                  </text>
-                </g>
               </g>
             </g>
           </svg>
-        </div>
-
-        {/* Bottom Architectural Caption / Assumptions Banner */}
-        <div className="bg-[#101216] border border-white/10 rounded-lg px-4 py-2 mt-2 shadow-industrial-sm flex flex-col md:flex-row items-center justify-between gap-3 text-xs">
-          <div className="flex items-center gap-3 min-w-0">
-            <span className="w-6 h-6 rounded bg-[#dc2626] text-white flex items-center justify-center font-mono font-bold text-xs flex-shrink-0 shadow-industrial-sm">
-              3NF
-            </span>
-            <p className="text-zinc-300 font-inter leading-relaxed">
-              <strong className="text-white font-headline">Key Assumptions & Normalization: </strong>
-              (1) Request multi-item orders decomposed into <span className="text-red-300 font-mono font-semibold">RequestItem</span> line items.
-              (2) <span className="text-amber-300 font-mono font-semibold">Inventory</span> junction isolates merchant stock & threshold alerts.
-              (3) Zero derived fields: report aggregations (Process 6.0) & order totals computed on-the-fly.
-              (4) <span className="text-purple-300 font-mono font-semibold">DeliveryBatch</span> clusters accepted requests on dynamic routes dispatched ASAP.
-            </p>
-          </div>
-
-          <div className="flex items-center gap-2 text-zinc-400 font-mono text-[11px] whitespace-nowrap bg-[#161822] px-3 py-1.5 rounded border border-white/5 flex-shrink-0">
-            <Check className="w-3.5 h-3.5 text-[#ef4444]" />
-            <span>Academic Specification • HiLCoE SE-302</span>
-          </div>
         </div>
       </div>
     </Slide>
