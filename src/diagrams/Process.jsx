@@ -6,22 +6,33 @@ import React from 'react';
  * and lower compartment for Process Name (verb phrase).
  * Enlarged for commanding visual hierarchy over data stores.
  */
-export default function Process({ node, isActive = false, isDimmed = false }) {
+export default function Process({ node, isActive = false, isDimmed = false, theme = 'light' }) {
   const { x, y, w, h, procId, name } = node;
+  const isLight = theme === 'light';
   const isSystem = procId === "0";
   const idHeight = isSystem ? 56 : 38;
   const cornerRadius = isSystem ? 24 : 18;
 
-  const strokeColor = isActive ? '#ffffff' : '#888892';
-  const strokeWidth = isActive ? '3.5' : '2.8';
-  const bodyFill = isActive ? '#2f2f35' : '#27272b';
-  const headerFill = isActive ? '#46464e' : '#38383e';
+  const strokeColor = isLight
+    ? (isActive ? '#09090b' : '#3f3f46')
+    : (isActive ? '#ffffff' : '#888892');
+  const strokeWidth = isActive ? (isLight ? '4' : '3.5') : (isLight ? '3' : '2.8');
+  const bodyFill = isLight
+    ? '#ffffff'
+    : (isActive ? '#2f2f35' : '#27272b');
+  const headerFill = isLight
+    ? (isActive ? '#18181b' : '#e4e4e7')
+    : (isActive ? '#46464e' : '#38383e');
+  const idTextColor = isLight
+    ? (isActive ? '#ffffff' : '#09090b')
+    : '#ffffff';
+  const nameTextColor = isLight ? '#09090b' : '#ffffff';
 
   return (
     <g
       id={`process-${node.id}`}
       className={`transition-opacity duration-300 ${
-        isDimmed ? 'opacity-15' : 'opacity-100'
+        isDimmed ? (isLight ? 'opacity-20' : 'opacity-15') : 'opacity-100'
       }`}
     >
       {/* Clip path for the top ID header matching the top rounded corners */}
@@ -77,7 +88,7 @@ export default function Process({ node, isActive = false, isDimmed = false }) {
         x={x + 18}
         y={y + (isSystem ? 38 : 27)}
         className="font-headline font-bold select-none tabular-nums"
-        style={{ fontSize: isSystem ? '28px' : '20px', fill: '#ffffff' }}
+        style={{ fontSize: isSystem ? '28px' : '20px', fill: idTextColor }}
       >
         {procId}
       </text>
@@ -92,7 +103,7 @@ export default function Process({ node, isActive = false, isDimmed = false }) {
         <div className="w-full h-full flex items-center justify-center text-center px-2">
           <span
             className="font-headline font-bold leading-tight select-none uppercase tracking-tight"
-            style={{ fontSize: isSystem ? '34px' : '21px', color: '#ffffff' }}
+            style={{ fontSize: isSystem ? '34px' : '21px', color: nameTextColor }}
           >
             {name}
           </span>

@@ -5,20 +5,31 @@ import React from 'react';
  * Open-ended rectangle (right side open) with a left ID box and store name.
  * Supports active highlight and background dimming.
  */
-export default function DataStore({ node, isActive = false, isDimmed = false }) {
+export default function DataStore({ node, isActive = false, isDimmed = false, theme = 'light' }) {
   const { x, y, w, h, storeId, name } = node;
+  const isLight = theme === 'light';
   const idWidth = 64;
 
-  const strokeColor = isActive ? '#a1a1aa' : '#80808a';
-  const strokeWidth = isActive ? '3.5' : '2.5';
-  const bodyFill = isActive ? '#2b2b30' : '#232326';
-  const idFill = isActive ? '#3e3e46' : '#333338';
+  const strokeColor = isLight
+    ? (isActive ? '#09090b' : '#3f3f46')
+    : (isActive ? '#a1a1aa' : '#80808a');
+  const strokeWidth = isActive ? (isLight ? '4' : '3.5') : (isLight ? '2.8' : '2.5');
+  const bodyFill = isLight
+    ? '#ffffff'
+    : (isActive ? '#2b2b30' : '#232326');
+  const idFill = isLight
+    ? (isActive ? '#18181b' : '#e4e4e7')
+    : (isActive ? '#3e3e46' : '#333338');
+  const idTextColor = isLight
+    ? (isActive ? '#ffffff' : '#09090b')
+    : '#ffffff';
+  const nameTextColor = isLight ? '#09090b' : '#ffffff';
 
   return (
     <g
       id={`store-${node.id}`}
       className={`transition-opacity duration-300 ${
-        isDimmed ? 'opacity-15' : 'opacity-100'
+        isDimmed ? (isLight ? 'opacity-20' : 'opacity-15') : 'opacity-100'
       }`}
     >
       {/* Background fill */}
@@ -88,7 +99,7 @@ export default function DataStore({ node, isActive = false, isDimmed = false }) 
         y={y + h / 2 + 8}
         textAnchor="middle"
         className="font-headline font-bold select-none tabular-nums"
-        style={{ fontSize: '24px', fill: '#ffffff' }}
+        style={{ fontSize: '24px', fill: idTextColor }}
       >
         {storeId}
       </text>
@@ -103,7 +114,7 @@ export default function DataStore({ node, isActive = false, isDimmed = false }) 
         <div className="w-full h-full flex items-center justify-center text-center px-2">
           <span
             className="font-headline font-bold leading-tight select-none uppercase tracking-tight"
-            style={{ fontSize: '19px', color: '#ffffff' }}
+            style={{ fontSize: '19px', color: nameTextColor }}
           >
             {name}
           </span>

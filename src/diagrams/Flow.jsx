@@ -5,11 +5,14 @@ import React from 'react';
  * Strictly unidirectional with clear, single-concept noun phrase label badges.
  * Supports active highlight and background dimming.
  */
-export default function Flow({ flow, isActive = false, isDimmed = false }) {
+export default function Flow({ flow, isActive = false, isDimmed = false, theme = 'light' }) {
   const { id, path, label, labelPos } = flow;
+  const isLight = theme === 'light';
 
-  const strokeColor = isActive ? '#ffffff' : '#767682';
-  const strokeWidth = isActive ? 3.0 : 2.2;
+  const strokeColor = isLight
+    ? (isActive ? '#09090b' : '#52525b')
+    : (isActive ? '#ffffff' : '#767682');
+  const strokeWidth = isActive ? (isLight ? 3.5 : 3.0) : 2.2;
   const markerEnd = isActive ? 'url(#arrow-dfd-marker-active)' : 'url(#arrow-dfd-marker)';
 
   // Calculate clean badge dimensions to prevent overlap
@@ -21,14 +24,14 @@ export default function Flow({ flow, isActive = false, isDimmed = false }) {
     <g
       id={`flow-${id}`}
       className={`transition-opacity duration-300 ${
-        isDimmed ? 'opacity-15' : 'opacity-100'
+        isDimmed ? (isLight ? 'opacity-20' : 'opacity-15') : 'opacity-100'
       }`}
     >
       {/* Background shadow path for contrast against canvas and crossings */}
       <path
         d={path}
         fill="none"
-        stroke="#1c1c1f"
+        stroke={isLight ? '#ffffff' : '#1c1c1f'}
         strokeWidth={strokeWidth + 5}
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -55,17 +58,17 @@ export default function Flow({ flow, isActive = false, isDimmed = false }) {
               width={badgeWidth}
               height={badgeHeight}
               rx="6"
-              fill={isActive ? '#2a2a2f' : '#1e1e22'}
-              stroke={isActive ? '#ffffff' : '#52525b'}
-              strokeWidth={isActive ? '1.8' : '1.5'}
+              fill={isLight ? '#ffffff' : (isActive ? '#2a2a2f' : '#1e1e22')}
+              stroke={isLight ? (isActive ? '#09090b' : '#52525b') : (isActive ? '#ffffff' : '#52525b')}
+              strokeWidth={isActive ? '2' : '1.5'}
             />
-            {/* Flow name in pure white text */}
+            {/* Flow name */}
             <text
               x={badgeWidth / 2}
               y={21}
               textAnchor="middle"
               className="select-none font-body font-semibold tracking-wide"
-              style={{ fontSize: '15.5px', fill: '#ffffff' }}
+              style={{ fontSize: '15.5px', fill: isLight ? '#09090b' : '#ffffff' }}
             >
               {label}
             </text>

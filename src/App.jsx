@@ -12,9 +12,15 @@ export default function App() {
   const [phaseIndex, setPhaseIndex] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [zoomedPane, setZoomedPane] = useState(null); // null | 'dfd' | 'erd'
+  const [theme, setTheme] = useState('light'); // 'light' (projector high-contrast) | 'dark'
 
+  const isLight = theme === 'light';
   const totalPhases = splitPhases.length;
   const activePhase = splitPhases[phaseIndex] || splitPhases[0];
+
+  const handleToggleTheme = useCallback(() => {
+    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
+  }, []);
 
   const handleNext = useCallback(() => {
     setPhaseIndex(prev => (prev < totalPhases - 1 ? prev + 1 : prev));
@@ -66,6 +72,11 @@ export default function App() {
           e.preventDefault();
           handleToggleFullscreen();
           break;
+        case 't':
+        case 'T':
+          e.preventDefault();
+          handleToggleTheme();
+          break;
         case '1':
           setPhaseIndex(0);
           break;
@@ -88,7 +99,7 @@ export default function App() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleNext, handlePrev, handleToggleFullscreen, zoomedPane]);
+  }, [handleNext, handlePrev, handleToggleFullscreen, handleToggleTheme, zoomedPane]);
 
   useEffect(() => {
     const handleFsChange = () => {
@@ -99,7 +110,11 @@ export default function App() {
   }, []);
 
   return (
-    <div className="w-full min-h-screen lg:h-screen lg:overflow-hidden bg-[#121214] text-white flex flex-col justify-between p-3 sm:p-4 lg:p-5 select-none font-body relative">
+    <div
+      className={`w-full min-h-screen lg:h-screen lg:overflow-hidden flex flex-col justify-between p-3 sm:p-4 lg:p-5 select-none font-body relative transition-colors duration-200 ${
+        isLight ? 'bg-zinc-100 text-zinc-950' : 'bg-[#121214] text-white'
+      }`}
+    >
       {/* 1. GLOBAL TOP HEADER */}
       <GlobalHeader
         currentPhase={phaseIndex}
@@ -108,6 +123,8 @@ export default function App() {
         activeSubtitle={activePhase.subtitle}
         isFullscreen={isFullscreen}
         onToggleFullscreen={handleToggleFullscreen}
+        theme={theme}
+        onToggleTheme={handleToggleTheme}
       />
 
       {/* 2. 50/50 SYNCED SPLIT SCREEN (Stacks on mobile/tablet, 50/50 on lg+; click either pane to zoom) */}
@@ -116,14 +133,32 @@ export default function App() {
         <section
           onClick={() => setZoomedPane('dfd')}
           title="Click to zoom Level 0 DFD"
-          className="group relative w-full h-full min-h-[300px] sm:min-h-[380px] lg:min-h-0 rounded-2xl bg-[#18181b] border border-[#2d2d32] hover:border-[#52525b] transition-colors cursor-zoom-in overflow-hidden flex items-center justify-center p-2 sm:p-3"
+          className={`group relative w-full h-full min-h-[300px] sm:min-h-[380px] lg:min-h-0 rounded-2xl border-2 transition-colors cursor-zoom-in overflow-hidden flex items-center justify-center p-2 sm:p-3 ${
+            isLight
+              ? 'bg-white border-zinc-300 hover:border-zinc-900 shadow-sm'
+              : 'bg-[#18181b] border-[#2d2d32] hover:border-[#52525b]'
+          }`}
         >
-          <div className="absolute top-3 left-3 z-20 bg-[#202023] border border-[#38383e] px-3 py-1 rounded-lg shadow">
-            <span className="text-[11px] font-headline font-bold text-zinc-300 uppercase tracking-wider">
+          <div
+            className={`absolute top-3 left-3 z-20 border px-3 py-1 rounded-lg shadow-sm ${
+              isLight ? 'bg-zinc-900 border-zinc-900' : 'bg-[#202023] border-[#38383e]'
+            }`}
+          >
+            <span
+              className={`text-[11px] font-headline font-bold uppercase tracking-wider ${
+                isLight ? 'text-white' : 'text-zinc-300'
+              }`}
+            >
               LEVEL 0 DFD
             </span>
           </div>
-          <div className="absolute top-3 right-3 z-20 opacity-0 group-hover:opacity-100 transition-opacity bg-[#202023] border border-[#38383e] px-2.5 py-1 rounded-lg flex items-center gap-1.5 text-[10px] font-mono text-zinc-300 uppercase">
+          <div
+            className={`absolute top-3 right-3 z-20 opacity-0 group-hover:opacity-100 transition-opacity border px-2.5 py-1 rounded-lg flex items-center gap-1.5 text-[10px] font-mono uppercase ${
+              isLight
+                ? 'bg-zinc-100 border-zinc-400 text-zinc-900 font-semibold'
+                : 'bg-[#202023] border-[#38383e] text-zinc-300'
+            }`}
+          >
             <Maximize2 size={11} />
             <span>Click to Zoom</span>
           </div>
@@ -131,6 +166,7 @@ export default function App() {
             data={level0DiagramData}
             activeNodes={activePhase.dfdNodes}
             activeFlows={activePhase.dfdFlows}
+            theme={theme}
           />
         </section>
 
@@ -138,14 +174,28 @@ export default function App() {
         <section
           onClick={() => setZoomedPane('erd')}
           title="Click to zoom Conceptual ERD"
-          className="group relative w-full h-full min-h-[300px] sm:min-h-[380px] lg:min-h-0 rounded-2xl bg-[#18181b] border border-[#2d2d32] hover:border-[#52525b] transition-colors cursor-zoom-in overflow-hidden flex items-center justify-center p-2 sm:p-3"
+          className={`group relative w-full h-full min-h-[300px] sm:min-h-[380px] lg:min-h-0 rounded-2xl border-2 transition-colors cursor-zoom-in overflow-hidden flex items-center justify-center p-2 sm:p-3 ${
+            isLight
+              ? 'bg-white border-zinc-300 hover:border-zinc-900 shadow-sm'
+              : 'bg-[#18181b] border-[#2d2d32] hover:border-[#52525b]'
+          }`}
         >
-          <div className="absolute top-3 left-3 z-20 bg-[#202023] border border-[#38383e] px-3 py-1 rounded-lg shadow">
+          <div
+            className={`absolute top-3 left-3 z-20 border px-3 py-1 rounded-lg shadow-sm ${
+              isLight ? 'bg-zinc-900 border-zinc-900' : 'bg-[#202023] border-[#38383e]'
+            }`}
+          >
             <span className="text-[11px] font-headline font-bold text-white uppercase tracking-wider">
               CONCEPTUAL ERD
             </span>
           </div>
-          <div className="absolute top-3 right-3 z-20 opacity-0 group-hover:opacity-100 transition-opacity bg-[#202023] border border-[#38383e] px-2.5 py-1 rounded-lg flex items-center gap-1.5 text-[10px] font-mono text-zinc-300 uppercase">
+          <div
+            className={`absolute top-3 right-3 z-20 opacity-0 group-hover:opacity-100 transition-opacity border px-2.5 py-1 rounded-lg flex items-center gap-1.5 text-[10px] font-mono uppercase ${
+              isLight
+                ? 'bg-zinc-100 border-zinc-400 text-zinc-900 font-semibold'
+                : 'bg-[#202023] border-[#38383e] text-zinc-300'
+            }`}
+          >
             <Maximize2 size={11} />
             <span>Click to Zoom</span>
           </div>
@@ -153,6 +203,7 @@ export default function App() {
             data={erdDiagramData}
             activeEntities={activePhase.erdEntities}
             activeRelationships={activePhase.erdRelationships}
+            theme={theme}
           />
         </section>
       </main>
@@ -166,6 +217,7 @@ export default function App() {
         onNextStep={handleNext}
         flowLabel={activePhase.flowLabel}
         flowSteps={activePhase.flowSteps}
+        theme={theme}
       />
 
       {/* 4. BLURRED CENTER SPOTLIGHT OVERLAY (When a pane is clicked) */}
@@ -176,22 +228,42 @@ export default function App() {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="w-[95vw] sm:w-[92vw] h-[84vh] sm:h-[86vh] rounded-2xl bg-[#18181b] border border-[#45454e] shadow-2xl flex flex-col overflow-hidden cursor-default"
+            className={`w-[95vw] sm:w-[92vw] h-[84vh] sm:h-[86vh] rounded-2xl border-2 shadow-2xl flex flex-col overflow-hidden cursor-default ${
+              isLight ? 'bg-white border-zinc-900' : 'bg-[#18181b] border-[#45454e]'
+            }`}
           >
             {/* Spotlight Header */}
-            <div className="flex flex-wrap items-center justify-between gap-2 px-3 sm:px-5 py-2.5 sm:py-3 border-b border-[#2d2d32] bg-[#1e1e22]">
+            <div
+              className={`flex flex-wrap items-center justify-between gap-2 px-3 sm:px-5 py-2.5 sm:py-3 border-b ${
+                isLight ? 'border-zinc-300 bg-zinc-100' : 'border-[#2d2d32] bg-[#1e1e22]'
+              }`}
+            >
               <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-                <span className="bg-[#2c2c32] border border-[#45454e] px-2.5 sm:px-3 py-1 rounded-lg text-[11px] sm:text-xs font-headline font-bold text-white uppercase tracking-wider flex-shrink-0">
+                <span
+                  className={`border px-2.5 sm:px-3 py-1 rounded-lg text-[11px] sm:text-xs font-headline font-bold uppercase tracking-wider flex-shrink-0 ${
+                    isLight
+                      ? 'bg-zinc-900 border-zinc-900 text-white'
+                      : 'bg-[#2c2c32] border-[#45454e] text-white'
+                  }`}
+                >
                   {zoomedPane === 'dfd' ? 'LEVEL 0 DFD' : 'CONCEPTUAL ERD'}
                 </span>
-                <span className="text-xs sm:text-sm font-headline font-bold text-zinc-200 uppercase tracking-tight truncate">
+                <span
+                  className={`text-xs sm:text-sm font-headline font-bold uppercase tracking-tight truncate ${
+                    isLight ? 'text-zinc-950' : 'text-zinc-200'
+                  }`}
+                >
                   PHASE {activePhase.code} // {activePhase.title}
                 </span>
               </div>
 
               <button
                 onClick={() => setZoomedPane(null)}
-                className="flex items-center gap-1.5 bg-[#28282d] hover:bg-[#38383e] border border-[#45454e] px-2.5 sm:px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-mono text-zinc-200 uppercase transition-colors flex-shrink-0"
+                className={`flex items-center gap-1.5 border px-2.5 sm:px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-mono uppercase transition-colors flex-shrink-0 ${
+                  isLight
+                    ? 'bg-white hover:bg-zinc-200 border-zinc-400 text-zinc-900 font-semibold'
+                    : 'bg-[#28282d] hover:bg-[#38383e] border-[#45454e] text-zinc-200'
+                }`}
               >
                 <X size={14} />
                 <span>Close (ESC)</span>
@@ -205,12 +277,14 @@ export default function App() {
                   data={level0DiagramData}
                   activeNodes={activePhase.dfdNodes}
                   activeFlows={activePhase.dfdFlows}
+                  theme={theme}
                 />
               ) : (
                 <ErdDiagram
                   data={erdDiagramData}
                   activeEntities={activePhase.erdEntities}
                   activeRelationships={activePhase.erdRelationships}
+                  theme={theme}
                 />
               )}
             </div>

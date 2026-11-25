@@ -13,10 +13,12 @@ export default function Diagram({
   activeNodes = null,
   activeFlows = null,
   viewBoxOverride = null,
-  className = ""
+  className = "",
+  theme = 'light'
 }) {
   if (!data) return null;
 
+  const isLight = theme === 'light';
   const { viewBox: defaultViewBox = "0 0 1920 1080", nodes = [], flows = [] } = data;
   const viewBox = viewBoxOverride || defaultViewBox;
   const hasFilter = activeNodes !== null && activeNodes !== undefined;
@@ -30,7 +32,7 @@ export default function Diagram({
         preserveAspectRatio="xMidYMid meet"
       >
         <defs>
-          {/* Default Grey Arrowhead Marker */}
+          {/* Default Arrowhead Marker */}
           <marker
             id="arrow-dfd-marker"
             viewBox="0 0 10 10"
@@ -40,10 +42,10 @@ export default function Diagram({
             markerHeight="8"
             orient="auto-start-reverse"
           >
-            <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#767682" />
+            <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill={isLight ? '#52525b' : '#767682'} />
           </marker>
 
-          {/* Active Highlighted Arrowhead Marker (Crisp Light Grey / Silver) */}
+          {/* Active Highlighted Arrowhead Marker */}
           <marker
             id="arrow-dfd-marker-active"
             viewBox="0 0 10 10"
@@ -53,7 +55,7 @@ export default function Diagram({
             markerHeight="9"
             orient="auto-start-reverse"
           >
-            <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#ffffff" />
+            <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill={isLight ? '#09090b' : '#ffffff'} />
           </marker>
 
           {/* Reverse Marker */}
@@ -66,7 +68,7 @@ export default function Diagram({
             markerHeight="8"
             orient="auto"
           >
-            <path d="M 9 1.5 L 0 5 L 9 8.5 z" fill="#767682" />
+            <path d="M 9 1.5 L 0 5 L 9 8.5 z" fill={isLight ? '#52525b' : '#767682'} />
           </marker>
         </defs>
 
@@ -81,6 +83,7 @@ export default function Diagram({
                 flow={flow}
                 isActive={isActive}
                 isDimmed={isDimmed}
+                theme={theme}
               />
             );
           })}
@@ -100,6 +103,7 @@ export default function Diagram({
                     node={node}
                     isActive={isActive}
                     isDimmed={isDimmed}
+                    theme={theme}
                   />
                 );
               case 'process':
@@ -109,6 +113,7 @@ export default function Diagram({
                     node={node}
                     isActive={isActive}
                     isDimmed={isDimmed}
+                    theme={theme}
                   />
                 );
               case 'store':
@@ -118,6 +123,7 @@ export default function Diagram({
                     node={node}
                     isActive={isActive}
                     isDimmed={isDimmed}
+                    theme={theme}
                   />
                 );
               default:
