@@ -12,11 +12,13 @@ export default function Diagram({
   data,
   activeNodes = null,
   activeFlows = null,
+  viewBoxOverride = null,
   className = ""
 }) {
   if (!data) return null;
 
-  const { viewBox = "0 0 1920 1080", nodes = [], flows = [] } = data;
+  const { viewBox: defaultViewBox = "0 0 1920 1080", nodes = [], flows = [] } = data;
+  const viewBox = viewBoxOverride || defaultViewBox;
   const hasFilter = activeNodes !== null && activeNodes !== undefined;
 
   return (
@@ -24,7 +26,7 @@ export default function Diagram({
       <svg
         viewBox={viewBox}
         className="w-full h-full"
-        style={{ overflow: 'visible' }}
+        style={{ overflow: 'hidden' }}
         preserveAspectRatio="xMidYMid meet"
       >
         <defs>

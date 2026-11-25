@@ -14,8 +14,8 @@ export default function Flow({ flow, isActive = false, isDimmed = false }) {
 
   // Calculate clean badge dimensions to prevent overlap
   const textLength = label ? label.length : 12;
-  const badgeWidth = Math.max(120, textLength * 8.8 + 26);
-  const badgeHeight = 26;
+  const badgeWidth = Math.max(145, textLength * 10.5 + 30);
+  const badgeHeight = 32;
 
   return (
     <g
@@ -62,10 +62,10 @@ export default function Flow({ flow, isActive = false, isDimmed = false }) {
             {/* Flow name in pure white text */}
             <text
               x={badgeWidth / 2}
-              y={17}
+              y={21}
               textAnchor="middle"
               className="select-none font-body font-semibold tracking-wide"
-              style={{ fontSize: '12px', fill: '#ffffff' }}
+              style={{ fontSize: '15.5px', fill: '#ffffff' }}
             >
               {label}
             </text>

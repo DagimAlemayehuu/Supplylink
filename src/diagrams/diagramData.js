@@ -609,6 +609,9 @@ export const level0Phases = [
     id: 0,
     title: "Overview",
     summary: "Full functional decomposition of Process 0 into six processes and five data stores.",
+    presenterScript: "Process 0 decomposes into 6 core processes and 5 persistent data stores, maintaining 100% balancing with our context diagram.",
+    flowSteps: ["EXTERNAL ENTITIES", "➔", "PROCESSES 1.0–6.0", "➔", "DATA STORES D1–D5"],
+    flowLabel: "SYSTEM ARCHITECTURE",
     activeNodes: null,
     activeFlows: null
   },
@@ -616,6 +619,9 @@ export const level0Phases = [
     id: 1,
     title: "1. Register Users",
     summary: "Merchants and Suppliers submit registration details; Admin reviews pending accounts and grants approvals.",
+    presenterScript: "Merchants and Suppliers submit registration details to Process 1.0. Pending accounts route to the Admin for approval, and validated profiles store in D1.",
+    flowSteps: ["MERCHANT / SUPPLIER", "➔", "PROCESS 1.0", "➔", "ADMIN APPROVAL"],
+    flowLabel: "USER REGISTRATION FLOW",
     activeNodes: ["e_merchant", "e_supplier", "e_admin", "p1", "d1"],
     activeFlows: [
       "f_m_reg_1",
@@ -631,6 +637,9 @@ export const level0Phases = [
     id: 2,
     title: "2. Catalog & Stock",
     summary: "Suppliers manage product catalog items; Merchants monitor inventory counts and receive low-stock alerts.",
+    presenterScript: "Suppliers publish catalog items to Process 2.0 stored in D2 Products. Merchants send daily counts to Process 3.0, triggering low-stock alerts when levels dip.",
+    flowSteps: ["SUPPLIER", "➔", "CATALOG D2", "➔", "INVENTORY D3", "➔", "MERCHANT"],
+    flowLabel: "CATALOG & STOCK FLOW",
     activeNodes: ["e_supplier", "p2", "d2", "e_merchant", "p3", "d3"],
     activeFlows: [
       "f_s_cat_2",
@@ -644,6 +653,9 @@ export const level0Phases = [
     id: 3,
     title: "3. Process Orders",
     summary: "Merchants place restock orders validated against catalog pricing; Suppliers review and accept orders.",
+    presenterScript: "Merchants dispatch restock orders to Process 4.0. Orders check against D2 Products, store in D4 Requests, and await Supplier acceptance.",
+    flowSteps: ["MERCHANT", "➔", "PROCESS 4.0", "➔", "D4 REQUESTS", "➔", "SUPPLIER"],
+    flowLabel: "ORDER PLACEMENT FLOW",
     activeNodes: ["e_merchant", "p4", "d2", "d4", "e_supplier"],
     activeFlows: [
       "f_m_req_4",
@@ -658,6 +670,9 @@ export const level0Phases = [
     id: 4,
     title: "4. Schedule Deliveries",
     summary: "Accepted orders are grouped by location into delivery route batches and dispatched to suppliers.",
+    presenterScript: "Process 5.0 reads accepted orders from D4 and store locations from D1, clustering them into D5 Delivery Batches for organized route dispatch.",
+    flowSteps: ["D4 REQUESTS + D1 LOCATIONS", "➔", "PROCESS 5.0", "➔", "D5 DELIVERY BATCHES"],
+    flowLabel: "ROUTE SCHEDULING FLOW",
     activeNodes: ["d4", "d1", "p5", "d5", "e_supplier", "e_merchant"],
     activeFlows: [
       "f_d4_acc_5",
@@ -672,6 +687,9 @@ export const level0Phases = [
     id: 5,
     title: "5. Generate Reports",
     summary: "Merchant delivery receipts update inventory levels; completed delivery records generate admin reports.",
+    presenterScript: "Merchant receipt confirmations update stock in D3 Inventory, while historical batch records in D5 feed Process 6.0 to generate Admin reports.",
+    flowSteps: ["RECEIPT CONFIRMATION", "➔", "D3 INVENTORY", "➔", "ADMIN REPORTS"],
+    flowLabel: "CLOSING THE LOOP",
     activeNodes: ["e_merchant", "p5", "d3", "d5", "p6", "e_admin"],
     activeFlows: [
       "f_m_rec_5",
